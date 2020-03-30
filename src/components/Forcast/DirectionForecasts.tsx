@@ -10,7 +10,7 @@ interface DirectionForecastsProps {
 
 function DirectionForecasts(props: DirectionForecastsProps) {
   return (
-    <div className="direction-forecast">
+    <section className="direction-forecast">
       <h2>{props.direction}</h2>
       <ul>
         {props.forecasts.length === 0 &&
@@ -18,7 +18,7 @@ function DirectionForecasts(props: DirectionForecastsProps) {
         {props.forecasts.map((tram, index) =>
           <DirectionForecastsItem key={index} tram={tram} />)}
       </ul>
-    </div>
+    </section>
   );
 }
 

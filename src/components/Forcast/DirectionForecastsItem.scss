@@ -6,6 +6,10 @@
     padding: 0.5rem 0;
     border-bottom: 1px solid #c9c9c9;
 
+    &:last-child {
+        border: none;
+    }
+
     .destination {
         margin-right: 1rem;
     }

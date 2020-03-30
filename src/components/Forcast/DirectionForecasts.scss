@@ -1,5 +1,9 @@
 .direction-forecast {
-    ul {
-        padding: 0;
+  ul {
+    padding: 0;
+
+    li {
+      list-style-type: none;
     }
+  }
 }

@@ -2,6 +2,7 @@ import Line from "./Line";
 
 interface Station {
     name : string,
+    irishName : string,
     pronunciation : string,
     abbreviation : string,
     line : Line,
