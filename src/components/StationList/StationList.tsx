@@ -60,8 +60,10 @@ class StationList extends React.Component<StationListProps, StationListState> {
               this.state.stations
                 .filter(s => s.line.toString().toLowerCase() === this.props.match.params.line.toString().toLowerCase())
                 .map(station =>
-                  <Link to={`/station/${station.abbreviation}`}  key={station.abbreviation}>
-                    <li style={station.line.toString() === Line[Line.Red] ? { borderLeftColor: '#f44336' } : { borderLeftColor: '#4caf50' }}>{station.name}</li>
+                  <Link to={`/station/${station.abbreviation}`} key={station.abbreviation}>
+                    <li style={station.line.toString() === Line[Line.Red] ? { borderLeftColor: '#f44336' } : { borderLeftColor: '#4caf50' }}>
+                      {station.name}
+                    </li>
                   </Link>)
             }
           </ul>

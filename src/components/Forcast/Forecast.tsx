@@ -1,6 +1,6 @@
 import React from 'react';
 import './Forecast.scss';
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import StationForecast from '../../models/StationForecast';
 import DirectionForecasts from './DirectionForecasts';
 import Line from '../../models/Line';
