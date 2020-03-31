@@ -1,14 +1,27 @@
 .app {
   .main-content {
+    margin-bottom: 4rem;
   }
 
   .bottom-nav {
-    background: #ddd;
-    border-radius: 0.5rem;
+    background: #eee;
     bottom: 0;
-    margin: 1rem;
     max-width: 800px;
     position: fixed;
+    height: 4rem;
+
     width: 100%;
+
+
+    ul {
+      padding: 0;
+      display: flex;
+      justify-content: flex-start;
+
+      li {
+        list-style-type: none;
+        margin: 0.5rem;
+      }
+    }
   }
 }

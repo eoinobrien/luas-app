@@ -23,7 +23,8 @@
     "build": "react-scripts build",
     "test:lint:js": "eslint --ext=ts --ext=tsx .",
     "test:lint:css": "stylelint \"**/*.css\"",
-    "test": "react-scripts test",
+    "tes:unit": "react-scripts test",
+    "test": "npm run test:lint:js && npm run test:lint:css && npm run test:unit",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

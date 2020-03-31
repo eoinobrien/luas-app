@@ -1,4 +1,5 @@
 import Line from "./Line";
+import OperatingHoursModel from "./OperatingHoursModel";
 
 interface Station {
     name: string;
@@ -14,6 +15,7 @@ interface Station {
     outboundStations: Array<string>;
     walkingTransfer: Array<string>;
     isInUse: boolean;
+    operatingHours: OperatingHoursModel;
 }
 
 export default Station;

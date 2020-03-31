@@ -4,6 +4,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import StationForecast from '../../models/StationForecast';
 import DirectionForecasts from './DirectionForecasts';
 import Line from '../../models/Line';
+import OperatingHours from '../OperatingHours/OperatingHours';
 
 interface ForecastRouteProps {
   abbreviation: string;
@@ -27,7 +28,19 @@ class Forecast extends React.Component<RouteComponentProps<ForecastRouteProps>, 
     }
   }
 
+  private interval: any;
+
   componentDidMount(): void {
+    this.getForecastFromApi();
+
+    this.interval = setInterval(this.getForecastFromApi.bind(this), 15000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  getForecastFromApi(): void {
     fetch(`https://luasapifunction.azurewebsites.net/api/stations/${this.props.match.params.abbreviation}/forecast`)
       .then(response => response.json())
       .then(response =>
@@ -47,7 +60,7 @@ class Forecast extends React.Component<RouteComponentProps<ForecastRouteProps>, 
       <div className="forecast">
         <header>
           {/* <Link to={`/line/${!this.state.loading && this.state.forecast.station.line}`}>Back</Link> */}
-          <h1 style={!this.state.loading && this.state.forecast.station.line.toString() === Line[Line.Red] ? { borderColor: '#f44336' } : { borderColor: '#4caf50' }}>
+          <h1 style={(this.state.loading && { borderColor: '#333333' }) || (this.state.forecast.station.line.toString() === Line[Line.Red] ? { borderColor: '#f44336' } : { borderColor: '#4caf50' })}>
             {(this.state.loading && this.props.match.params.abbreviation)
               || this.state.forecast.station.name} <span>{!this.state.loading && this.state.forecast.station.irishName}</span></h1>
         </header>
@@ -61,11 +74,14 @@ class Forecast extends React.Component<RouteComponentProps<ForecastRouteProps>, 
 
           {!this.state.loading &&
             <div>
-              <DirectionForecasts direction={this.state.forecast.station.line.toString() === Line[Line.Red] ? "Eastbound" : "Northbound"} forecasts={this.state.forecast.inboundTrams} />
-              <DirectionForecasts direction={this.state.forecast.station.line.toString() === Line[Line.Red] ? "Westbound" : "Southbound"} forecasts={this.state.forecast.outboundTrams} />
-            </div>}
+              <div>
+                <DirectionForecasts direction={this.state.forecast.station.line.toString() === Line[Line.Red] ? "Eastbound" : "Northbound"} forecasts={this.state.forecast.inboundTrams} />
+                <DirectionForecasts direction={this.state.forecast.station.line.toString() === Line[Line.Red] ? "Westbound" : "Southbound"} forecasts={this.state.forecast.outboundTrams} />
+              </div>
 
-          <h3 className="message">{!this.state.loading && this.state.forecast.message}</h3>
+              <h3 className="message">{this.state.forecast.message}</h3>
+              <OperatingHours operatingHours={this.state.forecast.station.operatingHours} />
+            </div>}
         </main>
       </div>
     );

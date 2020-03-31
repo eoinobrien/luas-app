@@ -9,6 +9,10 @@ interface StationListRouteProps {
   line: string;
 }
 
+interface StationListProps extends RouteComponentProps<StationListRouteProps> {
+  favouriteAppClick: any;
+}
+
 interface StationListState {
   stations: Station[];
   loading: boolean;
@@ -16,8 +20,8 @@ interface StationListState {
 }
 
 
-class StationList extends React.Component<RouteComponentProps<StationListRouteProps>, StationListState> {
-  constructor(props: RouteComponentProps<StationListRouteProps>) {
+class StationList extends React.Component<StationListProps, StationListState> {
+  constructor(props: StationListProps) {
     super(props);
 
     this.state = {
@@ -69,7 +73,8 @@ class StationList extends React.Component<RouteComponentProps<StationListRoutePr
                 .map(station =>
                   <Link to={`/station/${station.abbreviation}`} key={station.abbreviation}>
                     <li style={station.line.toString() === Line[Line.Red] ? { borderLeftColor: '#f44336' } : { borderLeftColor: '#4caf50' }}>
-                      {station.name}
+                      <span>{station.name}</span>
+                      <button onClick={() => this.props.favouriteAppClick(station)}>Click</button>
                     </li>
                   </Link>)
             }
