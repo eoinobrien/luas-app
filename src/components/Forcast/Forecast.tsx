@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import './Forecast.scss';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import StationForecast from '../../models/StationForecast';
@@ -6,21 +6,18 @@ import DirectionForecasts from './DirectionForecasts';
 import Line from '../../models/Line';
 
 interface ForecastRouteProps {
-  abbreviation: string,
-}
-
-interface ForecastProps extends RouteComponentProps<ForecastRouteProps> {
+  abbreviation: string;
 }
 
 interface ForecastState {
-  loading: boolean,
-  forecast: StationForecast,
-  error: boolean
+  loading: boolean;
+  forecast: StationForecast;
+  error: boolean;
 }
 
 
-class Forecast extends React.Component<ForecastProps, ForecastState> {
-  constructor(props: any) {
+class Forecast extends React.Component<RouteComponentProps<ForecastRouteProps>, ForecastState> {
+  constructor(props: RouteComponentProps<ForecastRouteProps>) {
     super(props);
 
     this.state = {
@@ -30,7 +27,7 @@ class Forecast extends React.Component<ForecastProps, ForecastState> {
     }
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     fetch(`https://luasapifunction.azurewebsites.net/api/stations/${this.props.match.params.abbreviation}/forecast`)
       .then(response => response.json())
       .then(response =>
@@ -38,14 +35,14 @@ class Forecast extends React.Component<ForecastProps, ForecastState> {
           loading: false,
           forecast: response
         }))
-      .catch(error =>
+      .catch(() =>
         this.setState({
           loading: false,
           error: true
         }));
   }
 
-  render() {
+  render(): ReactElement {
     return (
       <div className="forecast">
         <header>

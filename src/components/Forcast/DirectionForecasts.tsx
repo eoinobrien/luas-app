@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import './DirectionForecasts.scss';
 import TramForecast from '../../models/TramForecast';
 import DirectionForecastsItem from './DirectionForecastsItem';
 
 interface DirectionForecastsProps {
-  direction: string,
-  forecasts: TramForecast[]
+  direction: string;
+  forecasts: TramForecast[];
 }
 
-function DirectionForecasts(props: DirectionForecastsProps) {
+function DirectionForecasts(props: DirectionForecastsProps): ReactElement {
   return (
     <section className="direction-forecast">
       <h2>{props.direction}</h2>

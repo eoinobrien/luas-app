@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import './StationList.scss';
 import { Link, RouteComponentProps, withRouter, NavLink } from 'react-router-dom';
 import Station from '../../models/Station';
@@ -6,21 +6,18 @@ import Line from '../../models/Line';
 
 
 interface StationListRouteProps {
-  line: string,
-}
-
-interface StationListProps extends RouteComponentProps<StationListRouteProps> {
+  line: string;
 }
 
 interface StationListState {
-  stations: Station[],
-  loading: boolean,
-  error: boolean
+  stations: Station[];
+  loading: boolean;
+  error: boolean;
 }
 
 
-class StationList extends React.Component<StationListProps, StationListState> {
-  constructor(props: any) {
+class StationList extends React.Component<RouteComponentProps<StationListRouteProps>, StationListState> {
+  constructor(props: RouteComponentProps<StationListRouteProps>) {
     super(props);
 
     this.state = {
@@ -30,7 +27,7 @@ class StationList extends React.Component<StationListProps, StationListState> {
     }
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     fetch(`https://luasapifunction.azurewebsites.net/api/stations`)
       .then(response => response.json())
       .then(response =>
@@ -38,19 +35,29 @@ class StationList extends React.Component<StationListProps, StationListState> {
           loading: false,
           stations: response
         }))
-      .catch(error =>
+      .catch(() =>
         this.setState({
           loading: false,
           error: true
         }));
   }
 
-  render() {
+  GetLineName(active: boolean): string{
+    if (active)
+    {
+      return this.props.match.params.line;
+    }
+    else {
+      return this.props.match.params.line ===  Line[Line.Red] ? Line[Line.Green] : Line[Line.Red]
+    }
+  }
+
+  render(): ReactElement {
     return (
       <div className="station-list">
         <nav className="colour-nav">
-          <NavLink exact to={'/line/Red'} activeClassName="active-line">Red</NavLink>
-          <NavLink exact to={'/line/Green'} activeClassName="active-line">Green</NavLink>
+          <NavLink exact to={`/line/${this.GetLineName(true)}`} activeClassName="active-line">{this.GetLineName(true)}</NavLink>
+          <NavLink exact to={`/line/${this.GetLineName(false)}`} activeClassName="active-line">{this.GetLineName(false)}</NavLink>
         </nav>
         <h2>{this.state.loading && "Loading..."}</h2>
         <nav className="list">

@@ -1,20 +1,20 @@
 .direction-forcast-item {
-    list-style-type: none;
-    display: flex;
-    flex-direction: row;
+  border-bottom: 1px solid #c9c9c9;
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
 
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #c9c9c9;
+  padding: 0.5rem 0;
 
-    &:last-child {
-        border: none;
-    }
+  &:last-child {
+    border: none;
+  }
 
-    .destination {
-        margin-right: 1rem;
-    }
+  .destination {
+    margin-right: 1rem;
+  }
 
-    .minutes {
-        margin-left: auto;
-    }
+  .minutes {
+    margin-left: auto;
+  }
 }

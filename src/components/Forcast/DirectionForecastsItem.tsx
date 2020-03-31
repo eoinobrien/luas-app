@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import './DirectionForecastsItem.scss';
 import TramForecast from '../../models/TramForecast';
 
 
 interface DirectionForecastsItemProps {
-  tram: TramForecast
+  tram: TramForecast;
 }
 
-function minutesDue(tram: TramForecast) {
-  return tram.isDue ? "Due" : tram.minutes + " mins"
+function minutesDue(tram: TramForecast): string {
+  return tram.isDue ? "Due" : tram.minutes + " mins";
 }
 
-function DirectionForecastsItem(props: DirectionForecastsItemProps) {
+function DirectionForecastsItem(props: DirectionForecastsItemProps): ReactElement {
   return (
     <li className="direction-forcast-item">
       <div className="destination">{props.tram.destinationStation.name}</div>
