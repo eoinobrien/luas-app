@@ -24,30 +24,28 @@
     ul {
       padding: 0;
 
-      a {
-        color: #333;
-        text-decoration: none;
+      li {
+        border-bottom: 1px solid #c9c9c9;
+        border-left: 0.5rem solid #f44336;
+        list-style-type: none;
+        display: flex;
 
-        li {
+        &:hover,
+        &:focus {
+          background: #f9f9f9;
+        }
 
-          border-bottom: 1px solid #c9c9c9;
-          border-left: 0.5rem solid #f44336;
-          list-style-type: none;
+        a {
+          color: #333;
+          text-decoration: none;
+          margin-right: 1rem;
           padding: 0.8rem 0.5rem;
-          display: flex;
+          width: 100%;
+          height: 100%;
+        }
 
-          &:hover,
-          &:focus {
-            background: #f9f9f9;
-          }
-
-          span {
-            margin-right: 1rem;
-          }
-
-          button {
-            margin-left: auto;
-          }
+        button {
+          margin-left: auto;
         }
       }
     }

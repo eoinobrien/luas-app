@@ -33,6 +33,12 @@ class App extends React.Component<{}, AppState> {
         favoriteStations: [...this.state.favoriteStations, station]
       })
     }
+    else {
+      let updatedFavoriteStations = this.state.favoriteStations.filter(s => s.abbreviation !== station.abbreviation);
+      this.setState({
+        favoriteStations: updatedFavoriteStations
+      })
+    }
   }
 
   render(): ReactElement {

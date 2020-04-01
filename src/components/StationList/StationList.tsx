@@ -46,13 +46,12 @@ class StationList extends React.Component<StationListProps, StationListState> {
         }));
   }
 
-  GetLineName(active: boolean): string{
-    if (active)
-    {
+  GetLineName(active: boolean): string {
+    if (active) {
       return this.props.match.params.line;
     }
     else {
-      return this.props.match.params.line ===  Line[Line.Red] ? Line[Line.Green] : Line[Line.Red]
+      return this.props.match.params.line === Line[Line.Red] ? Line[Line.Green] : Line[Line.Red]
     }
   }
 
@@ -71,12 +70,12 @@ class StationList extends React.Component<StationListProps, StationListState> {
               this.state.stations
                 .filter(s => s.line.toString().toLowerCase() === this.props.match.params.line.toString().toLowerCase())
                 .map(station =>
-                  <Link to={`/station/${station.abbreviation}`} key={station.abbreviation}>
-                    <li style={station.line.toString() === Line[Line.Red] ? { borderLeftColor: '#f44336' } : { borderLeftColor: '#4caf50' }}>
-                      <span>{station.name}</span>
-                      <button onClick={() => this.props.favouriteAppClick(station)}>Click</button>
-                    </li>
-                  </Link>)
+                  <li style={station.line.toString() === Line[Line.Red] ? { borderLeftColor: '#f44336' } : { borderLeftColor: '#4caf50' }}>
+                    <Link to={`/station/${station.abbreviation}`} key={station.abbreviation}>
+                      {station.name}
+                    </Link>
+                    <button onClick={() => this.props.favouriteAppClick(station)}>Click</button>
+                  </li>)
             }
           </ul>
         </nav>
