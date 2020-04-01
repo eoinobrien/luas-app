@@ -55,17 +55,17 @@ class App extends React.Component<{}, AppState> {
 
           <nav className="bottom-nav">
             <ul>
-              <li>
-                <Link to="/line/Red">Red</Link>
-              </li>
-              <li>
-                <Link to="/line/Green">Green</Link>
-              </li>
+              <Link to="/line/Red">
+                <li>Red</li>
+              </Link>
+              <Link to="/line/Green">
+                <li>Green</li>
+              </Link>
 
               {this.state.favoriteStations.map(s =>
-                <li key={s.abbreviation}>
-                  <Link to={`station/${s.abbreviation}`}>{s.name}</Link>
-                </li>
+                <Link to={`station/${s.abbreviation}`} key={s.abbreviation}>
+                  <li>{s.name}</li>
+                </Link>
               )}
             </ul>
           </nav>

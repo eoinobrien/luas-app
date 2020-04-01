@@ -28,16 +28,19 @@ class Forecast extends React.Component<RouteComponentProps<ForecastRouteProps>, 
     }
   }
 
-  private interval: any;
+  private apiInterval: any;
+  private secondInterval: any;
 
   componentDidMount(): void {
     this.getForecastFromApi();
 
-    this.interval = setInterval(this.getForecastFromApi.bind(this), 15000);
+    this.secondInterval = setInterval(() => { }, 1000);
+    this.apiInterval = setInterval(this.getForecastFromApi.bind(this), 60000);
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval);
+    clearInterval(this.secondInterval);
+    clearInterval(this.apiInterval);
   }
 
   getForecastFromApi(): void {
