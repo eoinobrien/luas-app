@@ -2,10 +2,8 @@ import React, { ReactElement } from 'react';
 import './StationListRow.scss';
 import { Link } from 'react-router-dom';
 import Station from '../../models/Station';
-import { ReactComponent as Star } from '../../star.svg';
-import { ReactComponent as StarFill } from '../../star-fill.svg';
 import Line from '../../models/Line';
-
+import FavouriteStar from '../shared/FavouriteStar';
 
 interface StationListRowProps {
   station: Station;
@@ -13,16 +11,21 @@ interface StationListRowProps {
   favourite: boolean;
 }
 
+class StationListRow extends React.Component<StationListRowProps, {}> {
+  favouriteStationClick() {
+    this.props.favouriteClick(this.props.station);
+  }
 
-function StationListRow(props: StationListRowProps): ReactElement {
-  return (
-    <li className="station-list-row" style={props.station.line.toString() === Line[Line.Red] ? { borderLeftColor: '#f44336' } : { borderLeftColor: '#4caf50' }}>
-      <Link to={`/station/${props.station.abbreviation}`}>
-        {props.station.name}
-      </Link>
-      <button onClick={() => props.favouriteClick(props.station)}>{props.favourite ? <StarFill /> : <Star />}</button>
-    </li>
-  );
+  render(): ReactElement {
+    return (
+      <li className="station-list-row" style={this.props.station.line.toString() === Line[Line.Red] ? { borderLeftColor: '#f44336' } : { borderLeftColor: '#4caf50' }}>
+        <Link to={`/station/${this.props.station.abbreviation}`}>
+          {this.props.station.name}
+        </Link>
+        <FavouriteStar favourite={this.props.favourite} favouriteClick={this.favouriteStationClick.bind(this)} />
+      </li>
+    );
+  }
 }
 
 export default StationListRow;

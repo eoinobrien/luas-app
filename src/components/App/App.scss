@@ -2,33 +2,4 @@
   .main-content {
     margin-bottom: 4rem;
   }
-
-  .bottom-nav {
-    background: #eee;
-    bottom: 0;
-    max-width: 800px;
-    position: fixed;
-    height: 4rem;
-
-    width: 100%;
-
-    ul {
-      padding: 0;
-      display: flex;
-      justify-content: flex-start;
-      margin: 0;
-
-      a {
-        margin: 0.5rem;
-        word-wrap: break-word;
-        overflow: hidden;
-        align-content: center;
-        display: grid;
-
-        li {
-          list-style-type: none;
-        }
-      }
-    }
-  }
 }

@@ -4,12 +4,12 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
-  Link
+  Redirect
 } from 'react-router-dom';
 import Forecast from '../Forcast/Forecast';
 import StationList from '../StationList/StationList';
 import Station from '../../models/Station';
+import NavBar from '../NavBar/NavBar';
 
 interface AppState {
   favoriteStations: Station[];
@@ -25,9 +25,6 @@ class App extends React.Component<{}, AppState> {
   }
 
   addToFavoriteStations(station: Station): void {
-    console.log(station.name);
-    console.log(this.state.favoriteStations)
-
     if (this.state.favoriteStations.filter(s => s.abbreviation === station.abbreviation).length === 0) {
       this.setState({
         favoriteStations: [...this.state.favoriteStations, station]
@@ -58,23 +55,7 @@ class App extends React.Component<{}, AppState> {
               </Route>
             </Switch>
           </div>
-
-          <nav className="bottom-nav">
-            <ul>
-              <Link to="/line/Red">
-                <li>Red</li>
-              </Link>
-              <Link to="/line/Green">
-                <li>Green</li>
-              </Link>
-
-              {this.state.favoriteStations.map(s =>
-                <Link to={`/station/${s.abbreviation}`} key={s.abbreviation}>
-                  <li>{s.name}</li>
-                </Link>
-              )}
-            </ul>
-          </nav>
+          <NavBar favoriteStations={this.state.favoriteStations} />
         </div>
       </Router>
     );
