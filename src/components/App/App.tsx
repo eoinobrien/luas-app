@@ -51,7 +51,7 @@ class App extends React.Component<{}, AppState> {
 
               <Route exact
                 path="/line/:line"
-                render={() => <StationList favouriteAppClick={this.addToFavoriteStations.bind(this)} />} />
+                render={() => <StationList favouriteClick={this.addToFavoriteStations.bind(this)} favouriteStations={this.state.favoriteStations} />} />
 
               <Route exact path="/">
                 <Redirect to="/line/Red" />

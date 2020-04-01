@@ -3,6 +3,7 @@ import './StationList.scss';
 import { Link, RouteComponentProps, withRouter, NavLink } from 'react-router-dom';
 import Station from '../../models/Station';
 import Line from '../../models/Line';
+import StationListRow from './StationListRow';
 
 
 interface StationListRouteProps {
@@ -10,7 +11,8 @@ interface StationListRouteProps {
 }
 
 interface StationListProps extends RouteComponentProps<StationListRouteProps> {
-  favouriteAppClick: any;
+  favouriteClick: any;
+  favouriteStations: Station[];
 }
 
 interface StationListState {
@@ -70,12 +72,10 @@ class StationList extends React.Component<StationListProps, StationListState> {
               this.state.stations
                 .filter(s => s.line.toString().toLowerCase() === this.props.match.params.line.toString().toLowerCase())
                 .map(station =>
-                  <li style={station.line.toString() === Line[Line.Red] ? { borderLeftColor: '#f44336' } : { borderLeftColor: '#4caf50' }}>
-                    <Link to={`/station/${station.abbreviation}`} key={station.abbreviation}>
-                      {station.name}
-                    </Link>
-                    <button onClick={() => this.props.favouriteAppClick(station)}>Click</button>
-                  </li>)
+                  <StationListRow
+                    station={station}
+                    favouriteClick={this.props.favouriteClick}
+                    favourite={this.props.favouriteStations.filter(s => s.abbreviation === station.abbreviation).length !== 0} />)
             }
           </ul>
         </nav>
