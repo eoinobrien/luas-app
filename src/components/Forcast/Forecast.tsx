@@ -1,9 +1,10 @@
 import React, { ReactElement } from 'react';
 import './Forecast.scss';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import StationForecast from '../../models/StationForecast';
 import DirectionForecasts from './DirectionForecasts';
 import Line from '../../models/Line';
+import { ReactComponent as LeftArrow } from '../../arrow-left-circle.svg';
 // import OperatingHours from '../OperatingHours/OperatingHours';
 
 interface ForecastRouteProps {
@@ -62,7 +63,7 @@ class Forecast extends React.Component<RouteComponentProps<ForecastRouteProps>, 
     return (
       <div className="forecast">
         <header>
-          {/* <Link to={`/line/${!this.state.loading && this.state.forecast.station.line}`}>Back</Link> */}
+          <Link className="back-arrow" to={`/line/${!this.state.loading && this.state.forecast.station.line}`}><LeftArrow /></Link>
           <h1 style={(this.state.loading && { borderColor: '#333333' }) || (this.state.forecast.station.line.toString() === Line[Line.Red] ? { borderColor: '#f44336' } : { borderColor: '#4caf50' })}>
             {(this.state.loading && this.props.match.params.abbreviation)
               || this.state.forecast.station.name} <span>{!this.state.loading && this.state.forecast.station.irishName}</span></h1>

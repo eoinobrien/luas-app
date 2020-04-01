@@ -1,8 +1,6 @@
 import React, { ReactElement } from 'react';
 import './NavBarLink.scss';
 import { Link } from 'react-router-dom';
-import Station from '../../models/Station';
-import Line from '../../models/Line';
 
 interface NavBarLinkProps {
   value: string;

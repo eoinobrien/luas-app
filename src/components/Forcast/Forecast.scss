@@ -1,12 +1,19 @@
 .forecast {
   header {
     margin: 0.5rem 0;
+    display: flex;
+    border-bottom: 0.75rem solid #4caf50;
+    margin: 0;
+    padding: 0.5rem;
+
+    .back-arrow svg {
+      color: #333;
+      width: 3rem;
+      margin-right: 0.5rem;
+    }
 
     h1 {
-
-      border-bottom: 0.75rem solid #4caf50;
       margin: 0;
-      padding: 0.5rem;
 
       span {
         font-size: 2rem;
