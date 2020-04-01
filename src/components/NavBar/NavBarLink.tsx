@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react';
 import './NavBarLink.scss';
-import { Link } from 'react-router-dom';
+import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 
-interface NavBarLinkProps {
+interface NavBarLinkProps extends RouteComponentProps {
   value: string;
   to: string;
   colour: string;
@@ -18,4 +18,4 @@ class NavBarLink extends React.Component<NavBarLinkProps, {}> {
   }
 }
 
-export default NavBarLink;
+export default withRouter(NavBarLink);

@@ -44,7 +44,9 @@ class App extends React.Component<{}, AppState> {
         <div className="app">
           <div className="main-content">
             <Switch>
-              <Route exact path="/station/:abbreviation" component={Forecast} />
+              <Route
+                path="/station/:abbreviation"
+                render={() => <Forecast />} />
 
               <Route exact
                 path="/line/:line"

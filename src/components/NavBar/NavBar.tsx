@@ -3,8 +3,9 @@ import './NavBar.scss';
 import Station from '../../models/Station';
 import NavBarLink from './NavBarLink';
 import Line from '../../models/Line';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-interface NavBarProps {
+interface NavBarProps extends RouteComponentProps {
   favoriteStations: Station[];
 }
 
@@ -27,4 +28,4 @@ class NavBar extends React.Component<NavBarProps, {}> {
   }
 }
 
-export default NavBar;
+export default withRouter(NavBar);

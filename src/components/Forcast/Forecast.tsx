@@ -17,7 +17,6 @@ interface ForecastState {
   error: boolean;
 }
 
-
 class Forecast extends React.Component<RouteComponentProps<ForecastRouteProps>, ForecastState> {
   constructor(props: RouteComponentProps<ForecastRouteProps>) {
     super(props);
@@ -43,6 +42,15 @@ class Forecast extends React.Component<RouteComponentProps<ForecastRouteProps>, 
     clearInterval(this.secondInterval);
     clearInterval(this.apiInterval);
   }
+
+
+  componentDidUpdate(prevProps: RouteComponentProps<ForecastRouteProps>) {
+    if (this.props.match.params.abbreviation !== prevProps.match.params.abbreviation) // Check if it's a new user, you can also use some unique property, like the ID  (this.props.user.id !== prevProps.user.id)
+    {
+      this.getForecastFromApi();
+    }
+  }
+
 
   getForecastFromApi(): void {
     fetch(`https://luasapifunction.azurewebsites.net/api/stations/${this.props.match.params.abbreviation}/forecast`)
