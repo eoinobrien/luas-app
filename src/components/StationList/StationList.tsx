@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import './StationList.scss';
-import { Link, RouteComponentProps, withRouter, NavLink } from 'react-router-dom';
+import { RouteComponentProps, withRouter, NavLink } from 'react-router-dom';
 import Station from '../../models/Station';
 import Line from '../../models/Line';
 import StationListRow from './StationListRow';
