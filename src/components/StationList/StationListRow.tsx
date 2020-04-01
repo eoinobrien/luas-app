@@ -16,7 +16,7 @@ interface StationListRowProps {
 
 function StationListRow(props: StationListRowProps): ReactElement {
   return (
-    <li className="station-list-row" style={props.station.line === Line.Red ? { borderLeftColor: '#f44336' } : { borderLeftColor: '#4caf50' }}>
+    <li className="station-list-row" style={props.station.line.toString() === Line[Line.Red] ? { borderLeftColor: '#f44336' } : { borderLeftColor: '#4caf50' }}>
       <Link to={`/station/${props.station.abbreviation}`}>
         {props.station.name}
       </Link>
