@@ -83,7 +83,7 @@ class Forecast extends React.Component<RouteComponentProps<ForecastRouteProps>, 
               </div>
 
               <h3 className="message">{this.state.forecast.message}</h3>
-              <OperatingHours operatingHours={this.state.forecast.station.operatingHours} />
+              {/* <OperatingHours operatingHours={this.state.forecast.station.operatingHours} /> */}
             </div>}
         </main>
       </div>

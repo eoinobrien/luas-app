@@ -69,7 +69,7 @@ class App extends React.Component<{}, AppState> {
               </Link>
 
               {this.state.favoriteStations.map(s =>
-                <Link to={`station/${s.abbreviation}`} key={s.abbreviation}>
+                <Link to={`/station/${s.abbreviation}`} key={s.abbreviation}>
                   <li>{s.name}</li>
                 </Link>
               )}

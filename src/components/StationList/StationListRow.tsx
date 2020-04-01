@@ -17,7 +17,7 @@ interface StationListRowProps {
 function StationListRow(props: StationListRowProps): ReactElement {
   return (
     <li className="station-list-row" style={props.station.line === Line.Red ? { borderLeftColor: '#f44336' } : { borderLeftColor: '#4caf50' }}>
-      <Link to={`/station/${props.station.abbreviation}`} key={props.station.abbreviation}>
+      <Link to={`/station/${props.station.abbreviation}`}>
         {props.station.name}
       </Link>
       <button onClick={() => props.favouriteClick(props.station)}>{props.favourite ? <StarFill /> : <Star />}</button>

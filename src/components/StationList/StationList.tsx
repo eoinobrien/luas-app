@@ -73,6 +73,7 @@ class StationList extends React.Component<StationListProps, StationListState> {
                 .filter(s => s.line.toString().toLowerCase() === this.props.match.params.line.toString().toLowerCase())
                 .map(station =>
                   <StationListRow
+                    key={station.abbreviation}
                     station={station}
                     favouriteClick={this.props.favouriteClick}
                     favourite={this.props.favouriteStations.filter(s => s.abbreviation === station.abbreviation).length !== 0} />)
