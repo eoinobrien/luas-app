@@ -34,13 +34,28 @@ class StationList extends React.Component<StationListProps, StationListState> {
   }
 
   componentDidMount(): void {
+    let localStorageStations: string = localStorage.getItem('allStations') || "";
+
+    if (localStorageStations !== "") {
+      console.log("updating")
+      let allStations: Station[] = JSON.parse(localStorageStations);
+
+      this.setState({
+        loading: false,
+        stations: allStations
+      })
+    }
+
     fetch(`https://luasapifunction.azurewebsites.net/api/stations`)
       .then(response => response.json())
-      .then(response =>
+      .then(response => {
         this.setState({
           loading: false,
           stations: response
-        }))
+        });
+
+        localStorage.setItem('allStations', JSON.stringify(response));
+      })
       .catch(() =>
         this.setState({
           loading: false,
