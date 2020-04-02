@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders learn react link 1`] = `
+<button
+  className="favourite-star"
+  onClick={[Function]}
+>
+  <svg>
+    star.svg
+  </svg>
+</button>
+`;
+
+exports[`renders learn react link 2`] = `
+<button
+  className="favourite-star"
+  onClick={[Function]}
+>
+  <svg>
+    star.svg
+  </svg>
+</button>
+`;

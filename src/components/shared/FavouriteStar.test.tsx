@@ -1,9 +1,15 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import StationListRow from './FavouriteStar';
+import renderer from 'react-test-renderer';
+import FavouriteStar from './FavouriteStar';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<StationListRow />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+
+test('renders correctly', () => {
+  const favouriteClick = () => {
+    console.log("click");
+  }
+
+  const tree = renderer
+    .create(<FavouriteStar isFavourite={false} favouriteClick={favouriteClick} />)
+    .toJSON();
+  expect(tree).toMatchSnapshot();
 });
