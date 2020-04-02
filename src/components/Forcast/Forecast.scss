@@ -1,12 +1,12 @@
 .forecast {
   header {
-    border-bottom: 0.75rem solid #4caf50;
+    border-bottom: 0.75rem solid var(--main-text-colour);
     display: flex;
     margin: 0;
     padding: 0.5rem;
 
     .back-arrow svg {
-      color: #424242;
+      color: var(--main-text-colour);
       margin-right: 0.5rem;
       width: 2.9rem;
     }

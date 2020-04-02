@@ -1,7 +1,7 @@
 .navbar {
+  background: var(--background);
   align-items: center;
-  background: #fff;
-  border-top: solid #bdbdbd 2px;
+  border-top: 2px solid var(--secondary-text-colour);
   bottom: 0;
 
   display: flex;

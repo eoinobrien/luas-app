@@ -4,7 +4,7 @@ button.favourite-star {
   margin-left: auto;
 
   svg {
-    color: #bdbdbd;
+    color: var(--secondary-text-colour);
     width: 2rem;
   }
 }
