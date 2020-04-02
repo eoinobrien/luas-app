@@ -81,7 +81,7 @@ class StationList extends React.Component<StationListProps, StationListState> {
             <NavLink exact to={`/line/${this.GetLineName(true)}`} activeClassName="active-line" style={this.GetLineName(true) === Line[Line.Red] ? { color: '#f44336' } : { color: '#00af00' }}>{this.GetLineName(true)}</NavLink>
             <NavLink exact to={`/line/${this.GetLineName(false)}`} activeClassName="active-line">{this.GetLineName(false)}</NavLink>
           </nav>
-          <Link to="/help"><MoreIcon /></Link>
+          <Link to="/help" aria-label="Learn More"><MoreIcon /></Link>
         </header>
         <h2>{this.state.loading && "Loading..."}</h2>
         <nav className="list">

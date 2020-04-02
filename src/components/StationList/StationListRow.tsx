@@ -23,7 +23,10 @@ class StationListRow extends React.Component<StationListRowProps, {}> {
           {this.props.station.name}
           <span> {this.props.station.irishName}</span>
         </Link>
-        <FavouriteStar isFavourite={this.props.isFavourite} favouriteClick={this.favouriteStationClick.bind(this)} />
+        <FavouriteStar
+          name={this.props.station.name}
+          isFavourite={this.props.isFavourite}
+          favouriteClick={this.favouriteStationClick.bind(this)} />
       </li>
     );
   }

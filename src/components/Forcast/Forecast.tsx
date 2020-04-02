@@ -66,7 +66,7 @@ class Forecast extends React.Component<ForecastProps, ForecastState> {
 
 
   getForecastFromApi(): void {
-    this.setState({updating: true});
+    this.setState({ updating: true });
 
     fetch(`https://luasapifunction.azurewebsites.net/api/stations/${this.props.match.params.abbreviation}/forecast`)
       .then(response => response.json())
@@ -91,8 +91,8 @@ class Forecast extends React.Component<ForecastProps, ForecastState> {
   }
 
   getSecondsToUpdate(time: Date) {
-    let secondsToUpdate: number = 15 - Math.abs(Math.ceil((time.getTime() - Date.now())/1000));
-    this.setState({secondsSinceUpdate: secondsToUpdate})
+    let secondsToUpdate: number = 15 - Math.abs(Math.ceil((time.getTime() - Date.now()) / 1000));
+    this.setState({ secondsSinceUpdate: secondsToUpdate })
     return secondsToUpdate;
   }
 
@@ -100,12 +100,20 @@ class Forecast extends React.Component<ForecastProps, ForecastState> {
     return (
       <div className="forecast">
         <header style={(this.state.loading && { borderColor: '#424242' }) || (this.state.forecast.station.line.toString() === Line[Line.Red] ? { borderColor: '#f44336' } : { borderColor: '#00af00' })}>
-          <Link className="back-arrow" to={`/line/${!this.state.loading && this.state.forecast.station.line}`}><LeftArrow /></Link>
+          <Link
+            className="back-arrow"
+            aria-label="Go Back to the list of Stations"
+            to={`/line/${!this.state.loading && this.state.forecast.station.line}`}>
+            <LeftArrow />
+          </Link>
           <h1>
             {(this.state.loading && this.props.match.params.abbreviation)
               || this.state.forecast.station.name} <span>{!this.state.loading && this.state.forecast.station.irishName}</span></h1>
 
-          <FavouriteStar isFavourite={this.props.favouriteStations.filter(s => s.abbreviation === this.props.match.params.abbreviation).length !== 0} favouriteClick={this.favouriteStationClick.bind(this)} />
+          <FavouriteStar
+            name={this.state.forecast.station.name}
+            isFavourite={this.props.favouriteStations.filter(s => s.abbreviation === this.props.match.params.abbreviation).length !== 0}
+            favouriteClick={this.favouriteStationClick.bind(this)} />
         </header>
 
         <main>
