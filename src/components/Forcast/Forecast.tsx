@@ -22,6 +22,9 @@ interface ForecastState {
   loading: boolean;
   forecast: StationForecast;
   error: boolean;
+  updating: boolean;
+  secondsSinceUpdate: number;
+  lastUpdate: Date;
 }
 
 class Forecast extends React.Component<ForecastProps, ForecastState> {
@@ -31,7 +34,10 @@ class Forecast extends React.Component<ForecastProps, ForecastState> {
     this.state = {
       forecast: {} as StationForecast,
       loading: true,
-      error: false
+      error: false,
+      updating: false,
+      secondsSinceUpdate: 0,
+      lastUpdate: new Date(0)
     }
   }
 
@@ -41,8 +47,8 @@ class Forecast extends React.Component<ForecastProps, ForecastState> {
   componentDidMount(): void {
     this.getForecastFromApi();
 
-    this.secondInterval = setInterval(() => { }, 1000);
-    this.apiInterval = setInterval(this.getForecastFromApi.bind(this), 60000);
+    this.secondInterval = setInterval(() => this.getSecondsToUpdate(this.state.lastUpdate), 1000);
+    this.apiInterval = setInterval(this.getForecastFromApi.bind(this), 15000);
   }
 
   componentWillUnmount(): void {
@@ -60,22 +66,34 @@ class Forecast extends React.Component<ForecastProps, ForecastState> {
 
 
   getForecastFromApi(): void {
+    this.setState({updating: true});
+
     fetch(`https://luasapifunction.azurewebsites.net/api/stations/${this.props.match.params.abbreviation}/forecast`)
       .then(response => response.json())
       .then(response =>
         this.setState({
           loading: false,
-          forecast: response
+          forecast: response,
+          updating: false,
+          lastUpdate: new Date()
         }))
       .catch(() =>
         this.setState({
           loading: false,
-          error: true
+          error: true,
+          updating: false,
+          lastUpdate: new Date()
         }));
   }
 
   favouriteStationClick() {
     this.props.favouriteClick(this.state.forecast.station)
+  }
+
+  getSecondsToUpdate(time: Date) {
+    let secondsToUpdate: number = 15 - Math.abs(Math.ceil((time.getTime() - Date.now())/1000));
+    this.setState({secondsSinceUpdate: secondsToUpdate})
+    return secondsToUpdate;
   }
 
   render(): ReactElement {
@@ -99,6 +117,7 @@ class Forecast extends React.Component<ForecastProps, ForecastState> {
 
           {!this.state.loading &&
             <div>
+              <h4 className="updating">{this.state.updating ? "Updating..." : "Updating in " + this.state.secondsSinceUpdate + " seconds."}</h4>
               <div>
                 <DirectionForecasts direction={this.state.forecast.station.line.toString() === Line[Line.Red] ? "Eastbound" : "Northbound"} forecasts={this.state.forecast.inboundTrams} />
                 <DirectionForecasts direction={this.state.forecast.station.line.toString() === Line[Line.Red] ? "Westbound" : "Southbound"} forecasts={this.state.forecast.outboundTrams} />

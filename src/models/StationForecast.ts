@@ -7,7 +7,7 @@ interface StationForecast
     inboundTrams: Array<TramForecast>;
     outboundTrams: Array<TramForecast>;
     message: string;
-    created: Date;
+    created: string;
 }
 
 export default StationForecast;
