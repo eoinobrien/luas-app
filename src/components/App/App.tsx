@@ -45,11 +45,14 @@ class App extends React.Component<{}, AppState> {
 
   componentDidMount(): void {
     let localStorageString: string = localStorage.getItem('favouriteStations') || "";
-    let stations: Station[] = JSON.parse(localStorageString);
 
-    this.setState({
-      favouriteStations: stations
-    })
+    if (localStorageString !== "") {
+      let stations: Station[] = JSON.parse(localStorageString);
+
+      this.setState({
+        favouriteStations: stations
+      })
+    }
   }
 
   render(): ReactElement {
