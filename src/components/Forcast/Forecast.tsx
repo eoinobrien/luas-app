@@ -45,7 +45,7 @@ class Forecast extends React.Component<ForecastProps, ForecastState> {
     this.apiInterval = setInterval(this.getForecastFromApi.bind(this), 60000);
   }
 
-  componentWillUnmount() {
+  componentWillUnmount(): void {
     clearInterval(this.secondInterval);
     clearInterval(this.apiInterval);
   }

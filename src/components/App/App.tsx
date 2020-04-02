@@ -25,17 +25,31 @@ class App extends React.Component<{}, AppState> {
   }
 
   addToFavouriteStations(station: Station): void {
+    let updatedFavouriteStations: Station[];
+
     if (this.state.favouriteStations.filter(s => s.abbreviation === station.abbreviation).length === 0) {
-      this.setState({
-        favouriteStations: [...this.state.favouriteStations, station]
-      })
-    }
-    else {
-      let updatedFavouriteStations = this.state.favouriteStations.filter(s => s.abbreviation !== station.abbreviation);
+      updatedFavouriteStations = [...this.state.favouriteStations, station]
       this.setState({
         favouriteStations: updatedFavouriteStations
       })
     }
+    else {
+      updatedFavouriteStations = this.state.favouriteStations.filter(s => s.abbreviation !== station.abbreviation);
+      this.setState({
+        favouriteStations: updatedFavouriteStations
+      })
+    }
+
+    localStorage.setItem('favouriteStations', JSON.stringify(updatedFavouriteStations));
+  }
+
+  componentDidMount(): void {
+    let localStorageString: string = localStorage.getItem('favouriteStations') || "";
+    let stations: Station[] = JSON.parse(localStorageString);
+
+    this.setState({
+      favouriteStations: stations
+    })
   }
 
   render(): ReactElement {
