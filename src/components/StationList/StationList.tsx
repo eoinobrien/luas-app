@@ -76,7 +76,7 @@ class StationList extends React.Component<StationListProps, StationListState> {
                     key={station.abbreviation}
                     station={station}
                     favouriteClick={this.props.favouriteClick}
-                    favourite={this.props.favouriteStations.filter(s => s.abbreviation === station.abbreviation).length !== 0} />)
+                    isFavourite={this.props.favouriteStations.filter(s => s.abbreviation === station.abbreviation).length !== 0} />)
             }
           </ul>
         </nav>

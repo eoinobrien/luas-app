@@ -8,7 +8,7 @@ import FavouriteStar from '../shared/FavouriteStar';
 interface StationListRowProps {
   station: Station;
   favouriteClick: any;
-  favourite: boolean;
+  isFavourite: boolean;
 }
 
 class StationListRow extends React.Component<StationListRowProps, {}> {
@@ -23,7 +23,7 @@ class StationListRow extends React.Component<StationListRowProps, {}> {
           {this.props.station.name}
           <span> {this.props.station.irishName}</span>
         </Link>
-        <FavouriteStar favourite={this.props.favourite} favouriteClick={this.favouriteStationClick.bind(this)} />
+        <FavouriteStar isFavourite={this.props.isFavourite} favouriteClick={this.favouriteStationClick.bind(this)} />
       </li>
     );
   }

@@ -5,13 +5,13 @@ import { ReactComponent as StarFill } from './star-fill.svg';
 
 interface FavouriteStarProps {
   favouriteClick: any;
-  favourite: boolean;
+  isFavourite: boolean;
 }
 
 function FavouriteStar(props: FavouriteStarProps): ReactElement {
   return (
     <button className="favourite-star" onClick={() => props.favouriteClick()}>
-      {props.favourite ? <StarFill style={{color: '#fdd835'}} /> : <Star />}
+      {props.isFavourite ? <StarFill style={{color: '#fdd835'}} /> : <Star />}
     </button>
   );
 }

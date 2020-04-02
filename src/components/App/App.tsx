@@ -46,7 +46,7 @@ class App extends React.Component<{}, AppState> {
             <Switch>
               <Route
                 path="/station/:abbreviation"
-                render={() => <Forecast />} />
+                render={() => <Forecast favouriteClick={this.addToFavouriteStations.bind(this)} favouriteStations={this.state.favouriteStations} />} />
 
               <Route exact
                 path="/line/:line"

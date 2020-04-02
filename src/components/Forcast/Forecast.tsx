@@ -5,10 +5,17 @@ import StationForecast from '../../models/StationForecast';
 import DirectionForecasts from './DirectionForecasts';
 import Line from '../../models/Line';
 import { ReactComponent as LeftArrow } from '../../arrow-left-circle.svg';
+import FavouriteStar from '../shared/FavouriteStar';
+import Station from '../../models/Station';
 // import OperatingHours from '../OperatingHours/OperatingHours';
 
 interface ForecastRouteProps {
   abbreviation: string;
+}
+
+interface ForecastProps extends RouteComponentProps<ForecastRouteProps> {
+  favouriteClick: any;
+  favouriteStations: Station[];
 }
 
 interface ForecastState {
@@ -17,8 +24,8 @@ interface ForecastState {
   error: boolean;
 }
 
-class Forecast extends React.Component<RouteComponentProps<ForecastRouteProps>, ForecastState> {
-  constructor(props: RouteComponentProps<ForecastRouteProps>) {
+class Forecast extends React.Component<ForecastProps, ForecastState> {
+  constructor(props: ForecastProps) {
     super(props);
 
     this.state = {
@@ -67,6 +74,10 @@ class Forecast extends React.Component<RouteComponentProps<ForecastRouteProps>, 
         }));
   }
 
+  favouriteStationClick() {
+    this.props.favouriteClick(this.state.forecast.station)
+  }
+
   render(): ReactElement {
     return (
       <div className="forecast">
@@ -75,6 +86,8 @@ class Forecast extends React.Component<RouteComponentProps<ForecastRouteProps>, 
           <h1>
             {(this.state.loading && this.props.match.params.abbreviation)
               || this.state.forecast.station.name} <span>{!this.state.loading && this.state.forecast.station.irishName}</span></h1>
+
+          <FavouriteStar isFavourite={this.props.favouriteStations.filter(s => s.abbreviation === this.props.match.params.abbreviation).length !== 0} favouriteClick={this.favouriteStationClick.bind(this)} />
         </header>
 
         <main>
