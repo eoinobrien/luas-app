@@ -18,7 +18,7 @@ class NavBar extends React.Component<NavBarProps, {}> {
 
           <div className="line-section-links">
             <NavBarLink className="line" value="Red" to="/line/Red" colour="#f44336" />
-            <NavBarLink className="line" value="Green" to="/line/Green" colour="#4caf50" />
+            <NavBarLink className="line" value="Green" to="/line/Green" colour="#00af00" />
           </div>
         </div>
 
@@ -33,7 +33,7 @@ class NavBar extends React.Component<NavBarProps, {}> {
                   className="stations"
                   value={station.name}
                   to={`/station/${station.abbreviation}`}
-                  colour={station.line.toString() === Line[Line.Red] ? '#f44336' : '#4caf50'}
+                  colour={station.line.toString() === Line[Line.Red] ? '#f44336' : '#00af00'}
                   key={station.abbreviation} />
               )}
           </div>

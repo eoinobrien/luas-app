@@ -1,9 +1,10 @@
 import React, { ReactElement } from 'react';
 import './StationList.scss';
-import { RouteComponentProps, withRouter, NavLink } from 'react-router-dom';
+import { RouteComponentProps, withRouter, NavLink, Link } from 'react-router-dom';
 import Station from '../../models/Station';
 import Line from '../../models/Line';
 import StationListRow from './StationListRow';
+import { ReactComponent as MoreIcon } from './more-vertical.svg';
 
 
 interface StationListRouteProps {
@@ -37,7 +38,7 @@ class StationList extends React.Component<StationListProps, StationListState> {
     let localStorageStations: string = localStorage.getItem('allStations') || "";
 
     if (localStorageStations !== "") {
-      console.log("updating")
+      console.log("Updating")
       let allStations: Station[] = JSON.parse(localStorageStations);
 
       this.setState({
@@ -75,10 +76,13 @@ class StationList extends React.Component<StationListProps, StationListState> {
   render(): ReactElement {
     return (
       <div className="station-list">
-        <nav className="colour-nav">
-          <NavLink exact to={`/line/${this.GetLineName(true)}`} activeClassName="active-line">{this.GetLineName(true)}</NavLink>
-          <NavLink exact to={`/line/${this.GetLineName(false)}`} activeClassName="active-line">{this.GetLineName(false)}</NavLink>
-        </nav>
+        <header>
+          <nav className="colour-nav">
+            <NavLink exact to={`/line/${this.GetLineName(true)}`} activeClassName="active-line" style={this.GetLineName(true) === Line[Line.Red] ? { color: '#f44336' } : { color: '#00af00' }}>{this.GetLineName(true)}</NavLink>
+            <NavLink exact to={`/line/${this.GetLineName(false)}`} activeClassName="active-line">{this.GetLineName(false)}</NavLink>
+          </nav>
+          <Link to="/help"><MoreIcon /></Link>
+        </header>
         <h2>{this.state.loading && "Loading..."}</h2>
         <nav className="list">
           <ul>

@@ -99,7 +99,7 @@ class Forecast extends React.Component<ForecastProps, ForecastState> {
   render(): ReactElement {
     return (
       <div className="forecast">
-        <header style={(this.state.loading && { borderColor: '#424242' }) || (this.state.forecast.station.line.toString() === Line[Line.Red] ? { borderColor: '#f44336' } : { borderColor: '#4caf50' })}>
+        <header style={(this.state.loading && { borderColor: '#424242' }) || (this.state.forecast.station.line.toString() === Line[Line.Red] ? { borderColor: '#f44336' } : { borderColor: '#00af00' })}>
           <Link className="back-arrow" to={`/line/${!this.state.loading && this.state.forecast.station.line}`}><LeftArrow /></Link>
           <h1>
             {(this.state.loading && this.props.match.params.abbreviation)

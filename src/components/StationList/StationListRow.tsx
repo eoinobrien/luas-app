@@ -18,7 +18,7 @@ class StationListRow extends React.Component<StationListRowProps, {}> {
 
   render(): ReactElement {
     return (
-      <li className="station-list-row" style={this.props.station.line.toString() === Line[Line.Red] ? { borderLeftColor: '#f44336' } : { borderLeftColor: '#4caf50' }}>
+      <li className="station-list-row" style={this.props.station.line.toString() === Line[Line.Red] ? { borderLeftColor: '#f44336' } : { borderLeftColor: '#00af00' }}>
         <Link to={`/station/${this.props.station.abbreviation}`}>
           {this.props.station.name}
           <span> {this.props.station.irishName}</span>

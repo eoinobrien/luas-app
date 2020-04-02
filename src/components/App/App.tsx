@@ -10,6 +10,7 @@ import Forecast from '../Forcast/Forecast';
 import StationList from '../StationList/StationList';
 import Station from '../../models/Station';
 import NavBar from '../NavBar/NavBar';
+import Help from '../Help/Help';
 
 interface AppState {
   favouriteStations: Station[];
@@ -68,6 +69,10 @@ class App extends React.Component<{}, AppState> {
               <Route exact
                 path="/line/:line"
                 render={() => <StationList favouriteClick={this.addToFavouriteStations.bind(this)} favouriteStations={this.state.favouriteStations} />} />
+
+              <Route exact path="/help">
+                <Help />
+              </Route>
 
               <Route exact path="/">
                 <Redirect to="/line/Red" />

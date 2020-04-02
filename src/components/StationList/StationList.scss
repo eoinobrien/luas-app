@@ -1,6 +1,17 @@
 .station-list {
   padding: 0.5rem;
 
+  header {
+    display: flex;
+
+    a {
+      margin-left: auto;
+      align-self: center;
+
+      color: var(--main-text-colour);
+    }
+  }
+
   .colour-nav {
     font-size: 2rem;
 
@@ -14,7 +25,8 @@
         text-decoration: none;
       }
 
-      &:hover {
+      &:hover,
+      &:active {
         text-decoration: underline;
       }
     }
