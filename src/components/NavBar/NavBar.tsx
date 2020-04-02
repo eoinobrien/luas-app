@@ -26,14 +26,16 @@ class NavBar extends React.Component<NavBarProps, {}> {
           <h1>Favourite Stations</h1>
 
           <div className="line-section-links">
-            {this.props.favouriteStations.map(station =>
-              <NavBarLink
-                className="stations"
-                value={station.name}
-                to={`/station/${station.abbreviation}`}
-                colour={station.line.toString() === Line[Line.Red] ? '#f44336' : '#4caf50'}
-                key={station.abbreviation} />
-            )}
+            {this.props.favouriteStations.length === 0 ?
+              <p>Starred stations will appear here.</p> :
+              this.props.favouriteStations.map(station =>
+                <NavBarLink
+                  className="stations"
+                  value={station.name}
+                  to={`/station/${station.abbreviation}`}
+                  colour={station.line.toString() === Line[Line.Red] ? '#f44336' : '#4caf50'}
+                  key={station.abbreviation} />
+              )}
           </div>
         </div>
       </nav>
