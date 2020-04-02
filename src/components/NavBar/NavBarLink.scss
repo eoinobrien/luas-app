@@ -1,11 +1,18 @@
 .navbar-link {
-  border-bottom: 3px solid #333;
-  padding: 0.5rem;
+  border-bottom: 3px solid #424242;
+  color: #424242;
   margin-right: 0.5rem;
+  padding: 0.5rem;
+  text-decoration: none;
 
   vertical-align: middle;
-  text-decoration: none;
-  color: #333;
+
+  &.line {
+    font-weight: 700;
+  }
+
+  // &.stations {
+  // }
 
   :last-child {
     margin-right: 0;

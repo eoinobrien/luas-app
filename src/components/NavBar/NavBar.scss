@@ -1,14 +1,31 @@
 .navbar {
-  background: #eee;
+  align-items: center;
+  background: #fff;
+  border-top: solid #bdbdbd 2px;
   bottom: 0;
-  max-width: 800px;
-  position: fixed;
+
+  display: flex;
   height: 4rem;
+  max-width: 784px;
+
+  overflow: hidden;
+  padding: 0.5rem;
+  position: fixed;
 
   width: 100%;
 
-  display: inline-flex;
-  align-items: center;
 
-  overflow: hidden;
+  div {
+    height: 100%;
+
+    h1 {
+      font-size: 0.7rem;
+      margin-top: 0;
+      text-transform: uppercase;
+    }
+
+    &.line-section {
+      margin-right: 0.5rem;
+    }
+  }
 }

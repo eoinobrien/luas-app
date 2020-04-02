@@ -12,7 +12,7 @@ import Station from '../../models/Station';
 import NavBar from '../NavBar/NavBar';
 
 interface AppState {
-  favoriteStations: Station[];
+  favouriteStations: Station[];
 }
 
 class App extends React.Component<{}, AppState> {
@@ -20,20 +20,20 @@ class App extends React.Component<{}, AppState> {
     super(props);
 
     this.state = {
-      favoriteStations: [] as Station[]
+      favouriteStations: [] as Station[]
     }
   }
 
-  addToFavoriteStations(station: Station): void {
-    if (this.state.favoriteStations.filter(s => s.abbreviation === station.abbreviation).length === 0) {
+  addToFavouriteStations(station: Station): void {
+    if (this.state.favouriteStations.filter(s => s.abbreviation === station.abbreviation).length === 0) {
       this.setState({
-        favoriteStations: [...this.state.favoriteStations, station]
+        favouriteStations: [...this.state.favouriteStations, station]
       })
     }
     else {
-      let updatedFavoriteStations = this.state.favoriteStations.filter(s => s.abbreviation !== station.abbreviation);
+      let updatedFavouriteStations = this.state.favouriteStations.filter(s => s.abbreviation !== station.abbreviation);
       this.setState({
-        favoriteStations: updatedFavoriteStations
+        favouriteStations: updatedFavouriteStations
       })
     }
   }
@@ -50,14 +50,14 @@ class App extends React.Component<{}, AppState> {
 
               <Route exact
                 path="/line/:line"
-                render={() => <StationList favouriteClick={this.addToFavoriteStations.bind(this)} favouriteStations={this.state.favoriteStations} />} />
+                render={() => <StationList favouriteClick={this.addToFavouriteStations.bind(this)} favouriteStations={this.state.favouriteStations} />} />
 
               <Route exact path="/">
                 <Redirect to="/line/Red" />
               </Route>
             </Switch>
           </div>
-          <NavBar favoriteStations={this.state.favoriteStations} />
+          <NavBar favouriteStations={this.state.favouriteStations} />
         </div>
       </Router>
     );

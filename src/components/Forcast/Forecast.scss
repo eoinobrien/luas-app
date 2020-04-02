@@ -1,14 +1,14 @@
 .forecast {
   header {
-    display: flex;
     border-bottom: 0.75rem solid #4caf50;
+    display: flex;
     margin: 0;
     padding: 0.5rem;
 
     .back-arrow svg {
-      color: #333;
-      width: 3rem;
+      color: #424242;
       margin-right: 0.5rem;
+      width: 3rem;
     }
 
     h1 {
@@ -25,7 +25,7 @@
   main {
     padding: 0.5rem;
 
-    .message {
-    }
+    // .message {
+    // }
   }
 }

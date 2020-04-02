@@ -6,12 +6,13 @@ interface NavBarLinkProps extends RouteComponentProps {
   value: string;
   to: string;
   colour: string;
+  className: string;
 }
 
 class NavBarLink extends React.Component<NavBarLinkProps, {}> {
   render(): ReactElement {
     return (
-      <Link className="navbar-link" to={this.props.to} style={{borderColor: this.props.colour}}>
+      <Link className={'navbar-link ' + this.props.className!} to={this.props.to} style={{borderColor: this.props.colour}}>
         {this.props.value}
       </Link>
     );
