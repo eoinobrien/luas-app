@@ -110,10 +110,11 @@ class Forecast extends React.Component<ForecastProps, ForecastState> {
             {(this.state.loading && this.props.match.params.abbreviation)
               || this.state.forecast.station.name} <span>{!this.state.loading && this.state.forecast.station.irishName}</span></h1>
 
-          <FavouriteStar
-            name={this.state.forecast.station.name}
-            isFavourite={this.props.favouriteStations.filter(s => s.abbreviation === this.props.match.params.abbreviation).length !== 0}
-            favouriteClick={this.favouriteStationClick.bind(this)} />
+          {!this.state.loading &&
+            <FavouriteStar
+              name={this.state.forecast.station.name}
+              isFavourite={this.props.favouriteStations.filter(s => s.abbreviation === this.props.match.params.abbreviation).length !== 0}
+              favouriteClick={this.favouriteStationClick.bind(this)} />}
         </header>
 
         <main>
