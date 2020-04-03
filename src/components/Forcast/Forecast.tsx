@@ -7,6 +7,8 @@ import Line from '../../models/Line';
 import { ReactComponent as LeftArrow } from '../../arrow-left-circle.svg';
 import FavouriteStar from '../shared/FavouriteStar';
 import Station from '../../models/Station';
+import OperatingHoursModel from '../../models/OperatingHoursModel';
+import OperatingHoursDay from '../../models/OperatingHoursDay';
 // import OperatingHours from '../OperatingHours/OperatingHours';
 
 interface ForecastRouteProps {
@@ -96,6 +98,36 @@ class Forecast extends React.Component<ForecastProps, ForecastState> {
     return secondsToUpdate;
   }
 
+  // getOperatingHoursForToday(operatingHours: OperatingHoursModel): boolean {
+  //   let dayOfWeek: number = new Date().getDate();
+
+  //   let operatingHoursForDay: OperatingHoursDay;
+
+  //   switch (dayOfWeek) {
+  //     case 1:
+  //     case 2:
+  //     case 3:
+  //     case 4:
+  //     case 5:
+  //       operatingHoursForDay = operatingHours.weekdays;
+  //       break;
+
+  //     case 6:
+  //       operatingHoursForDay = operatingHours.saturday;
+  //       break;
+
+  //     case 0:
+  //       operatingHoursForDay = operatingHours.sunday;
+  //       break;
+
+  //     default:
+  //       operatingHoursForDay = operatingHours.sunday;
+  //       break;
+  //   }
+
+  //   return operatingHoursForDay;
+  // }
+
   render(): ReactElement {
     return (
       <div className="forecast">
@@ -128,8 +160,16 @@ class Forecast extends React.Component<ForecastProps, ForecastState> {
             <div>
               <h4 className="updating">{this.state.updating ? "Updating..." : "Updating in " + this.state.secondsSinceUpdate + " seconds."}</h4>
               <div>
-                <DirectionForecasts direction={this.state.forecast.station.line.toString() === Line[Line.Red] ? "Eastbound" : "Northbound"} forecasts={this.state.forecast.inboundTrams} />
-                <DirectionForecasts direction={this.state.forecast.station.line.toString() === Line[Line.Red] ? "Westbound" : "Southbound"} forecasts={this.state.forecast.outboundTrams} />
+                <DirectionForecasts
+                  direction={this.state.forecast.station.line.toString() === Line[Line.Red] ? "Eastbound" : "Northbound"}
+                  forecasts={this.state.forecast.inboundTrams}
+                  enabled={this.state.forecast.station.operatingHours.weekdays.inbound !== null}
+                  servicesFinishedForDay={false} />
+                <DirectionForecasts
+                  direction={this.state.forecast.station.line.toString() === Line[Line.Red] ? "Westbound" : "Southbound"}
+                  forecasts={this.state.forecast.outboundTrams}
+                  enabled={this.state.forecast.station.operatingHours.weekdays.outbound !== null}
+                  servicesFinishedForDay={false} />
               </div>
 
               <h3 className="message">{this.state.forecast.message}</h3>

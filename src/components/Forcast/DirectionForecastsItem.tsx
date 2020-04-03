@@ -4,18 +4,20 @@ import TramForecast from '../../models/TramForecast';
 
 
 interface DirectionForecastsItemProps {
-  tram: TramForecast;
+  destination: string;
+  minutes?: number;
+  due?: boolean;
 }
 
-function minutesDue(tram: TramForecast): string {
-  return tram.isDue ? "Due" : tram.minutes + " mins";
+function minutesDue(minutes?: number, due?: boolean): string {
+  return due ? "Due" : minutes + " mins";
 }
 
 function DirectionForecastsItem(props: DirectionForecastsItemProps): ReactElement {
   return (
     <li className="direction-forcast-item">
-      <div className="destination">{props.tram.destinationStation.name}</div>
-      <div className="minutes">{minutesDue(props.tram)}</div>
+      <div className="destination">{props.destination}</div>
+      <div className="minutes">{props.minutes !== undefined && minutesDue(props.minutes, props.due)}</div>
     </li>
   );
 }
