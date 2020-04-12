@@ -1,6 +1,6 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-function Help(props: any): ReactElement {
+const Help: React.FC<{}> = () => {
   return (
     <div>
       <h1>Help</h1>

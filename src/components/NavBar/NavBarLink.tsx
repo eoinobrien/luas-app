@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import './NavBarLink.scss';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 
@@ -9,14 +9,12 @@ interface NavBarLinkProps extends RouteComponentProps {
   className: string;
 }
 
-class NavBarLink extends React.Component<NavBarLinkProps, {}> {
-  render(): ReactElement {
-    return (
-      <Link className={'navbar-link ' + this.props.className!} to={this.props.to} style={{borderColor: this.props.colour}}>
-        {this.props.value}
-      </Link>
-    );
-  }
+const NavBarLink: React.FC<NavBarLinkProps> = (props: NavBarLinkProps) => {
+  return (
+    <Link className={'navbar-link ' + props.className!} to={props.to} style={{ borderColor: props.colour }}>
+      {props.value}
+    </Link>
+  );
 }
 
 export default withRouter(NavBarLink);

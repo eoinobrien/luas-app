@@ -7,7 +7,7 @@ interface OperatingHoursProps {
   operatingHours: OperatingHoursModel;
 }
 
-function OperatingHours(props: OperatingHoursProps): ReactElement {
+const OperatingHours: React.FC<OperatingHoursProps> = (props: OperatingHoursProps) => {
   const { t, i18n } = useTranslation();
 
   return (

@@ -6,7 +6,7 @@ interface OperatingHoursDayRowProps {
   operatingHoursDay: OperatingHoursDay;
 }
 
-function OperatingHoursDayRow(props: OperatingHoursDayRowProps): ReactElement {
+const OperatingHoursDayRow: React.FC<OperatingHoursDayRowProps> = (props: OperatingHoursDayRowProps) => {
   return (
     <div>
       <div>{props.day}</div>

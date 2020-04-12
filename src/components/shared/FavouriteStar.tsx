@@ -9,7 +9,7 @@ interface FavouriteStarProps {
   name: string;
 }
 
-function FavouriteStar(props: FavouriteStarProps): ReactElement {
+const FavouriteStar: React.FC<FavouriteStarProps> = (props: FavouriteStarProps) => {
   return (
     <button
       className="favourite-star"

@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import './DirectionForecastsItem.scss';
 import TramForecast from '../../models/TramForecast';
 
@@ -13,7 +13,7 @@ function minutesDue(minutes?: number, due?: boolean): string {
   return due ? "Due" : minutes + " mins";
 }
 
-function DirectionForecastsItem(props: DirectionForecastsItemProps): ReactElement {
+const DirectionForecastsItem: React.FC<DirectionForecastsItemProps> = (props: DirectionForecastsItemProps) => {
   return (
     <li className="direction-forcast-item">
       <div className="destination">{props.destination}</div>

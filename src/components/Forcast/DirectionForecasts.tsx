@@ -59,7 +59,7 @@ function servicesFinishedForDay(lastTram: string): boolean {
     || (time[0] === now.getHours() && time[1] > now.getMinutes());
 }
 
-function DirectionForecasts(props: DirectionForecastsProps): ReactElement {
+const DirectionForecasts: React.FC<DirectionForecastsProps> = (props: DirectionForecastsProps) => {
   let enabled: boolean = ((props.isInbound && props.operatingHours.weekdays.inbound !== null)
     || (!props.isInbound && props.operatingHours.weekdays.outbound.firstTram !== null));
   let operatingHours: [OperatingHoursDirection, OperatingHoursDirection] = getOperatingHoursDirectionForToday(props.operatingHours, props.isInbound);

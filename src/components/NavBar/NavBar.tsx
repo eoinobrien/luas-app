@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import './NavBar.scss';
 import Station from '../../models/Station';
 import NavBarLink from './NavBarLink';
@@ -9,8 +9,7 @@ interface NavBarProps extends RouteComponentProps {
   favouriteStations: Station[];
 }
 
-class NavBar extends React.Component<NavBarProps, {}> {
-  render(): ReactElement {
+const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
     return (
       <nav className="navbar">
         <div className="line-section">
@@ -26,9 +25,9 @@ class NavBar extends React.Component<NavBarProps, {}> {
           <h1>Favourite Stations</h1>
 
           <div className="line-section-links">
-            {this.props.favouriteStations.length === 0 ?
+            {props.favouriteStations.length === 0 ?
               <p>Starred stations will appear here.</p> :
-              this.props.favouriteStations.map(station =>
+              props.favouriteStations.map(station =>
                 <NavBarLink
                   className="stations"
                   value={station.name}
@@ -40,7 +39,6 @@ class NavBar extends React.Component<NavBarProps, {}> {
         </div>
       </nav>
     );
-  }
 }
 
 export default withRouter(NavBar);

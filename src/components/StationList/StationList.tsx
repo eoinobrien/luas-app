@@ -1,10 +1,11 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState, useEffect } from 'react';
 import './StationList.scss';
 import { RouteComponentProps, withRouter, NavLink, Link } from 'react-router-dom';
 import Station from '../../models/Station';
 import Line from '../../models/Line';
 import StationListRow from './StationListRow';
 import { ReactComponent as MoreIcon } from './more-vertical.svg';
+import { useTranslation } from 'react-i18next';
 
 
 interface StationListRouteProps {
@@ -16,101 +17,95 @@ interface StationListProps extends RouteComponentProps<StationListRouteProps> {
   favouriteStations: Station[];
 }
 
-interface StationListState {
-  stations: Station[];
-  loading: boolean;
-  error: boolean;
-}
+
+function StationList(props: StationListProps): ReactElement {
+  const [stations, setStations] = useState<Station[]>([] as Station[]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
+  const { t, i18n } = useTranslation();
 
 
-class StationList extends React.Component<StationListProps, StationListState> {
-  constructor(props: StationListProps) {
-    super(props);
-
-    this.state = {
-      stations: [] as Station[],
-      loading: true,
-      error: false
-    }
-  }
-
-  componentDidMount(): void {
+  useEffect(() => {
     let localStorageStations: string = localStorage.getItem('allStations') || "";
 
     if (localStorageStations !== "") {
       console.log("Updating")
       let allStations: Station[] = JSON.parse(localStorageStations);
 
-      this.setState({
-        loading: false,
-        stations: allStations
-      })
+      setLoading(false);
+      setStations(allStations);
     }
 
     fetch(`https://luasapifunction.azurewebsites.net/api/stations`)
       .then(response => response.json())
       .then(response => {
-        this.setState({
-          loading: false,
-          stations: response
-        });
+        setLoading(false);
+        setStations(response);
 
         localStorage.setItem('allStations', JSON.stringify(response));
       })
-      .catch(() =>
-        this.setState({
-          loading: false,
-          error: true
-        }));
-  }
+      .catch(() => {
+        setLoading(false);
+        setError(true);
+      });
+  }, []);
 
-  GetLocalisedStringFromParam(line: string): string {
-    if (line === Line[Line.Red]) {
-      return line;
+  const GetLocalizedStringFromLineName = (line: string, active: boolean): string => {
+    let englishName: string  = GetLineName(line, active);
+
+    if (englishName === Line[Line.Red]) {
+      return t('Red');
     }
     else {
-      return line;
+      return t('Green');
     }
   }
 
-  GetLineName(active: boolean): string {
+  const GetLineName = (line: string, active: boolean): string => {
     if (active) {
-      return this.GetLocalisedStringFromParam(this.props.match.params.line);
+      return line;
     }
     else {
-      return this.GetLocalisedStringFromParam(this.props.match.params.line === Line[Line.Red] ? Line[Line.Green] : Line[Line.Red]);
+      return line === Line[Line.Red] ? Line[Line.Green] : Line[Line.Red];
     }
   }
 
-  render(): ReactElement {
-    return (
-      <div className="station-list">
-        <header>
-          <nav className="colour-nav">
-            <NavLink exact to={`/line/${this.GetLineName(true)}`} activeClassName="active-line" style={this.GetLineName(true) === Line[Line.Red] ? { color: '#f44336' } : { color: '#00af00' }}>{this.GetLineName(true)}</NavLink>
-            <NavLink exact to={`/line/${this.GetLineName(false)}`} activeClassName="active-line">{this.GetLineName(false)}</NavLink>
-          </nav>
-          <Link to="/help" aria-label="Learn More"><MoreIcon /></Link>
-        </header>
-        <h2>{this.state.loading && "Loading..."}</h2>
-        <nav className="list">
-          <ul>
-            {
-              !this.state.loading &&
-              this.state.stations
-                .filter(s => s.line.toString().toLowerCase() === this.props.match.params.line.toString().toLowerCase())
-                .map(station =>
-                  <StationListRow
-                    key={station.abbreviation}
-                    station={station}
-                    favouriteClick={this.props.favouriteClick}
-                    isFavourite={this.props.favouriteStations.filter(s => s.abbreviation === station.abbreviation).length !== 0} />)
-            }
-          </ul>
+  return (
+    <div className="station-list">
+      <header>
+        <nav className="colour-nav">
+          <NavLink
+            exact to={`/line/${GetLineName(props.match.params.line, true)}`}
+            activeClassName="active-line"
+            style={props.match.params.line === Line[Line.Red] ? { color: '#f44336' } : { color: '#00af00' }}>
+            {GetLocalizedStringFromLineName(props.match.params.line, true)}
+          </NavLink>
+          <NavLink
+            exact to={`/line/${GetLineName(props.match.params.line, false)}`}
+            activeClassName="active-line">
+            {GetLocalizedStringFromLineName(props.match.params.line, false)}
+          </NavLink>
         </nav>
-      </div>
-    );
-  }
+        <Link to="/help" aria-label="Learn More"><MoreIcon /></Link>
+      </header>
+      <h2>{loading && "Loading..."}</h2>
+      <nav className="list">
+        <ul>
+          {
+            !loading &&
+            stations
+              .filter(s => s.line.toString().toLowerCase() === props.match.params.line.toString().toLowerCase())
+              .map(station =>
+                <StationListRow
+                  key={station.abbreviation}
+                  station={station}
+                  favouriteClick={props.favouriteClick}
+                  isFavourite={props.favouriteStations.filter(s => s.abbreviation === station.abbreviation).length !== 0} />)
+          }
+        </ul>
+      </nav>
+    </div>
+  );
 };
 
 export default withRouter(StationList);

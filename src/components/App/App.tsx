@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.scss';
 import {
   BrowserRouter as Router,
@@ -12,78 +12,60 @@ import Station from '../../models/Station';
 import NavBar from '../NavBar/NavBar';
 import Help from '../Help/Help';
 
-interface AppState {
-  favouriteStations: Station[];
-}
+const App: React.FC = () => {
+  const [favouriteStations, setFavouriteStations] = useState<Station[]>([] as Station[]);
 
-class App extends React.Component<{}, AppState> {
-  constructor(props: any) {
-    super(props);
-
-    this.state = {
-      favouriteStations: [] as Station[]
-    }
-  }
-
-  addToFavouriteStations(station: Station): void {
+  const addToFavouriteStations = (station: Station) => {
     let updatedFavouriteStations: Station[];
 
-    if (this.state.favouriteStations.filter(s => s.abbreviation === station.abbreviation).length === 0) {
-      updatedFavouriteStations = [...this.state.favouriteStations, station]
-      this.setState({
-        favouriteStations: updatedFavouriteStations
-      })
+    if (favouriteStations.filter(s => s.abbreviation === station.abbreviation).length === 0) {
+      updatedFavouriteStations = [...favouriteStations, station];
+      setFavouriteStations(updatedFavouriteStations);
     }
     else {
-      updatedFavouriteStations = this.state.favouriteStations.filter(s => s.abbreviation !== station.abbreviation);
-      this.setState({
-        favouriteStations: updatedFavouriteStations
-      })
+      updatedFavouriteStations = favouriteStations.filter(s => s.abbreviation !== station.abbreviation);
+      setFavouriteStations(updatedFavouriteStations);
     }
 
     localStorage.setItem('favouriteStations', JSON.stringify(updatedFavouriteStations));
   }
 
-  componentDidMount(): void {
+  useEffect(() => {
     let localStorageString: string = localStorage.getItem('favouriteStations') || "";
 
     if (localStorageString !== "") {
       let stations: Station[] = JSON.parse(localStorageString);
 
-      this.setState({
-        favouriteStations: stations
-      })
+      setFavouriteStations(stations);
     }
-  }
+  }, []);
 
-  render(): ReactElement {
-    return (
-      <Router>
-        <div className="app">
-          <div className="main-content">
-            <Switch>
-              <Route
-                path="/station/:abbreviation"
-                render={() => <Forecast favouriteClick={this.addToFavouriteStations.bind(this)} favouriteStations={this.state.favouriteStations} />} />
+  return (
+    <Router>
+      <div className="app">
+        <div className="main-content">
+          <Switch>
+            <Route
+              path="/station/:abbreviation"
+              render={() => <Forecast favouriteClick={addToFavouriteStations} favouriteStations={favouriteStations} />} />
 
-              <Route exact
-                path="/line/:line"
-                render={() => <StationList favouriteClick={this.addToFavouriteStations.bind(this)} favouriteStations={this.state.favouriteStations} />} />
+            <Route exact
+              path="/line/:line"
+              render={() => <StationList favouriteClick={addToFavouriteStations} favouriteStations={favouriteStations} />} />
 
-              <Route exact path="/help">
-                <Help />
-              </Route>
+            <Route exact path="/help">
+              <Help />
+            </Route>
 
-              <Route exact path="/">
-                <Redirect to="/line/Red" />
-              </Route>
-            </Switch>
-          </div>
-          <NavBar favouriteStations={this.state.favouriteStations} />
+            <Route exact path="/">
+              <Redirect to="/line/Red" />
+            </Route>
+          </Switch>
         </div>
-      </Router>
-    );
-  }
+        <NavBar favouriteStations={favouriteStations} />
+      </div>
+    </Router>
+  );
 }
 
 export default App;
