@@ -1,13 +1,21 @@
 import React, { ReactElement } from 'react';
+import { useTranslation } from 'react-i18next';
 import OperatingHoursModel from '../../models/OperatingHoursModel';
+import OperatingHoursDayRow from './OperatingHoursDayRow';
 
 interface OperatingHoursProps {
   operatingHours: OperatingHoursModel;
 }
 
 function OperatingHours(props: OperatingHoursProps): ReactElement {
+  const { t, i18n } = useTranslation();
+
   return (
-    <p>{props.operatingHours.weekdays.inbound.lastTram}</p>
+    <div>
+      <OperatingHoursDayRow day={t('Weekdays')} operatingHoursDay={props.operatingHours.weekdays} />
+      <OperatingHoursDayRow day={t('Saturday')} operatingHoursDay={props.operatingHours.saturday} />
+      <OperatingHoursDayRow day={t('Sunday')} operatingHoursDay={props.operatingHours.sunday} />
+    </div>
   );
 }
 

@@ -64,12 +64,21 @@ class StationList extends React.Component<StationListProps, StationListState> {
         }));
   }
 
-  GetLineName(active: boolean): string {
-    if (active) {
-      return this.props.match.params.line;
+  GetLocalisedStringFromParam(line: string): string {
+    if (line === Line[Line.Red]) {
+      return line;
     }
     else {
-      return this.props.match.params.line === Line[Line.Red] ? Line[Line.Green] : Line[Line.Red]
+      return line;
+    }
+  }
+
+  GetLineName(active: boolean): string {
+    if (active) {
+      return this.GetLocalisedStringFromParam(this.props.match.params.line);
+    }
+    else {
+      return this.GetLocalisedStringFromParam(this.props.match.params.line === Line[Line.Red] ? Line[Line.Green] : Line[Line.Red]);
     }
   }
 
