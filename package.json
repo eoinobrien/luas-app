@@ -28,10 +28,7 @@
     "test:lint:css": "stylelint \"**/*.scss\"",
     "test:unit": "react-scripts test",
     "test": "npm run test:lint:js && npm run test:lint:css && npm run test:unit",
-    "eject": "react-scripts eject",
-    "i18n:add-locale": "lingui add-locale",
-    "i18n:extract": "lingui extract",
-    "i18n:compile": "lingui compile"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
