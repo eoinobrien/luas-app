@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import OperatingHoursModel from '../../models/OperatingHoursModel';
 import OperatingHoursDayRow from './OperatingHoursDayRow';

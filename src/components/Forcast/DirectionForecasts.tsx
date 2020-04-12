@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import './DirectionForecasts.scss';
 import TramForecast from '../../models/TramForecast';
 import DirectionForecastsItem from './DirectionForecastsItem';

@@ -1,6 +1,6 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-function PrivacyPrompt(props: any): ReactElement {
+const PrivacyPrompt: React.FC = () => {
   return (
     <div>test</div>
   );

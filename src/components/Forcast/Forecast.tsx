@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Forecast.scss';
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import StationForecast from '../../models/StationForecast';
@@ -20,135 +20,127 @@ interface ForecastProps extends RouteComponentProps<ForecastRouteProps> {
   favouriteStations: Station[];
 }
 
-interface ForecastState {
-  loading: boolean;
-  forecast: StationForecast;
-  error: boolean;
-  updating: boolean;
-  secondsSinceUpdate: number;
-  lastUpdate: Date;
+
+function useInterval(callback: any, delay: number) {
+  const savedCallback = useRef<any | null>();
+
+  // Remember the latest function.
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  useEffect(() => {
+    function tick() {
+      if(savedCallback) {
+        savedCallback.current();
+      }
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
 }
 
-class Forecast extends React.Component<ForecastProps, ForecastState> {
-  constructor(props: ForecastProps) {
-    super(props);
 
-    this.state = {
-      forecast: {} as StationForecast,
-      loading: true,
-      error: false,
-      updating: false,
-      secondsSinceUpdate: 0,
-      lastUpdate: new Date(0)
-    }
-  }
+const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
+  const [forecast, setForecast] = useState<StationForecast>({} as StationForecast);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
+  const [updating, setUpdating] = useState<boolean>(false);
+  const [secondsSinceUpdate, setSecondsSinceUpdate] = useState<number>(0);
+  const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
 
-  private apiInterval: any;
-  private secondInterval: any;
+  useEffect(() => {
+    let abbreviation: string = props.match.params.abbreviation;
+    getForecastFromApi(abbreviation)
+  }, [props.match.params.abbreviation]);
 
-  componentDidMount(): void {
-    this.getForecastFromApi();
+  useInterval(() => getForecastFromApi(props.match.params.abbreviation), 15000);
+  useInterval(() => getSecondsToUpdate(), 1000);
 
-    this.secondInterval = setInterval(() => this.getSecondsToUpdate(this.state.lastUpdate), 1000);
-    this.apiInterval = setInterval(this.getForecastFromApi.bind(this), 15000);
-  }
+  function getForecastFromApi(abbreviation: string): void {
+    setUpdating(true);
+    setLastUpdate(new Date());
 
-  componentWillUnmount(): void {
-    clearInterval(this.secondInterval);
-    clearInterval(this.apiInterval);
-  }
-
-
-  componentDidUpdate(prevProps: RouteComponentProps<ForecastRouteProps>) {
-    if (this.props.match.params.abbreviation !== prevProps.match.params.abbreviation) // Check if it's a new user, you can also use some unique property, like the ID  (this.props.user.id !== prevProps.user.id)
-    {
-      this.getForecastFromApi();
-    }
-  }
-
-
-  getForecastFromApi(): void {
-    this.setState({ updating: true });
-
-    fetch(`https://luasapifunction.azurewebsites.net/api/stations/${this.props.match.params.abbreviation}/forecast`)
+    fetch(`https://luasapifunction.azurewebsites.net/api/stations/${abbreviation}/forecast`)
       .then(response => response.json())
-      .then(response =>
-        this.setState({
-          loading: false,
-          forecast: response,
-          updating: false,
-          lastUpdate: new Date()
-        }))
-      .catch(() =>
-        this.setState({
-          loading: false,
-          error: true,
-          updating: false,
-          lastUpdate: new Date()
-        }));
+      .then(response => {
+        setForecast(response);
+        setLastUpdate(new Date());
+        setUpdating(false);
+        setLoading(false);
+      })
+      .catch(() => {
+        console.error("Something went wrong fetching real time information.");
+
+        setError(true);
+        // setLastUpdate(new Date());
+        setLoading(false);
+        setUpdating(false);
+      });
   }
 
-  favouriteStationClick() {
-    this.props.favouriteClick(this.state.forecast.station)
+  function favouriteStationClick() {
+    props.favouriteClick(forecast.station)
   }
 
-  getSecondsToUpdate(time: Date) {
-    let secondsToUpdate: number = 15 - Math.abs(Math.ceil((time.getTime() - Date.now()) / 1000));
-    this.setState({ secondsSinceUpdate: secondsToUpdate })
-    return secondsToUpdate;
+  function getSecondsToUpdate(): void {
+    let secondsToUpdate: number = 15 - Math.ceil((Date.now() - lastUpdate.getTime()) / 1000);
+    setSecondsSinceUpdate(secondsToUpdate)
   }
 
-  render(): ReactElement {
-    return (
-      <div className="forecast">
-        <header style={(this.state.loading && { borderColor: '#424242' }) || (this.state.forecast.station.line.toString() === Line[Line.Red] ? { borderColor: '#f44336' } : { borderColor: '#00af00' })}>
-          <Link
-            className="back-arrow"
-            aria-label="Go Back to the list of Stations"
-            to={`/line/${!this.state.loading && this.state.forecast.station.line}`}>
-            <LeftArrow />
-          </Link>
-          <h1>
-            {(this.state.loading && this.props.match.params.abbreviation)
-              || this.state.forecast.station.name} <span>{!this.state.loading && this.state.forecast.station.irishName}</span></h1>
+  return (
+    <div className="forecast">
+      <header style={(loading && { borderColor: '#424242' }) || (forecast.station.line.toString() === Line[Line.Red] ? { borderColor: '#f44336' } : { borderColor: '#00af00' })}>
+        <Link
+          className="back-arrow"
+          aria-label="Go Back to the list of Stations"
+          to={`/line/${!loading && forecast.station.line}`}>
+          <LeftArrow />
+        </Link>
+        <h1>
+          {(loading && props.match.params.abbreviation)
+            || forecast.station.name} <span>{!loading && forecast.station.irishName}</span></h1>
 
-          {!this.state.loading &&
-            <FavouriteStar
-              name={this.state.forecast.station.name}
-              isFavourite={this.props.favouriteStations.filter(s => s.abbreviation === this.props.match.params.abbreviation).length !== 0}
-              favouriteClick={this.favouriteStationClick.bind(this)} />}
-        </header>
+        {!loading &&
+          <FavouriteStar
+            name={forecast.station.name}
+            isFavourite={props.favouriteStations.filter(s => s.abbreviation === props.match.params.abbreviation).length !== 0}
+            favouriteClick={favouriteStationClick} />}
+      </header>
 
-        <main>
-          {this.state.loading &&
-            <h1>Loading...</h1>}
+      <main>
+        {loading &&
+          <h1>Loading...</h1>}
 
-          {this.state.error &&
-            <h1>Error getting data</h1>}
+        {error &&
+          <h1>Error getting data</h1>}
 
-          {!this.state.loading &&
+        {!loading &&
+          <div>
+            <h4 className="updating">{updating ? "Updating..." : "Updating in " + secondsSinceUpdate + " seconds."}</h4>
             <div>
-              <h4 className="updating">{this.state.updating ? "Updating..." : "Updating in " + this.state.secondsSinceUpdate + " seconds."}</h4>
-              <div>
-                <DirectionForecasts
-                  isInbound={true}
-                  direction={this.state.forecast.station.line.toString() === Line[Line.Red] ? "Eastbound" : "Northbound"}
-                  forecasts={this.state.forecast.inboundTrams}
-                  operatingHours={this.state.forecast.station.operatingHours}/>
-                <DirectionForecasts
-                  isInbound={false}
-                  direction={this.state.forecast.station.line.toString() === Line[Line.Red] ? "Westbound" : "Southbound"}
-                  forecasts={this.state.forecast.outboundTrams}
-                  operatingHours={this.state.forecast.station.operatingHours}/>
-              </div>
+              <DirectionForecasts
+                isInbound={true}
+                direction={forecast.station.line.toString() === Line[Line.Red] ? "Eastbound" : "Northbound"}
+                forecasts={forecast.inboundTrams}
+                operatingHours={forecast.station.operatingHours} />
 
-              <h3 className="message">{this.state.forecast.message}</h3>
-              <OperatingHours operatingHours={this.state.forecast.station.operatingHours} />
-            </div>}
-        </main>
-      </div>
-    );
-  }
+              <DirectionForecasts
+                isInbound={false}
+                direction={forecast.station.line.toString() === Line[Line.Red] ? "Westbound" : "Southbound"}
+                forecasts={forecast.outboundTrams}
+                operatingHours={forecast.station.operatingHours} />
+            </div>
+
+            <h3 className="message">{forecast.message}</h3>
+            <OperatingHours operatingHours={forecast.station.operatingHours} />
+          </div>}
+      </main>
+    </div>
+  );
 };
 
 export default withRouter(Forecast);

@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './StationList.scss';
 import { RouteComponentProps, withRouter, NavLink, Link } from 'react-router-dom';
 import Station from '../../models/Station';
@@ -17,8 +17,7 @@ interface StationListProps extends RouteComponentProps<StationListRouteProps> {
   favouriteStations: Station[];
 }
 
-
-function StationList(props: StationListProps): ReactElement {
+const StationList: React.FC<StationListProps> = (props: StationListProps) => {
   const [stations, setStations] = useState<Station[]>([] as Station[]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
