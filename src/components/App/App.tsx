@@ -48,7 +48,6 @@ const App: React.FC = () => {
 
   return (
     <Router>
-      {i18n.language} - {i18n.options.whitelist}
       <div className="app">
         <div className="main-content">
           <Switch>
