@@ -10,6 +10,7 @@ import Station from '../../models/Station';
 import OperatingHours from '../OperatingHours/OperatingHours';
 import OperatingHoursModel from '../../models/OperatingHoursModel';
 import OperatingHoursDay from '../../models/OperatingHoursDay';
+import { useTranslation } from 'react-i18next';
 
 interface ForecastRouteProps {
   abbreviation: string;
@@ -51,6 +52,7 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
   const [updating, setUpdating] = useState<boolean>(false);
   const [secondsSinceUpdate, setSecondsSinceUpdate] = useState<number>(0);
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     let abbreviation: string = props.match.params.abbreviation;
@@ -102,7 +104,8 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
         </Link>
         <h1>
           {(loading && props.match.params.abbreviation)
-            || forecast.station.name} <span>{!loading && forecast.station.irishName}</span></h1>
+            || ((i18n.language == "ga" && forecast.station.irishName) || forecast.station.name)}
+            <span> {!loading && ((i18n.language == "ga" && forecast.station.name) || forecast.station.irishName)}</span></h1>
 
         {!loading &&
           <FavouriteStar
@@ -113,24 +116,24 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
 
       <main>
         {loading &&
-          <h1>Loading...</h1>}
+          <h1>{t('loading')}</h1>}
 
         {error &&
           <h1>Error getting data</h1>}
 
         {!loading &&
           <div>
-            <h4 className="updating">{updating ? "Updating..." : "Updating in " + secondsSinceUpdate + " seconds."}</h4>
+            <h4 className="updating">{updating ? t('updating.now') : t('updating.in', {count: secondsSinceUpdate}) }</h4>
             <div>
               <DirectionForecasts
                 isInbound={true}
-                direction={forecast.station.line.toString() === Line[Line.Red] ? "Eastbound" : "Northbound"}
+                direction={t(`lines.${forecast.station.line.toString().toLowerCase()}.inbound`)}
                 forecasts={forecast.inboundTrams}
                 operatingHours={forecast.station.operatingHours} />
 
               <DirectionForecasts
                 isInbound={false}
-                direction={forecast.station.line.toString() === Line[Line.Red] ? "Westbound" : "Southbound"}
+                direction={t(`lines.${forecast.station.line.toString().toLowerCase()}.outbound`)}
                 forecasts={forecast.outboundTrams}
                 operatingHours={forecast.station.operatingHours} />
             </div>

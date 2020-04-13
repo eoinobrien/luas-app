@@ -21,7 +21,7 @@ const StationList: React.FC<StationListProps> = (props: StationListProps) => {
   const [stations, setStations] = useState<Station[]>([] as Station[]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
 
   useEffect(() => {
@@ -49,15 +49,8 @@ const StationList: React.FC<StationListProps> = (props: StationListProps) => {
       });
   }, []);
 
-  const GetLocalizedStringFromLineName = (line: string, active: boolean): string => {
-    let englishName: string  = GetLineName(line, active);
-
-    if (englishName === Line[Line.Red]) {
-      return t('Red');
-    }
-    else {
-      return t('Green');
-    }
+  const GetLocalizedStringFromLine = (line: string, active: boolean): string => {
+    return t(`lines.${GetLineName(line, active).toLowerCase()}.colour`);
   }
 
   const GetLineName = (line: string, active: boolean): string => {
@@ -77,12 +70,12 @@ const StationList: React.FC<StationListProps> = (props: StationListProps) => {
             exact to={`/line/${GetLineName(props.match.params.line, true)}`}
             activeClassName="active-line"
             style={props.match.params.line === Line[Line.Red] ? { color: '#f44336' } : { color: '#00af00' }}>
-            {GetLocalizedStringFromLineName(props.match.params.line, true)}
+            {GetLocalizedStringFromLine(props.match.params.line, true)}
           </NavLink>
           <NavLink
             exact to={`/line/${GetLineName(props.match.params.line, false)}`}
             activeClassName="active-line">
-            {GetLocalizedStringFromLineName(props.match.params.line, false)}
+            {GetLocalizedStringFromLine(props.match.params.line, false)}
           </NavLink>
         </nav>
         <Link to="/help" aria-label="Learn More"><MoreIcon /></Link>

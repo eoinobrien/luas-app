@@ -6,20 +6,64 @@ import { initReactI18next } from "react-i18next";
 const resources = {
   en: {
     translation: {
-      "Red": "Red",
-      "Green": "Green",
-      "Weekdays": "Weekdays",
-      "Saturday": "Saturday",
-      "Sunday": "Sunday"
+      lines: {
+        line: "line",
+        red: {
+          colour: "Red",
+          inbound: "Eastbound",
+          outbound: "Westbound"
+        },
+        green: {
+          colour: "Green",
+          inbound: "Northbound",
+          outbound: "Southbound"
+        }
+      },
+      station: "station",
+      favouriteStations: "favourite stations",
+      loading: "Loading...",
+      updating: {
+        now: "Updating...",
+        in: "Updating in {{count}} seconds",
+        in_1: "Updating in {{count}} second",
+      },
+      days: {
+        weekdays: "Weekdays",
+        saturday: "Saturday",
+        sunday: "Sunday",
+      },
+      servicesFinished: "Services will resume in this direction at {{startTime}}a.m. in morning ",
+      noTramsForecast: "No trams forecast"
     }
   },
   ga: {
     translation: {
-      "Red": "Dearg",
-      "Green": "Glas",
-      "Weekdays": "Laethanta na seachtaine",
-      "Saturday": "Satharn",
-      "Sunday": "Domhnach"
+      lines: {
+        line: "líne",
+        red: {
+          colour: "Dearg",
+          inbound: "Ag dul soir",
+          outbound: "Ag dul siar"
+        },
+        green: {
+          colour: "Glas",
+          inbound: "Ag dul ó thuaidh",
+          outbound: "Ag dul ó dheas"
+        }
+      },
+      station: "stáisiún",
+      favouriteStations: "stáisiúin is fearr leat",
+      loading: "Ag Lódáil...",
+      updating: {
+        now: "Ag Uasdátú...",
+        in: "Ag nuashonrú i gceann {{count}} soicind",
+        in_1: "Ag nuashonrú i soicind amháin",
+      },
+      days: {
+        weekdays: "Laethanta na seachtaine",
+        saturday: "Satharn",
+        sunday: "Domhnach"
+      }
     }
   }
 };
@@ -30,11 +74,11 @@ i18n
     resources,
     lng: "ga",
 
-    keySeparator: false, // we do not use keys in form messages.welcome
+    keySeparator: '.',
 
     interpolation: {
       escapeValue: false // react already safes from xss
     }
   });
 
-  export default i18n;
+export default i18n;

@@ -12,9 +12,9 @@ const OperatingHours: React.FC<OperatingHoursProps> = (props: OperatingHoursProp
 
   return (
     <div>
-      <OperatingHoursDayRow day={t('Weekdays')} operatingHoursDay={props.operatingHours.weekdays} />
-      <OperatingHoursDayRow day={t('Saturday')} operatingHoursDay={props.operatingHours.saturday} />
-      <OperatingHoursDayRow day={t('Sunday')} operatingHoursDay={props.operatingHours.sunday} />
+      <OperatingHoursDayRow day={t('days.weekdays')} operatingHoursDay={props.operatingHours.weekdays} />
+      <OperatingHoursDayRow day={t('days.saturday')} operatingHoursDay={props.operatingHours.saturday} />
+      <OperatingHoursDayRow day={t('days.sunday')} operatingHoursDay={props.operatingHours.sunday} />
     </div>
   );
 }
