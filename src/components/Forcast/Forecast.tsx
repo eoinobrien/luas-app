@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './Forecast.scss';
 import { ReactComponent as LeftArrow } from '../../arrow-left-circle.svg';
 import StationForecast from '../../models/StationForecast';
 import DirectionForecasts from './DirectionForecasts';
-import Line from '../../models/Line';
-import FavouriteStar from '../shared/FavouriteStar';
 import Station from '../../models/Station';
 import OperatingHours from '../OperatingHours/OperatingHours';
+import ForecastHeader from './ForecastHeader';
 
 interface ForecastRouteProps {
   abbreviation: string;
@@ -41,7 +40,6 @@ function useInterval(callback: any, delay: number) {
     }
   }, [delay]);
 }
-
 
 const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
   const [forecast, setForecast] = useState<StationForecast>({} as StationForecast);
@@ -82,10 +80,6 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
       });
   }
 
-  function favouriteStationClick() {
-    props.favouriteClick(forecast.station)
-  }
-
   function getSecondsToUpdate(): void {
     let secondsToUpdate: number = 15 - Math.ceil((Date.now() - lastUpdate.getTime()) / 1000);
     setSecondsSinceUpdate(secondsToUpdate)
@@ -93,24 +87,12 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
 
   return (
     <div className="forecast">
-      <header style={(loading && { borderColor: '#424242' }) || (forecast.station.line.toString() === Line[Line.Red] ? { borderColor: '#f44336' } : { borderColor: '#00af00' })}>
-        <Link
-          className="back-arrow"
-          aria-label="Go Back to the list of Stations"
-          to={`/${i18n.language}/line/${!loading && forecast.station.line}`}>
-          <LeftArrow />
-        </Link>
-        <h1>
-          {(loading && props.match.params.abbreviation)
-            || ((i18n.language === "ga" && forecast.station.irishName) || forecast.station.name)}
-            <span> {!loading && ((i18n.language === "ga" && forecast.station.name) || forecast.station.irishName)}</span></h1>
-
-        {!loading &&
-          <FavouriteStar
-            name={forecast.station.name}
-            isFavourite={props.favouriteStations.filter(s => s.abbreviation === props.match.params.abbreviation).length !== 0}
-            favouriteClick={favouriteStationClick} />}
-      </header>
+      <ForecastHeader
+      loading={loading}
+      station={forecast.station}
+      abbreviation={props.match.params.abbreviation}
+      favouriteStations={props.favouriteStations}
+      favouriteClick={props.favouriteClick} />
 
       <main>
         {loading &&
