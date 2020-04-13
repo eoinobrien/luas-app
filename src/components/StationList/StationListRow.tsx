@@ -21,9 +21,9 @@ const StationListRow: React.FC<StationListRowProps> = (props: StationListRowProp
 
   return (
     <li className="station-list-row" style={props.station.line.toString() === Line[Line.Red] ? { borderLeftColor: '#f44336' } : { borderLeftColor: '#00af00' }}>
-      <Link to={`/station/${props.station.abbreviation}`}>
-        {(i18n.language == "ga" && props.station.irishName) || props.station.name}
-        <span> {(i18n.language == "ga" && props.station.name) || props.station.irishName}</span>
+      <Link to={`/${i18n.language}/station/${props.station.abbreviation}`}>
+        {(i18n.language === "ga" && props.station.irishName) || props.station.name}
+        <span> {(i18n.language === "ga" && props.station.name) || props.station.irishName}</span>
       </Link>
       <FavouriteStar
         name={props.station.name}

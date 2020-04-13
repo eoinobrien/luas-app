@@ -1,7 +1,5 @@
 import React from 'react';
 import './DirectionForecastsItem.scss';
-import TramForecast from '../../models/TramForecast';
-
 
 interface DirectionForecastsItemProps {
   destination: string;

@@ -7,7 +7,6 @@ import StationListRow from './StationListRow';
 import { ReactComponent as MoreIcon } from './more-vertical.svg';
 import { useTranslation } from 'react-i18next';
 
-
 interface StationListRouteProps {
   line: string;
 }
@@ -21,14 +20,12 @@ const StationList: React.FC<StationListProps> = (props: StationListProps) => {
   const [stations, setStations] = useState<Station[]>([] as Station[]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
-  const { t } = useTranslation();
-
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     let localStorageStations: string = localStorage.getItem('allStations') || "";
 
     if (localStorageStations !== "") {
-      console.log("Updating")
       let allStations: Station[] = JSON.parse(localStorageStations);
 
       setLoading(false);
@@ -67,18 +64,18 @@ const StationList: React.FC<StationListProps> = (props: StationListProps) => {
       <header>
         <nav className="colour-nav">
           <NavLink
-            exact to={`/line/${GetLineName(props.match.params.line, true)}`}
+            exact to={`/${i18n.language}/line/${GetLineName(props.match.params.line, true)}`}
             activeClassName="active-line"
             style={props.match.params.line === Line[Line.Red] ? { color: '#f44336' } : { color: '#00af00' }}>
             {GetLocalizedStringFromLine(props.match.params.line, true)}
           </NavLink>
           <NavLink
-            exact to={`/line/${GetLineName(props.match.params.line, false)}`}
+            exact to={`/${i18n.language}/line/${GetLineName(props.match.params.line, false)}`}
             activeClassName="active-line">
             {GetLocalizedStringFromLine(props.match.params.line, false)}
           </NavLink>
         </nav>
-        <Link to="/help" aria-label="Learn More"><MoreIcon /></Link>
+        <Link to={`/${i18n.language}/help`} aria-label="Learn More"><MoreIcon /></Link>
       </header>
       <h2>{loading && "Loading..."}</h2>
       <nav className="list">

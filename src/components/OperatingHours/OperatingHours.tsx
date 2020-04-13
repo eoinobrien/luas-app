@@ -8,7 +8,7 @@ interface OperatingHoursProps {
 }
 
 const OperatingHours: React.FC<OperatingHoursProps> = (props: OperatingHoursProps) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <div>

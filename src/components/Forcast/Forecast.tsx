@@ -1,16 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './Forecast.scss';
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import './Forecast.scss';
+import { ReactComponent as LeftArrow } from '../../arrow-left-circle.svg';
 import StationForecast from '../../models/StationForecast';
 import DirectionForecasts from './DirectionForecasts';
 import Line from '../../models/Line';
-import { ReactComponent as LeftArrow } from '../../arrow-left-circle.svg';
 import FavouriteStar from '../shared/FavouriteStar';
 import Station from '../../models/Station';
 import OperatingHours from '../OperatingHours/OperatingHours';
-import OperatingHoursModel from '../../models/OperatingHoursModel';
-import OperatingHoursDay from '../../models/OperatingHoursDay';
-import { useTranslation } from 'react-i18next';
 
 interface ForecastRouteProps {
   abbreviation: string;
@@ -99,13 +97,13 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
         <Link
           className="back-arrow"
           aria-label="Go Back to the list of Stations"
-          to={`/line/${!loading && forecast.station.line}`}>
+          to={`/${i18n.language}/line/${!loading && forecast.station.line}`}>
           <LeftArrow />
         </Link>
         <h1>
           {(loading && props.match.params.abbreviation)
-            || ((i18n.language == "ga" && forecast.station.irishName) || forecast.station.name)}
-            <span> {!loading && ((i18n.language == "ga" && forecast.station.name) || forecast.station.irishName)}</span></h1>
+            || ((i18n.language === "ga" && forecast.station.irishName) || forecast.station.name)}
+            <span> {!loading && ((i18n.language === "ga" && forecast.station.name) || forecast.station.irishName)}</span></h1>
 
         {!loading &&
           <FavouriteStar
