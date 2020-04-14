@@ -5,17 +5,19 @@ import OperatingHoursDayRow from './OperatingHoursDayRow';
 
 interface OperatingHoursProps {
   operatingHours: OperatingHoursModel;
+  line: string;
 }
 
 const OperatingHours: React.FC<OperatingHoursProps> = (props: OperatingHoursProps) => {
   const { t } = useTranslation();
 
   return (
-    <div>
-      <OperatingHoursDayRow day={t('days.weekdays')} operatingHoursDay={props.operatingHours.weekdays} />
-      <OperatingHoursDayRow day={t('days.saturday')} operatingHoursDay={props.operatingHours.saturday} />
-      <OperatingHoursDayRow day={t('days.sunday')} operatingHoursDay={props.operatingHours.sunday} />
-    </div>
+    <section>
+      <h3>Operating Hours</h3>
+      <OperatingHoursDayRow day={t('days.weekdays')} operatingHoursDay={props.operatingHours.weekdays} line={props.line} />
+      <OperatingHoursDayRow day={t('days.saturday')} operatingHoursDay={props.operatingHours.saturday} line={props.line} />
+      <OperatingHoursDayRow day={t('days.sunday')} operatingHoursDay={props.operatingHours.sunday} line={props.line} />
+    </section>
   );
 }
 

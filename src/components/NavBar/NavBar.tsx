@@ -11,7 +11,7 @@ interface NavBarProps extends RouteComponentProps {
 }
 
 const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   return (
     <nav className="navbar">
@@ -33,8 +33,8 @@ const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
             props.favouriteStations.map(station =>
               <NavBarLink
                 className="stations"
-                value={station.name}
-                to={`/station/${station.abbreviation}`}
+                value={i18n.language === "ga" ? station.irishName : station.name}
+                to={`/${i18n.language}/station/${station.abbreviation}`}
                 colour={station.line.toString() === Line[Line.Red] ? '#f44336' : '#00af00'}
                 key={station.abbreviation} />
             )}

@@ -1,4 +1,16 @@
 .direction-forecast {
+  .direction {
+    display: flex;
+    align-items: center;
+
+    .direction-last-tram {
+      margin-left: auto;
+      font-size: 1rem;
+      font-weight: 400;
+      font-style: italic;
+    }
+  }
+
   ul {
     padding: 0;
 

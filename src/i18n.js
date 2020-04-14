@@ -20,10 +20,16 @@ const resources = {
       station: "station",
       favouriteStations: "favourite stations",
       loading: "Loading...",
-      updating: {
-        now: "Updating...",
-        in: "Updating in {{count}} seconds",
-        in_1: "Updating in {{count}} second",
+      forecast: {
+        time: {
+          due: "Due",
+          minutes: "{{minutes}} mins"
+        },
+        updating: {
+          now: "Updating...",
+          in: "Updating in {{count}} seconds",
+          in_1: "Updating in {{count}} second",
+        },
       },
       days: {
         weekdays: "Weekdays",
@@ -52,10 +58,16 @@ const resources = {
       station: "stáisiún",
       favouriteStations: "stáisiúin is fearr leat",
       loading: "Ag Lódáil...",
-      updating: {
-        now: "Ag Uasdátú...",
-        in: "Ag nuashonrú i gceann {{count}} soicind",
-        in_1: "Ag nuashonrú i soicind amháin",
+      forecast: {
+        time: {
+          due: "Go luath",
+          minutes: "{{minutes}} nóiméad",
+        },
+        updating: {
+          now: "Ag Uasdátú...",
+          in: "Ag nuashonrú i gceann {{count}} soicind",
+          in_1: "Ag nuashonrú i soicind amháin",
+        },
       },
       days: {
         weekdays: "Laethanta na seachtaine",
@@ -72,7 +84,7 @@ i18n
     {
       resources,
 
-      debug: true,
+      debug: false,
       detection: {
         order: ['path', 'localStorage', 'navigator', 'htmlTag']
       },

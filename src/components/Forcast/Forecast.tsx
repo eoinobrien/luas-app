@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './Forecast.scss';
-import { ReactComponent as LeftArrow } from '../../arrow-left-circle.svg';
 import StationForecast from '../../models/StationForecast';
 import DirectionForecasts from './DirectionForecasts';
 import Station from '../../models/Station';
@@ -30,7 +29,7 @@ function useInterval(callback: any, delay: number) {
   // Set up the interval.
   useEffect(() => {
     function tick() {
-      if(savedCallback) {
+      if (savedCallback) {
         savedCallback.current();
       }
     }
@@ -48,14 +47,15 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
   const [updating, setUpdating] = useState<boolean>(false);
   const [secondsSinceUpdate, setSecondsSinceUpdate] = useState<number>(0);
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
-  const { t, i18n } = useTranslation();
+  var updateFrequencySeconds: number = 15;
+  const { t } = useTranslation();
 
   useEffect(() => {
     let abbreviation: string = props.match.params.abbreviation;
     getForecastFromApi(abbreviation)
   }, [props.match.params.abbreviation]);
 
-  useInterval(() => getForecastFromApi(props.match.params.abbreviation), 15000);
+  useInterval(() => getForecastFromApi(props.match.params.abbreviation), updateFrequencySeconds * 1000);
   useInterval(() => getSecondsToUpdate(), 1000);
 
   function getForecastFromApi(abbreviation: string): void {
@@ -81,18 +81,18 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
   }
 
   function getSecondsToUpdate(): void {
-    let secondsToUpdate: number = 15 - Math.ceil((Date.now() - lastUpdate.getTime()) / 1000);
+    let secondsToUpdate: number = updateFrequencySeconds - Math.ceil((Date.now() - lastUpdate.getTime()) / 1000);
     setSecondsSinceUpdate(secondsToUpdate)
   }
 
   return (
     <div className="forecast">
       <ForecastHeader
-      loading={loading}
-      station={forecast.station}
-      abbreviation={props.match.params.abbreviation}
-      favouriteStations={props.favouriteStations}
-      favouriteClick={props.favouriteClick} />
+        loading={loading}
+        station={forecast.station}
+        abbreviation={props.match.params.abbreviation}
+        favouriteStations={props.favouriteStations}
+        favouriteClick={props.favouriteClick} />
 
       <main>
         {loading &&
@@ -103,7 +103,7 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
 
         {!loading &&
           <div>
-            <h4 className="updating">{updating ? t('updating.now') : t('updating.in', {count: secondsSinceUpdate}) }</h4>
+            <h4 className="updating">{updating ? t('forecast.updating.now') : t('forecast.updating.in', { count: secondsSinceUpdate })}</h4>
             <div>
               <DirectionForecasts
                 isInbound={true}
@@ -119,7 +119,7 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
             </div>
 
             <h3 className="message">{forecast.message}</h3>
-            <OperatingHours operatingHours={forecast.station.operatingHours} />
+            <OperatingHours operatingHours={forecast.station.operatingHours} line={forecast.station.line.toString().toLowerCase()} />
           </div>}
       </main>
     </div>
