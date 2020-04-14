@@ -6,7 +6,6 @@ import {
   Route,
   Redirect
 } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import Forecast from '../Forcast/Forecast';
 import StationList from '../StationList/StationList';
 import Station from '../../models/Station';
