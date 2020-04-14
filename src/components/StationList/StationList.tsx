@@ -80,6 +80,7 @@ const StationList: React.FC<StationListProps> = (props: StationListProps) => {
       <h2>{loading && "Loading..."}</h2>
       <nav className="list">
         <ul>
+          {error && <h1>Error</h1>}
           {
             !loading &&
             stations

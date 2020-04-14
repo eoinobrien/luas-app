@@ -16,7 +16,7 @@ interface ForecastHeaderProps {
 }
 
 const ForecastHeader: React.FC<ForecastHeaderProps> = (props: ForecastHeaderProps) => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   function favouriteStationClick() {
     props.favouriteClick(props.station)

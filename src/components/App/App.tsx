@@ -15,7 +15,6 @@ import Help from '../Help/Help';
 
 const App: React.FC = () => {
   const [favouriteStations, setFavouriteStations] = useState<Station[]>([] as Station[]);
-  const { i18n } = useTranslation();
 
   const addToFavouriteStations = (station: Station) => {
     let updatedFavouriteStations: Station[];
