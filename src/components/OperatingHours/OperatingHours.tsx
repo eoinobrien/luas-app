@@ -21,7 +21,6 @@ const OperatingHours: React.FC<OperatingHoursProps> = (props: OperatingHoursProp
       weekday = 7;
     }
 
-    console.log(weekday)
     return weekday;
   }
 
@@ -29,8 +28,8 @@ const OperatingHours: React.FC<OperatingHoursProps> = (props: OperatingHoursProp
     <section>
       <h3>Operating Hours</h3>
       <OperatingHoursDayRow day={t('days.weekdays')} operatingHoursDay={props.operatingHours.weekdays} line={props.line} expanded={dayOfWeek() >= 1 && dayOfWeek() <= 5} />
-      <OperatingHoursDayRow day={t('days.saturday')} operatingHoursDay={props.operatingHours.saturday} line={props.line} expanded={dayOfWeek() == 6} />
-      <OperatingHoursDayRow day={t('days.sunday')} operatingHoursDay={props.operatingHours.sunday} line={props.line} expanded={dayOfWeek() == 7} />
+      <OperatingHoursDayRow day={t('days.saturday')} operatingHoursDay={props.operatingHours.saturday} line={props.line} expanded={dayOfWeek() === 6} />
+      <OperatingHoursDayRow day={t('days.sunday')} operatingHoursDay={props.operatingHours.sunday} line={props.line} expanded={dayOfWeek() === 7} />
     </section>
   );
 }

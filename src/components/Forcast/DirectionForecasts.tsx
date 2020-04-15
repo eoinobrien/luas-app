@@ -60,7 +60,7 @@ function getOperatingHours(dayOfWeek: number | Moment, operatingHours: Operating
 const getLastTramMoment = (lastTram: string) => {
   let lastTramMoment: Moment = moment(lastTram, "HH:mm");
 
-  if (lastTramMoment.diff(moment(), 'hours', true) > 12) {
+  if (moment().diff(lastTramMoment, 'hours', true) > 12) {
     if (lastTramMoment.hours() >= 0 && lastTramMoment.hours() <= 2) {
       return lastTramMoment.add(1, 'day');
     }
@@ -75,11 +75,15 @@ const getLastTramMoment = (lastTram: string) => {
 
 const servicesFinishedForDay = (lastTram: Moment) => {
   let now: Moment = moment();
-  return lastTram.diff(now, 'minutes') < 0
+
+  let isFinished = lastTram.diff(now, 'minutes') < 0;
+  console.log("Checking if services are finished: " + lastTram.diff(now, 'minutes'));
+  return isFinished;
 }
 
 const shouldShowLastTramTime = (lastTram: Moment) => {
   let now: Moment = moment();
+  console.log("Showing last tram times")
   return now.diff(lastTram, 'hours', true) < 1.5;
 }
 
