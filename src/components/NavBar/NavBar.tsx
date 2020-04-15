@@ -19,8 +19,8 @@ const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
         <h1>{t('lines.line')}</h1>
 
         <div className="line-section-links">
-          <NavBarLink className="line" value={t('lines.red.colour')} to="/line/Red" colour="#f44336" />
-          <NavBarLink className="line" value={t('lines.green.colour')} to="/line/Green" colour="#00af00" />
+          <NavBarLink className="line" value={t('lines.red.colour')} to={`/${i18n.language}/line/Red`} colour="#f44336" />
+          <NavBarLink className="line" value={t('lines.green.colour')} to={`/${i18n.language}/line/Green`} colour="#00af00" />
         </div>
       </div>
 
