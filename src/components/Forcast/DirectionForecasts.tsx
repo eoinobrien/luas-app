@@ -2,10 +2,11 @@ import React from 'react';
 import moment, { Moment } from 'moment';
 import './DirectionForecasts.scss';
 import TramForecast from '../../models/TramForecast';
-import DirectionForecastsItem from './DirectionForecastsItem';
+import SplitListItem from './SplitListItem';
 import OperatingHoursDirection from '../../models/OperatingHoursDirection';
 import OperatingHoursDay from '../../models/OperatingHoursDay';
 import OperatingHoursModel from '../../models/OperatingHoursModel';
+import { useTranslation } from 'react-i18next';
 
 interface DirectionForecastsProps {
   isInbound: boolean;
@@ -34,11 +35,11 @@ const BankHolidays: string[] = [
 ]
 
 function getOperatingHoursDirectionForToday(operatingHours: OperatingHoursModel, isInbound: boolean): [OperatingHoursDirection, OperatingHoursDirection] {
-  let now: Moment = moment().hour() < 2 ? moment(-1, 'day') : moment();
+  let now: Moment = moment().hour() <= 2 ? moment(-1, 'day') : moment();
 
   var todayOperatingHoursDay: OperatingHoursDay;
 
-  if (BankHolidays.map(bh => bh === now.format("YYYY-MM-DD"))) {
+  if (BankHolidays.includes(now.format("YYYY-MM-DD"))) {
     todayOperatingHoursDay = getOperatingHours(7, operatingHours);
   }
   else {
@@ -103,11 +104,20 @@ const formatTime = (time: string) => {
 
 const DirectionForecasts: React.FC<DirectionForecastsProps> = (props: DirectionForecastsProps) => {
   let enabled: boolean = ((props.isInbound && props.operatingHours.weekdays.inbound !== null)
-    || (!props.isInbound && props.operatingHours.weekdays.outbound.firstTram !== null));
+    || (!props.isInbound && props.operatingHours.weekdays.outbound !== null));
   let operatingHours: [OperatingHoursDirection, OperatingHoursDirection] = getOperatingHoursDirectionForToday(props.operatingHours, props.isInbound);
   let lastTramTime: Moment = enabled ? getLastTramMoment(operatingHours[0].lastTram) : moment(0);
   let areServicesFinishedForDay: boolean = enabled && servicesFinishedForDay(lastTramTime);
   let shouldShowLastTram: boolean = enabled && !areServicesFinishedForDay && shouldShowLastTramTime(lastTramTime);
+  const { t } = useTranslation();
+
+  const minutesDue = (minutes: number, due: boolean) => {
+    return due ? t('forecast.time.due') : t('forecast.time.minutes', {minutes: minutes});
+  }
+
+  const getMinutes = (minutes: number, due: boolean) => {
+    return (minutes !== undefined && due !== undefined && minutesDue(minutes, due)) || undefined;
+  }
 
   return (
     <section className="direction-forecast">
@@ -118,14 +128,14 @@ const DirectionForecasts: React.FC<DirectionForecastsProps> = (props: DirectionF
       <ul>
         {enabled && props.forecasts.length === 0 && (
           (areServicesFinishedForDay &&
-            <DirectionForecastsItem key="ServicesFinished" destination={"Services resume in this direction at " + formatTime(operatingHours[1].firstTram)} />) ||
+            <SplitListItem key="ServicesFinished" left={"Services resume in this direction at " + formatTime(operatingHours[1].firstTram)} />) ||
           (!areServicesFinishedForDay &&
-            <DirectionForecastsItem key="NoTramsForecast" destination={"No trams forecast"} />))}
+            <SplitListItem key="NoTramsForecast" left={"No trams forecast"} />))}
         {enabled &&
           props.forecasts.map((tram, index) =>
-            <DirectionForecastsItem key={index} destination={tram.destinationStation.name} minutes={tram.minutes} due={tram.isDue} />)}
+            <SplitListItem key={index} left={tram.destinationStation.name} right={getMinutes(tram.minutes, tram.isDue)} />)}
         {!enabled &&
-          <DirectionForecastsItem key="NoTramsDirection" destination={"Trams do not run from this stop in this direction."} />}
+          <SplitListItem key="NoTramsDirection" left={"Trams do not run from this stop in this direction."} />}
       </ul>
     </section>
   );
