@@ -1,5 +1,23 @@
 .operating-hours-day-row {
+  div.op-hours-header {
+    padding: 1rem;
+    margin: 0;
+    border-bottom: 1px solid var(--secondary-text-colour);
+    display: flex;
+    align-items: center;
+
+    h4 {
+      margin: 0;
+    }
+
+    svg {
+      margin-left: auto;
+    }
+  }
+
   ul {
-    padding-left: 0;
+    background: var(--hover-colour);
+    margin-top: 0;
+    padding: 1rem;
   }
 }

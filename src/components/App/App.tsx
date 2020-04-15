@@ -11,9 +11,13 @@ import StationList from '../StationList/StationList';
 import Station from '../../models/Station';
 import NavBar from '../NavBar/NavBar';
 import Help from '../Help/Help';
+import { useTranslation } from 'react-i18next';
 
 const App: React.FC = () => {
   const [favouriteStations, setFavouriteStations] = useState<Station[]>([] as Station[]);
+  const { i18n } = useTranslation();
+
+  document.getElementsByTagName("html")[0].setAttribute("lang", i18n.language);
 
   const addToFavouriteStations = (station: Station) => {
     let updatedFavouriteStations: Station[];

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './Forecast.scss';
-import { ReactComponent as LeftArrow } from '../../arrow-left-circle.svg';
+import { ReactComponent as LeftArrow } from './arrow-left-circle.svg';
 import Line from '../../models/Line';
 import FavouriteStar from '../shared/FavouriteStar';
 import Station from '../../models/Station';

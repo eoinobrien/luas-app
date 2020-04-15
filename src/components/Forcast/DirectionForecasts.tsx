@@ -7,6 +7,7 @@ import OperatingHoursDirection from '../../models/OperatingHoursDirection';
 import OperatingHoursDay from '../../models/OperatingHoursDay';
 import OperatingHoursModel from '../../models/OperatingHoursModel';
 import { useTranslation } from 'react-i18next';
+import { BankHolidays } from '../../models/BankHolidays';
 
 interface DirectionForecastsProps {
   isInbound: boolean;
@@ -15,41 +16,25 @@ interface DirectionForecastsProps {
   operatingHours: OperatingHoursModel;
 }
 
-const BankHolidays: string[] = [
-  "2020-04-13",
-  "2020-05-04",
-  "2020-06-01",
-  "2020-08-03",
-  "2020-10-26",
-  "2020-12-25",
-  "2020-12-26",
-  "2020-01-01",
-  "2020-03-17",
-  "2020-04-05",
-  "2020-05-03",
-  "2020-06-07",
-  "2020-07-02",
-  "2020-10-25",
-  "2020-12-25",
-  "2020-12-26",
-]
-
 function getOperatingHoursDirectionForToday(operatingHours: OperatingHoursModel, isInbound: boolean): [OperatingHoursDirection, OperatingHoursDirection] {
   let now: Moment = moment().hour() <= 2 ? moment(-1, 'day') : moment();
 
   var todayOperatingHoursDay: OperatingHoursDay;
+  let weekday = now.isoWeekday();
 
   if (BankHolidays.includes(now.format("YYYY-MM-DD"))) {
-    todayOperatingHoursDay = getOperatingHours(7, operatingHours);
+    weekday = 7;
   }
-  else {
-    todayOperatingHoursDay = getOperatingHours(now.isoWeekday(), operatingHours);
-  }
+
+  todayOperatingHoursDay = getOperatingHours(weekday, operatingHours);
+
 
   let nextDay: Moment = now.add(1, 'day');
   let nextOperatingHoursDay: OperatingHoursDay = getOperatingHours(nextDay.isoWeekday(), operatingHours);
 
-  return isInbound ? [todayOperatingHoursDay.inbound, nextOperatingHoursDay.inbound] : [todayOperatingHoursDay.outbound, nextOperatingHoursDay.outbound];
+  return isInbound ?
+    [todayOperatingHoursDay.inbound, nextOperatingHoursDay.inbound] :
+    [todayOperatingHoursDay.outbound, nextOperatingHoursDay.outbound];
 }
 
 function getOperatingHours(dayOfWeek: number | Moment, operatingHours: OperatingHoursModel): OperatingHoursDay {
@@ -112,7 +97,7 @@ const DirectionForecasts: React.FC<DirectionForecastsProps> = (props: DirectionF
   const { t } = useTranslation();
 
   const minutesDue = (minutes: number, due: boolean) => {
-    return due ? t('forecast.time.due') : t('forecast.time.minutes', {minutes: minutes});
+    return due ? t('forecast.time.due') : t('forecast.time.minutes', { minutes: minutes });
   }
 
   const getMinutes = (minutes: number, due: boolean) => {

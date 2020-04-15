@@ -95,13 +95,13 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
         favouriteClick={props.favouriteClick} />
 
       <main>
-        {loading &&
+        {loading && !error &&
           <h1>{t('loading')}</h1>}
 
         {error &&
           <h1>Error getting data</h1>}
 
-        {!loading &&
+        {!loading && !error &&
           <div>
             <h4 className="updating">{updating ? t('forecast.updating.now') : t('forecast.updating.in', { count: secondsSinceUpdate })}</h4>
             <div>
@@ -118,7 +118,10 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
                 operatingHours={forecast.station.operatingHours} />
             </div>
 
-            <h3 className="message">{forecast.message}</h3>
+            <section className="message">
+              <h3 className="message">{forecast.message}</h3>
+            </section>
+
             <OperatingHours operatingHours={forecast.station.operatingHours} line={forecast.station.line.toString().toLowerCase()} />
           </div>}
       </main>
