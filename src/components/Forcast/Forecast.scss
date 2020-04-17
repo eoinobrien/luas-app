@@ -5,12 +5,6 @@
     margin: 0;
     padding: 0.5rem;
 
-    .back-arrow svg {
-      color: var(--main-text-colour);
-      margin-right: 0.5rem;
-      width: 2.9rem;
-    }
-
     h1 {
       margin: 0;
 
@@ -30,10 +24,16 @@
     }
 
     .updating {
+      font-size: 0.8rem;
       font-style: italic;
       font-weight: 400;
-      font-size: 0.8rem;
       text-align: right;
     }
   }
+}
+
+.back-arrow svg {
+  color: var(--main-text-colour);
+  margin-right: 0.5rem;
+  width: 2.9rem;
 }

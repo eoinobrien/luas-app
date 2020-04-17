@@ -12,9 +12,11 @@ import Station from '../../models/Station';
 import NavBar from '../NavBar/NavBar';
 import Help from '../Help/Help';
 import { useTranslation } from 'react-i18next';
+import PrivacyPrompt from '../PrivacyPrompt';
 
 const App: React.FC = () => {
   const [favouriteStations, setFavouriteStations] = useState<Station[]>([] as Station[]);
+  const cookiesAccepted = document.cookie.split(';').some((item) => item.trim().startsWith('cookies-accepted-all=true'));
   const { i18n } = useTranslation();
 
   document.getElementsByTagName("html")[0].setAttribute("lang", i18n.language);
@@ -22,35 +24,40 @@ const App: React.FC = () => {
   const addToFavouriteStations = (station: Station) => {
     let updatedFavouriteStations: Station[];
 
-    if (favouriteStations.filter(s => s.abbreviation === station.abbreviation).length === 0) {
-      updatedFavouriteStations = [...favouriteStations, station];
-      setFavouriteStations(updatedFavouriteStations);
-    }
-    else {
-      updatedFavouriteStations = favouriteStations.filter(s => s.abbreviation !== station.abbreviation);
-      setFavouriteStations(updatedFavouriteStations);
-    }
+    if (cookiesAccepted) {
+      if (favouriteStations.filter(s => s.abbreviation === station.abbreviation).length === 0) {
+        updatedFavouriteStations = [...favouriteStations, station];
+        setFavouriteStations(updatedFavouriteStations);
+      }
+      else {
+        updatedFavouriteStations = favouriteStations.filter(s => s.abbreviation !== station.abbreviation);
+        setFavouriteStations(updatedFavouriteStations);
+      }
 
-    localStorage.setItem('favouriteStations', JSON.stringify(updatedFavouriteStations));
+      localStorage.setItem('favouriteStations', JSON.stringify(updatedFavouriteStations));
+    }
   }
 
   useEffect(() => {
-    let localStorageString: string = localStorage.getItem('favouriteStations') || "";
+    if (cookiesAccepted) {
+      let localStorageString: string = localStorage.getItem('favouriteStations') || "";
 
-    if (localStorageString !== "") {
-      let stations: Station[] = JSON.parse(localStorageString);
+      if (localStorageString !== "") {
+        let stations: Station[] = JSON.parse(localStorageString);
 
-      setFavouriteStations(stations);
+        setFavouriteStations(stations);
+      }
     }
   }, []);
 
   const getLanguageFromLocalStorage = () => {
-    return localStorage.getItem('i18nextLng') || "";
+    return (!cookiesAccepted && "") || localStorage.getItem('i18nextLng') || "";
   }
 
   return (
     <Router>
       <div className="app">
+        <PrivacyPrompt />
         <div className="main-content">
           <Switch>
             <Route

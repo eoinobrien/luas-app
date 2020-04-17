@@ -15,7 +15,7 @@ interface StationListRowProps {
 const StationListRow: React.FC<StationListRowProps> = (props: StationListRowProps) => {
   const { i18n } = useTranslation();
 
-  function favouriteStationClick() {
+  const favouriteStationClick = () => {
     props.favouriteClick(props.station);
   }
 

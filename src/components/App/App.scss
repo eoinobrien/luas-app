@@ -3,3 +3,10 @@
     margin-bottom: 4rem;
   }
 }
+
+button {
+  background: var(--hover-colour);
+  border: solid 1px var(--main-text-colour);
+  margin-right: 0.5rem;
+  padding: 0.5rem 1rem;
+}

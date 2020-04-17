@@ -17,19 +17,22 @@ interface StationListProps extends RouteComponentProps<StationListRouteProps> {
 }
 
 const StationList: React.FC<StationListProps> = (props: StationListProps) => {
+  const cookiesAccepted = document.cookie.split(';').some((item) => item.trim().startsWith('cookies-accepted-all=true'));
   const [stations, setStations] = useState<Station[]>([] as Station[]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
-    let localStorageStations: string = localStorage.getItem('allStations') || "";
+    if (cookiesAccepted) {
+      const localStorageStations: string = localStorage.getItem('allStations') || "";
 
-    if (localStorageStations !== "") {
-      let allStations: Station[] = JSON.parse(localStorageStations);
+      if (localStorageStations !== "") {
+        const allStations: Station[] = JSON.parse(localStorageStations);
 
-      setLoading(false);
-      setStations(allStations);
+        setLoading(false);
+        setStations(allStations);
+      }
     }
 
     fetch(`https://luasapifunction.azurewebsites.net/api/stations`)
@@ -38,17 +41,15 @@ const StationList: React.FC<StationListProps> = (props: StationListProps) => {
         setLoading(false);
         setStations(response);
 
-        localStorage.setItem('allStations', JSON.stringify(response));
+        if (cookiesAccepted) {
+          localStorage.setItem('allStations', JSON.stringify(response));
+        }
       })
       .catch(() => {
         setLoading(false);
         setError(true);
       });
   }, []);
-
-  const GetLocalizedStringFromLine = (line: string, active: boolean): string => {
-    return t(`lines.${GetLineName(line, active).toLowerCase()}.colour`);
-  }
 
   const GetLineName = (line: string, active: boolean): string => {
     if (active) {
@@ -57,6 +58,10 @@ const StationList: React.FC<StationListProps> = (props: StationListProps) => {
     else {
       return line === Line[Line.Red] ? Line[Line.Green] : Line[Line.Red];
     }
+  }
+
+  const GetLocalizedStringFromLine = (line: string, active: boolean): string => {
+    return t(`lines.${GetLineName(line, active).toLowerCase()}.colour`);
   }
 
   return (

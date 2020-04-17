@@ -1,10 +1,10 @@
 .operating-hours-day-row {
-  div.op-hours-header {
-    padding: 1rem 0;
-    margin: 0;
+  .op-hours-header {
+    align-items: center;
     border-bottom: 1px solid var(--secondary-text-colour);
     display: flex;
-    align-items: center;
+    margin: 0;
+    padding: 1rem 0;
 
     h4 {
       margin: 0;
