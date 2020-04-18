@@ -18,7 +18,7 @@
    "forecast": {
       "time": {
          "due": "Go luath",
-         "minutes": "{{minutes}} nóiméad",
+         "minutes": "{{minutes}} nóiméad"
       },
       "updating": {
          "now": "Ag Uasdátú...",
@@ -27,7 +27,7 @@
       }
    },
    "days": {
-      "weekdays": "Laethanta na seachtaine"
+      "weekdays": "Laethanta na seachtaine",
       "saturday": "Satharn",
       "sunday": "Domhnach"
    }
