@@ -1,5 +1,5 @@
-import React from './node_modules/react';
-import { useTranslation } from './node_modules/react-i18next';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 import './help.scss';
 
 const Help: React.FC<{}> = () => {
