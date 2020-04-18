@@ -1,25 +1,27 @@
 .direction-forecast {
-   .direction {
-      align-items: center;
-      display: flex;
+    .direction {
+        align-items: center;
+        display: flex;
 
-      h2,
-      h3 {
-         margin-bottom: 0;
-      }
+        h2,
+        h3 {
+            margin-bottom: 0;
+        }
 
-      .direction-last-tram {
-         font-size: 0.8rem;
-         font-style: italic;
-         margin-left: auto;
-      }
-   }
+        .direction-last-tram {
+            max-width: 40%;
+            text-align: right;
+            font-size: 0.8rem;
+            font-style: italic;
+            margin-left: auto;
+        }
+    }
 
-   ul {
-      padding: 0;
+    ul {
+        padding: 0;
 
-      li {
-         list-style-type: none;
-      }
-   }
+        li {
+            list-style-type: none;
+        }
+    }
 }

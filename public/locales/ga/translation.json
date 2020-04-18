@@ -34,6 +34,7 @@
         "saturday": "Satharn",
         "sunday": "Domhnach"
     },
+    "last-tram-is-at": "Tá an tram deireanach ag {{lastTram}}",
     "no-trams-in-this-direction": "Ní ritheann tramanna sa treo seo.",
     "services-resume-at": "Seirbhísí atosú sa treo seo ag {{startTime}}",
     "no-trams-forecast": "Ní thuar tramanna"

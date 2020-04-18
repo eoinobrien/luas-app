@@ -114,7 +114,7 @@ const DirectionForecasts: React.FC<DirectionForecastsProps> = (props: DirectionF
         <section className="direction-forecast">
             <div className="direction">
                 <h2>{props.direction}</h2>
-                {shouldShowLastTram && <h3 className="direction-last-tram">Last tram is at {formatTime(operatingHours[0].lastTram)}</h3>}
+                {shouldShowLastTram && <h3 className="direction-last-tram">{t('last-tram-is-at', {lastTram: formatTime(operatingHours[0].lastTram)})}</h3>}
             </div>
             <ul>
                 {enabled && props.forecasts.length === 0 && (
