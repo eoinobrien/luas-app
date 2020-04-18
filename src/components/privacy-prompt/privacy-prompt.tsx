@@ -12,7 +12,7 @@ interface PrivacyPromptProps {
 const PrivacyPrompt: React.FC<PrivacyPromptProps> = (props: PrivacyPromptProps) => {
    const [showPrompt, setPromptVisibility] = useState<boolean>(
       !document.cookie.split(';').some((item) => item.trim().startsWith(props.cookieName + '=true')));
-   const { t, i18n } = useTranslation();
+   const { i18n } = useTranslation();
 
    const setCookie = () => {
       document.cookie = props.cookieName + '=true;max-age=31536000;';

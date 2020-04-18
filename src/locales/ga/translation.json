@@ -1,0 +1,34 @@
+{
+   "lines": {
+      "line": "líne",
+      "red": {
+         "colour": "Dearg",
+         "inbound": "Ag dul soir",
+         "outbound": "Ag dul siar"
+      },
+      "green": {
+         "colour": "Glas",
+         "inbound": "Ag dul ó thuaidh",
+         "outbound": "Ag dul ó dheas"
+      }
+   },
+   "station": "stáisiún",
+   "favouriteStations": "stáisiúin is fearr leat",
+   "loading": "Ag Lódáil...",
+   "forecast": {
+      "time": {
+         "due": "Go luath",
+         "minutes": "{{minutes}} nóiméad",
+      },
+      "updating": {
+         "now": "Ag Uasdátú...",
+         "in": "Ag nuashonrú i gceann {{count}} soicind",
+         "in_1": "Ag nuashonrú i soicind amháin"
+      }
+   },
+   "days": {
+      "weekdays": "Laethanta na seachtaine"
+      "saturday": "Satharn",
+      "sunday": "Domhnach"
+   }
+}

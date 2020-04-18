@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import './help.scss';
 
 const Help: React.FC<{}> = () => {
-   const { t, i18n } = useTranslation();
+   const { i18n } = useTranslation();
 
    return (
       <div>

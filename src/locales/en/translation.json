@@ -1,0 +1,36 @@
+{
+   "lines": {
+      "line": "line",
+      "red": {
+         "colour": "Red",
+         "inbound": "Eastbound",
+         "outbound": "Westbound"
+      },
+      "green": {
+         "colour": "Green",
+         "inbound": "Northbound",
+         "outbound": "Southbound"
+      }
+   },
+   "station": "station",
+   "favouriteStations": "favourite stations",
+   "loading": "Loading...",
+   "forecast": {
+      "time": {
+         "due": "Due",
+         "minutes": "{{minutes}} mins"
+      },
+      "updating": {
+         "now": "Updating...",
+         "in": "Updating in {{count}} seconds",
+         "in_1": "Updating in {{count}} second"
+      }
+   },
+   "days": {
+      "weekdays": "Weekdays",
+      "saturday": "Saturday",
+      "sunday": "Sunday"
+   },
+   "servicesFinished": "Services will resume in this direction at {{startTime}}a.m. in morning ",
+   "noTramsForecast": "No trams forecast"
+}
