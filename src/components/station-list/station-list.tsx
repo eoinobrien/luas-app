@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './StationList.scss';
+import './station-list.scss';
 import { RouteComponentProps, withRouter, NavLink, Link } from 'react-router-dom';
 import Station from '../../models/Station';
 import Line from '../../models/Line';

@@ -1,5 +1,5 @@
 import React from 'react';
-import './NavBar.scss';
+import './nav-bar.scss';
 import Station from '../../models/Station';
 import NavBarLink from '../nav-bar-link/nav-bar-link';
 import Line from '../../models/Line';

@@ -1,5 +1,5 @@
 import React from 'react';
-import './StationListRowItem.scss';
+import './station-list-row-item.scss';
 import { Link } from 'react-router-dom';
 import Station from '../../models/Station';
 import Line from '../../models/Line';

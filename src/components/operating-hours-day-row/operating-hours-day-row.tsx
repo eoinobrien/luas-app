@@ -2,19 +2,19 @@ import React, { useState } from 'react';
 import { ReactComponent as ChevronUp } from './chevron-up.svg';
 import { ReactComponent as ChevronDown } from './chevron-down.svg';
 import OperatingHoursDay from '../../models/OperatingHoursDay';
-import './OperatingHoursDay.scss';
+import './operating-hours-day-row.scss';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import SplitListItem from '../split-list-item/split-list-item';
 
-interface OperatingHoursDayProps {
+interface OperatingHoursDayRowProps {
    day: string;
    operatingHoursDay: OperatingHoursDay;
    line: string;
    expanded: boolean;
 }
 
-const OperatingHoursDay: React.FC<OperatingHoursDayProps> = (props: OperatingHoursDayProps) => {
+const OperatingHoursDayRow: React.FC<OperatingHoursDayRowProps> = (props: OperatingHoursDayRowProps) => {
    const [open, toggle] = useState<boolean>(props.expanded);
    const { t } = useTranslation();
 
@@ -47,4 +47,4 @@ const OperatingHoursDay: React.FC<OperatingHoursDayProps> = (props: OperatingHou
    );
 }
 
-export default OperatingHoursDay;
+export default OperatingHoursDayRow;
