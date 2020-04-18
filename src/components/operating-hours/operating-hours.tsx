@@ -14,7 +14,7 @@ const OperatingHours: React.FC<OperatingHoursProps> = (props: OperatingHoursProp
    const { t } = useTranslation();
 
    const dayOfWeek = () => {
-      let now: Moment = moment().hour() <= 2 ? moment(-1, 'day') : moment();
+      const now: Moment = moment().hour() <= 2 ? moment(-1, 'day') : moment();
 
       let weekday = now.isoWeekday();
       if (BankHolidays.includes(now.format("YYYY-MM-DD"))) {
