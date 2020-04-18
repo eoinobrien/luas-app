@@ -1,9 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import OperatingHoursModel from '../../models/OperatingHoursModel';
-import OperatingHoursDayRow from '../operating-hours-day-row/operating-hours-day-row';
 import moment, { Moment } from 'moment';
+import OperatingHoursDayRow from '../operating-hours-day-row/operating-hours-day-row';
 import { BankHolidays } from '../../models/BankHolidays';
+import OperatingHoursModel from '../../models/OperatingHoursModel';
 
 interface OperatingHoursProps {
    operatingHours: OperatingHoursModel;

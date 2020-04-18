@@ -1,6 +1,6 @@
 import React from 'react';
-import './help.scss';
 import { useTranslation } from 'react-i18next';
+import './help.scss';
 
 const Help: React.FC<{}> = () => {
    const { t, i18n } = useTranslation();

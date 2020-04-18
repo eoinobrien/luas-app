@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import './station-list.scss';
 import { RouteComponentProps, withRouter, NavLink, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import './station-list.scss';
+import { ReactComponent as MoreIcon } from './more-vertical.svg';
+import StationListRowItem from '../station-list-row-item/station-list-row-item';
 import Station from '../../models/Station';
 import Line from '../../models/Line';
-import StationListRowItem from '../station-list-row-item/station-list-row-item';
-import { ReactComponent as MoreIcon } from './more-vertical.svg';
-import { useTranslation } from 'react-i18next';
 
 interface StationListRouteProps {
    line: string;

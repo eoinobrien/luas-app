@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { ReactComponent as ChevronUp } from './chevron-up.svg';
-import { ReactComponent as ChevronDown } from './chevron-down.svg';
-import OperatingHoursDay from '../../models/OperatingHoursDay';
-import './operating-hours-day-row.scss';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
+import { ReactComponent as ChevronUp } from './chevron-up.svg';
+import { ReactComponent as ChevronDown } from './chevron-down.svg';
+import './operating-hours-day-row.scss';
 import SplitListItem from '../split-list-item/split-list-item';
+import OperatingHoursDay from '../../models/OperatingHoursDay';
 
 interface OperatingHoursDayRowProps {
    day: string;

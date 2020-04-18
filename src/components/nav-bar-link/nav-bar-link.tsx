@@ -1,6 +1,6 @@
 import React from 'react';
-import './nav-bar-link.scss';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
+import './nav-bar-link.scss';
 
 interface NavBarLinkProps extends RouteComponentProps {
    value: string;

@@ -1,10 +1,10 @@
 import React from 'react';
-import './nav-bar.scss';
-import Station from '../../models/Station';
-import NavBarLink from '../nav-bar-link/nav-bar-link';
-import Line from '../../models/Line';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import './nav-bar.scss';
+import NavBarLink from '../nav-bar-link/nav-bar-link';
+import Line from '../../models/Line';
+import Station from '../../models/Station';
 
 interface NavBarProps extends RouteComponentProps {
    favouriteStations: Station[];

@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './forecast.scss';
-import StationForecast from '../../models/StationForecast';
 import DirectionForecasts from '../direction-forecast/direction-forecast';
-import Station from '../../models/Station';
 import OperatingHours from '../operating-hours/operating-hours';
 import ForecastHeader from '../forecast-header/forecast-header';
+import StationForecast from '../../models/StationForecast';
+import Station from '../../models/Station';
 
 interface ForecastRouteProps {
    abbreviation: string;

@@ -1,10 +1,10 @@
 import React from 'react';
-import './station-list-row-item.scss';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import './station-list-row-item.scss';
+import FavouriteStar from '../favourite-star/favourite-star';
 import Station from '../../models/Station';
 import Line from '../../models/Line';
-import FavouriteStar from '../favourite-star/favourite-star';
-import { useTranslation } from 'react-i18next';
 
 interface StationListRowItemProps {
    station: Station;
