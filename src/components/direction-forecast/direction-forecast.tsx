@@ -69,22 +69,23 @@ const getLastTramMoment = (lastTram: string) => {
       }
    }
 
-
    return lastTramMoment;
 }
 
-const servicesFinishedForDay = (lastTram: Moment) => {
+const timeToLastTram = (lastTram: Moment) => {
    let now: Moment = moment();
+   let lastTramDifference = now.diff(lastTram, 'hours', true);
 
-   let isFinished = lastTram.diff(now, 'minutes') < 0;
-   console.log("Checking if services are finished: " + lastTram.diff(now, 'minutes'));
-   return isFinished;
+   console.log("Time until last tram: " + lastTramDifference + " hours");
+   return lastTramDifference;
+}
+
+const servicesFinishedForDay = (lastTram: Moment) => {
+   return timeToLastTram(lastTram) > 0;
 }
 
 const shouldShowLastTramTime = (lastTram: Moment) => {
-   let now: Moment = moment();
-   console.log("Showing last tram times")
-   return now.diff(lastTram, 'hours', true) < 1.5;
+   return timeToLastTram(lastTram) > -1.5;
 }
 
 const formatTime = (time: string) => {

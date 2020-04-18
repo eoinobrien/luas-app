@@ -49,7 +49,7 @@ const StationList: React.FC<StationListProps> = (props: StationListProps) => {
             setLoading(false);
             setError(true);
          });
-   }, []);
+   }, [cookiesAccepted]);
 
    const GetLineName = (line: string, active: boolean): string => {
       if (active) {
