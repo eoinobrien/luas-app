@@ -18,6 +18,7 @@ i18n
 
             fallbackLng: "en",
             whitelist: ["en", "ga"],
+            ns: ['translation', 'error'],
             checkWhitelist: true,
 
             keySeparator: '.',

@@ -1,36 +1,40 @@
 {
-   "lines": {
-      "line": "line",
-      "red": {
-         "colour": "Red",
-         "inbound": "Eastbound",
-         "outbound": "Westbound"
-      },
-      "green": {
-         "colour": "Green",
-         "inbound": "Northbound",
-         "outbound": "Southbound"
-      }
-   },
-   "station": "station",
-   "favouriteStations": "favourite stations",
-   "loading": "Loading...",
-   "forecast": {
-      "time": {
-         "due": "Due",
-         "minutes": "{{minutes}} mins"
-      },
-      "updating": {
-         "now": "Updating...",
-         "in": "Updating in {{count}} seconds",
-         "in_1": "Updating in {{count}} second"
-      }
-   },
-   "days": {
-      "weekdays": "Weekdays",
-      "saturday": "Saturday",
-      "sunday": "Sunday"
-   },
-   "servicesFinished": "Services will resume in this direction at {{startTime}}a.m. in morning ",
-   "noTramsForecast": "No trams forecast"
+    "lines": {
+        "line": "line",
+        "red": {
+            "colour": "Red",
+            "inbound": "Eastbound",
+            "outbound": "Westbound"
+        },
+        "green": {
+            "colour": "Green",
+            "inbound": "Northbound",
+            "outbound": "Southbound"
+        }
+    },
+    "station": "station",
+    "favourite-stations": "favourite stations",
+    "favourite-stations-appear-here": "Starred stations will appear here.",
+    "loading": "Loading...",
+    "forecast": {
+        "time": {
+            "due": "Due",
+            "minutes": "{{minutes}} mins"
+        },
+        "updating": {
+            "now": "Updating...",
+            "in": "Updating in {{count}} seconds",
+            "in_1": "Updating in {{count}} second"
+        }
+    },
+    "operating-hours": "Operating Hours",
+    "operating-hours-times": "from {{firstTram}} to {{lastTram}}",
+    "days": {
+        "weekdays": "Weekdays",
+        "saturday": "Saturday",
+        "sunday": "Sunday"
+    },
+    "no-trams-in-this-direction": "Trams do not run in this direction.",
+    "services-resume-at": "Services resume in this direction at {{startTime}}",
+    "no-trams-forecast": "No trams forecast"
 }

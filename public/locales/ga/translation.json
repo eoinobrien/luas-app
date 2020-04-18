@@ -1,34 +1,40 @@
 {
-   "lines": {
-      "line": "líne",
-      "red": {
-         "colour": "Dearg",
-         "inbound": "Ag dul soir",
-         "outbound": "Ag dul siar"
-      },
-      "green": {
-         "colour": "Glas",
-         "inbound": "Ag dul ó thuaidh",
-         "outbound": "Ag dul ó dheas"
-      }
-   },
-   "station": "stáisiún",
-   "favouriteStations": "stáisiúin is fearr leat",
-   "loading": "Ag Lódáil...",
-   "forecast": {
-      "time": {
-         "due": "Go luath",
-         "minutes": "{{minutes}} nóiméad"
-      },
-      "updating": {
-         "now": "Ag Uasdátú...",
-         "in": "Ag nuashonrú i gceann {{count}} soicind",
-         "in_1": "Ag nuashonrú i soicind amháin"
-      }
-   },
-   "days": {
-      "weekdays": "Laethanta na seachtaine",
-      "saturday": "Satharn",
-      "sunday": "Domhnach"
-   }
+    "lines": {
+        "line": "líne",
+        "red": {
+            "colour": "Dearg",
+            "inbound": "Ag dul soir",
+            "outbound": "Ag dul siar"
+        },
+        "green": {
+            "colour": "Glas",
+            "inbound": "Ag dul ó thuaidh",
+            "outbound": "Ag dul ó dheas"
+        }
+    },
+    "station": "stáisiún",
+    "favourite-stations": "stáisiúin is fearr leat",
+    "favourite-stations-appear-here": "Beidh na stáisiúin is fearr leat le feiceáil anseo.",
+    "loading": "Ag Lódáil...",
+    "forecast": {
+        "time": {
+            "due": "Go luath",
+            "minutes": "{{minutes}} nóiméad"
+        },
+        "updating": {
+            "now": "Ag Uasdátú...",
+            "in": "Ag nuashonrú i gceann {{count}} soicind",
+            "in_1": "Ag nuashonrú i soicind amháin"
+        }
+    },
+    "operating-hours": "Uaireanta Oibriúcháin",
+    "operating-hours-times": "ó {{firstTram}} go {{lastTram}}",
+    "days": {
+        "weekdays": "Laethanta na seachtaine",
+        "saturday": "Satharn",
+        "sunday": "Domhnach"
+    },
+    "no-trams-in-this-direction": "Ní ritheann tramanna sa treo seo.",
+    "services-resume-at": "Seirbhísí atosú sa treo seo ag {{startTime}}",
+    "no-trams-forecast": "Ní thuar tramanna"
 }

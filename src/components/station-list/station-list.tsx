@@ -82,10 +82,10 @@ const StationList: React.FC<StationListProps> = (props: StationListProps) => {
             </nav>
             <Link to={`/${i18n.language}/help`} aria-label="Learn More"><MoreIcon /></Link>
          </header>
-         {loading && <h2>Loading...</h2>}
+         {loading && <h2>{t('loading')}</h2>}
          <nav className="list">
             <ul>
-               {error && <h2>Error</h2>}
+               {error && <h2>{t('error:loading')}</h2>}
                {
                   !loading &&
                   stations

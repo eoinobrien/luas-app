@@ -99,7 +99,7 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
                <h1>{t('loading')}</h1>}
 
             {error &&
-               <h1>Error getting data</h1>}
+               <h1>{t('error:loading')}</h1>}
 
             {!loading && !error &&
                <div>

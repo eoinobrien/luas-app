@@ -119,14 +119,14 @@ const DirectionForecasts: React.FC<DirectionForecastsProps> = (props: DirectionF
             <ul>
                 {enabled && props.forecasts.length === 0 && (
                     (areServicesFinishedForDay &&
-                        <SplitListItem key="ServicesFinished" left={"Services resume in this direction at " + formatTime(operatingHours[1].firstTram)} />) ||
+                        <SplitListItem key="ServicesFinished" left={t('services-resume-at', { startTime: formatTime(operatingHours[1].firstTram) })} />) ||
                     (!areServicesFinishedForDay &&
-                        <SplitListItem key="NoTramsForecast" left={"No trams forecast"} />))}
+                        <SplitListItem key="NoTramsForecast" left={t('no-trams-forecast')} />))}
                 {enabled &&
                     props.forecasts.map((tram, index) =>
                         <SplitListItem key={index} left={tram.destinationStation.name} right={getMinutes(tram.minutes, tram.isDue)} />)}
                 {!enabled &&
-                    <SplitListItem key="NoTramsDirection" left={"Trams do not run from this stop in this direction."} />}
+                    <SplitListItem key="NoTramsDirection" left={t('no-trams-in-this-direction')} />}
             </ul>
         </section>
     );
