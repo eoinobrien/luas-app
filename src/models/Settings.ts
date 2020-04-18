@@ -1,6 +1,5 @@
-interface Settings
-{
-    language: string
+interface Settings {
+   language: string
 }
 
 export default Settings;

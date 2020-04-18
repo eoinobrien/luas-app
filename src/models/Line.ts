@@ -1,6 +1,6 @@
 enum Line {
-    Red,
-    Green
+   Red,
+   Green
 }
 
 export default Line;

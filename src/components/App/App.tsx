@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './App.scss';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect
+   BrowserRouter as Router,
+   Switch,
+   Route,
+   Redirect
 } from 'react-router-dom';
 import Forecast from '../Forcast/Forecast';
 import StationList from '../StationList/StationList';
@@ -15,90 +15,92 @@ import { useTranslation } from 'react-i18next';
 import PrivacyPrompt from '../PrivacyPrompt';
 
 const App: React.FC = () => {
-  const [favouriteStations, setFavouriteStations] = useState<Station[]>([] as Station[]);
-  const cookiesAccepted = document.cookie.split(';').some((item) => item.trim().startsWith('cookies-accepted-all=true'));
-  const { i18n } = useTranslation();
+   const [favouriteStations, setFavouriteStations] = useState<Station[]>([] as Station[]);
+   const { i18n } = useTranslation();
+   let showFunctionalPrompt: boolean = false;
 
-  document.getElementsByTagName("html")[0].setAttribute("lang", i18n.language);
+   document.getElementsByTagName("html")[0].setAttribute("lang", i18n.language);
 
-  const addToFavouriteStations = (station: Station) => {
-    let updatedFavouriteStations: Station[];
+   const addToFavouriteStations = (station: Station) => {
+      showFunctionalPrompt = true;
 
-    if (cookiesAccepted) {
+      let updatedFavouriteStations: Station[];
+
       if (favouriteStations.filter(s => s.abbreviation === station.abbreviation).length === 0) {
-        updatedFavouriteStations = [...favouriteStations, station];
-        setFavouriteStations(updatedFavouriteStations);
+         updatedFavouriteStations = [...favouriteStations, station];
+         setFavouriteStations(updatedFavouriteStations);
       }
       else {
-        updatedFavouriteStations = favouriteStations.filter(s => s.abbreviation !== station.abbreviation);
-        setFavouriteStations(updatedFavouriteStations);
+         updatedFavouriteStations = favouriteStations.filter(s => s.abbreviation !== station.abbreviation);
+         setFavouriteStations(updatedFavouriteStations);
       }
 
       localStorage.setItem('favouriteStations', JSON.stringify(updatedFavouriteStations));
-    }
-  }
+   }
 
-  useEffect(() => {
-    if (cookiesAccepted) {
+   useEffect(() => {
       let localStorageString: string = localStorage.getItem('favouriteStations') || "";
 
       if (localStorageString !== "") {
-        let stations: Station[] = JSON.parse(localStorageString);
+         let stations: Station[] = JSON.parse(localStorageString);
 
-        setFavouriteStations(stations);
+         setFavouriteStations(stations);
       }
-    }
-  }, []);
+   }, []);
 
-  const getLanguageFromLocalStorage = () => {
-    return (!cookiesAccepted && "") || localStorage.getItem('i18nextLng') || "";
-  }
+   const getLanguageFromLocalStorage = () => {
+      return localStorage.getItem('i18nextLng') || "";
+   }
 
-  return (
-    <Router>
-      <div className="app">
-        <PrivacyPrompt />
-        <div className="main-content">
-          <Switch>
-            <Route
-              path="/:lng(en|ga)/station/:abbreviation"
-              render={() => <Forecast favouriteClick={addToFavouriteStations} favouriteStations={favouriteStations} />} />
+   return (
+      <Router>
+         <div className="app">
+            {showFunctionalPrompt &&
+               <PrivacyPrompt
+                  cookieName="cookies-favourites"
+                  header="Cookies"
+                  bodyText="We use cookies and local storage to remember your favourite stations and languages and to make the site faster for you." />}
+            <div className="main-content">
+               <Switch>
+                  <Route
+                     path="/:lng(en|ga)/station/:abbreviation"
+                     render={() => <Forecast favouriteClick={addToFavouriteStations} favouriteStations={favouriteStations} />} />
 
-            <Route
-              path="/:lng(en|ga)/line/:line"
-              render={() => <StationList favouriteClick={addToFavouriteStations} favouriteStations={favouriteStations} />} />
+                  <Route
+                     path="/:lng(en|ga)/line/:line"
+                     render={() => <StationList favouriteClick={addToFavouriteStations} favouriteStations={favouriteStations} />} />
 
-            <Route path="/:lng(en|ga)/help">
-              <Help />
-            </Route>
+                  <Route path="/:lng(en|ga)/help">
+                     <Help />
+                  </Route>
 
-            <Route
-              exact
-              path="/:lng(en|ga)"
-              render={props => (
-                <Redirect to={`/${props.match.params.lng}/line/Red`} />
-              )}
-            />
+                  <Route
+                     exact
+                     path="/:lng(en|ga)"
+                     render={props => (
+                        <Redirect to={`/${props.match.params.lng}/line/Red`} />
+                     )}
+                  />
 
-            <Route
-              exact
-              path="/"
-              render={() => {
-                let lang: string = getLanguageFromLocalStorage();
+                  <Route
+                     exact
+                     path="/"
+                     render={() => {
+                        let lang: string = getLanguageFromLocalStorage();
 
-                if (lang !== "") {
-                  return <Redirect to={`/${lang}/line/Red`} />
-                }
+                        if (lang !== "") {
+                           return <Redirect to={`/${lang}/line/Red`} />
+                        }
 
-                return <Redirect to="/en/line/Red" />
-              }}
-            />
-          </Switch>
-        </div>
-        <NavBar favouriteStations={favouriteStations} />
-      </div>
-    </Router>
-  );
+                        return <Redirect to="/en/line/Red" />
+                     }}
+                  />
+               </Switch>
+            </div>
+            <NavBar favouriteStations={favouriteStations} />
+         </div>
+      </Router>
+   );
 }
 
 export default App;

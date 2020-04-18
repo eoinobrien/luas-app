@@ -1,39 +1,39 @@
 .forecast {
-  header {
-    border-bottom: 0.75rem solid var(--main-text-colour);
-    display: flex;
-    margin: 0;
-    padding: 0.5rem;
-
-    h1 {
+   header {
+      border-bottom: 0.75rem solid var(--main-text-colour);
+      display: flex;
       margin: 0;
+      padding: 0.5rem;
 
-      span {
-        font-size: 2rem;
-        font-style: italic;
-        font-weight: 400;
+      h1 {
+         margin: 0;
+
+         span {
+            font-size: 2rem;
+            font-style: italic;
+            font-weight: 400;
+         }
       }
-    }
-  }
+   }
 
-  main {
-    padding: 0.5rem;
+   main {
+      padding: 0.5rem;
 
-    .message {
-      margin: 3rem 0;
-    }
+      .message {
+         margin: 3rem 0;
+      }
 
-    .updating {
-      font-size: 0.8rem;
-      font-style: italic;
-      font-weight: 400;
-      text-align: right;
-    }
-  }
+      .updating {
+         font-size: 0.8rem;
+         font-style: italic;
+         font-weight: 400;
+         text-align: right;
+      }
+   }
 }
 
 .back-arrow svg {
-  color: var(--main-text-colour);
-  margin-right: 0.5rem;
-  width: 2.9rem;
+   color: var(--main-text-colour);
+   margin-right: 0.5rem;
+   width: 2.9rem;
 }

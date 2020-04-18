@@ -1,39 +1,39 @@
 :root {
-  --main-text-colour: #212121;
-  --secondary-text-colour: #c9c9c9;
-  --red: #f44336;
-  --green: #00af00;
-  --background: #fff;
-  --hover-colour: #f5f5f5;
+   --main-text-colour: #212121;
+   --secondary-text-colour: #c9c9c9;
+   --red: #f44336;
+   --green: #00af00;
+   --background: #fff;
+   --hover-colour: #f5f5f5;
 
-  @media (prefers-color-scheme: dark) {
-    --main-text-colour: #fff;
-    --secondary-text-colour: #565656;
-    --red: #f44336;
-    --green: #00af00;
-    --background: #212121;
-    --hover-colour: #383838;
-  }
+   @media (prefers-color-scheme: dark) {
+      --main-text-colour: #fff;
+      --secondary-text-colour: #565656;
+      --red: #f44336;
+      --green: #00af00;
+      --background: #212121;
+      --hover-colour: #383838;
+   }
 }
 
 html,
 body {
-  height: 100%;
-  width: 100%;
+   height: 100%;
+   width: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--main-text-colour);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
-    'Droid Sans', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  margin: 0;
-  margin: 0 auto;
-  max-width: 800px;
+   background: var(--background);
+   color: var(--main-text-colour);
+   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+      "Droid Sans", "Helvetica Neue", sans-serif;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+   margin: 0;
+   margin: 0 auto;
+   max-width: 800px;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }

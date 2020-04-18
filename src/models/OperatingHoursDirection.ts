@@ -1,7 +1,6 @@
-interface OperatingHoursDirection
-{
-    firstTram: string;
-    lastTram: string;
+interface OperatingHoursDirection {
+   firstTram: string;
+   lastTram: string;
 }
 
 export default OperatingHoursDirection;

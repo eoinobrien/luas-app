@@ -4,12 +4,12 @@ import FavouriteStar from './FavouriteStar';
 
 
 test('renders correctly', () => {
-  const favouriteClick = () => {
-    console.log("click");
-  }
+   const favouriteClick = () => {
+      console.log("click");
+   }
 
-  const tree = renderer
-    .create(<FavouriteStar isFavourite={false} favouriteClick={favouriteClick} />)
-    .toJSON();
-  expect(tree).toMatchSnapshot();
+   const tree = renderer
+      .create(<FavouriteStar isFavourite={false} favouriteClick={favouriteClick} />)
+      .toJSON();
+   expect(tree).toMatchSnapshot();
 });

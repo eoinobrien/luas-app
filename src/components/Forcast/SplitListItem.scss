@@ -1,19 +1,19 @@
 .direction-forcast-item {
-  border-bottom: 1px solid var(--secondary-text-colour);
-  display: flex;
-  list-style-type: none;
+   border-bottom: 1px solid var(--secondary-text-colour);
+   display: flex;
+   list-style-type: none;
 
-  padding: 0.5rem 0;
+   padding: 0.5rem 0;
 
-  &:last-child {
-    border: 0;
-  }
+   &:last-child {
+      border: 0;
+   }
 
-  .left {
-    margin-right: 1rem;
-  }
+   .left {
+      margin-right: 1rem;
+   }
 
-  .right {
-    margin-left: auto;
-  }
+   .right {
+      margin-left: auto;
+   }
 }

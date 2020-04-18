@@ -1,30 +1,30 @@
 .navbar {
-  align-items: center;
-  background: var(--background);
-  border-top: 2px solid var(--secondary-text-colour);
-  bottom: 0;
+   align-items: center;
+   background: var(--background);
+   border-top: 2px solid var(--secondary-text-colour);
+   bottom: 0;
 
-  display: flex;
-  height: 4rem;
-  max-width: 784px;
+   display: flex;
+   height: 4rem;
+   max-width: 784px;
 
-  overflow: hidden;
-  padding: 0.25rem 0.5rem;
-  position: fixed;
+   overflow: hidden;
+   padding: 0.25rem 0.5rem;
+   position: fixed;
 
-  width: 100%;
+   width: 100%;
 
-  div {
-    height: 100%;
+   div {
+      height: 100%;
 
-    h1 {
-      font-size: 0.7rem;
-      margin-top: 0;
-      text-transform: uppercase;
-    }
+      h1 {
+         font-size: 0.7rem;
+         margin-top: 0;
+         text-transform: uppercase;
+      }
 
-    &.line-section {
-      margin-right: 0.5rem;
-    }
-  }
+      &.line-section {
+         margin-right: 0.5rem;
+      }
+   }
 }

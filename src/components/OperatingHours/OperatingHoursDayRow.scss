@@ -1,23 +1,23 @@
 .operating-hours-day-row {
-  .op-hours-header {
-    align-items: center;
-    border-bottom: 1px solid var(--secondary-text-colour);
-    display: flex;
-    margin: 0;
-    padding: 1rem 0;
-
-    h4 {
+   .op-hours-header {
+      align-items: center;
+      border-bottom: 1px solid var(--secondary-text-colour);
+      display: flex;
       margin: 0;
-    }
+      padding: 1rem 0;
 
-    svg {
-      margin-left: auto;
-    }
-  }
+      h4 {
+         margin: 0;
+      }
 
-  ul {
-    background: var(--hover-colour);
-    margin-top: 0;
-    padding: 1rem;
-  }
+      svg {
+         margin-left: auto;
+      }
+   }
+
+   ul {
+      background: var(--hover-colour);
+      margin-top: 0;
+      padding: 1rem;
+   }
 }
