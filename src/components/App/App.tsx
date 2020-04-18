@@ -75,6 +75,27 @@ const App: React.FC = () => {
                   </Route>
 
                   <Route
+                     path="/station/:abbreviation"
+                     render={props => {
+                        let lang: string = getLanguageFromLocalStorage();
+                        return <Redirect to={`/${lang}/station/${props.match.params.abbreviation}`} />
+                     }} />
+
+                  <Route
+                     path="/line/:line"
+                     render={props => {
+                           let lang: string = getLanguageFromLocalStorage();
+                           return <Redirect to={`/${lang}/line/${props.match.params.line}`} />
+                        }} />
+
+                  <Route
+                     path="/help"
+                     render={() => {
+                        let lang: string = getLanguageFromLocalStorage();
+                        return <Redirect to={`/${lang}/help`} />
+                     }} />
+
+                  <Route
                      exact
                      path="/:lng(en|ga)"
                      render={props => (
