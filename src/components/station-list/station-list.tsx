@@ -3,7 +3,7 @@ import './StationList.scss';
 import { RouteComponentProps, withRouter, NavLink, Link } from 'react-router-dom';
 import Station from '../../models/Station';
 import Line from '../../models/Line';
-import StationListRow from './StationListRow';
+import StationListRowItem from '../station-list-row-item/station-list-row-item';
 import { ReactComponent as MoreIcon } from './more-vertical.svg';
 import { useTranslation } from 'react-i18next';
 
@@ -91,7 +91,7 @@ const StationList: React.FC<StationListProps> = (props: StationListProps) => {
                   stations
                      .filter(s => s.line.toString().toLowerCase() === props.match.params.line.toString().toLowerCase())
                      .map(station =>
-                        <StationListRow
+                        <StationListRowItem
                            key={station.abbreviation}
                            station={station}
                            favouriteClick={props.favouriteClick}

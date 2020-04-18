@@ -1,5 +1,5 @@
 import React from 'react';
-import './FavouriteStar.scss';
+import './favourite-star.scss';
 import { ReactComponent as Star } from './star.svg';
 import { ReactComponent as StarFill } from './star-fill.svg';
 

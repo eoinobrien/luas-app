@@ -1,5 +1,5 @@
 import React from 'react';
-import './SplitListItem.scss';
+import './split-list-item.scss';
 
 interface SplitListItemProps {
    left: string;

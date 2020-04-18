@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import './PrivacyPrompt.scss';
+import './privacy-prompt.scss';
 
 interface PrivacyPromptProps {
    cookieName: string;

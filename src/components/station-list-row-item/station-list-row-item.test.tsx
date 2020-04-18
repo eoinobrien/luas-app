@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import StationListRow from './StationListRow';
+import StationListRowItem from './station-list-row-item';
 import Station from '../../models/Station';
 import Line from '../../models/Line';
 
@@ -58,7 +58,7 @@ test('renders correctly', () => {
    }
 
    const tree = renderer
-      .create(<StationListRow station={station} favouriteClick={favouriteClick} isFavourite={false} />)
+      .create(<StationListRowItem station={station} favouriteClick={favouriteClick} isFavourite={false} />)
       .toJSON();
    expect(tree).toMatchSnapshot();
 });

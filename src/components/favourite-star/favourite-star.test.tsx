@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import FavouriteStar from './FavouriteStar';
+import FavouriteStar from './favourite-star';
 
 
 test('renders correctly', () => {

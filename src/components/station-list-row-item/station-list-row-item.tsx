@@ -1,18 +1,18 @@
 import React from 'react';
-import './StationListRow.scss';
+import './StationListRowItem.scss';
 import { Link } from 'react-router-dom';
 import Station from '../../models/Station';
 import Line from '../../models/Line';
-import FavouriteStar from '../shared/FavouriteStar';
+import FavouriteStar from '../favourite-star/favourite-star';
 import { useTranslation } from 'react-i18next';
 
-interface StationListRowProps {
+interface StationListRowItemProps {
    station: Station;
    favouriteClick: any;
    isFavourite: boolean;
 }
 
-const StationListRow: React.FC<StationListRowProps> = (props: StationListRowProps) => {
+const StationListRowItem: React.FC<StationListRowItemProps> = (props: StationListRowItemProps) => {
    const { i18n } = useTranslation();
 
    const favouriteStationClick = () => {
@@ -33,4 +33,4 @@ const StationListRow: React.FC<StationListRowProps> = (props: StationListRowProp
    );
 }
 
-export default StationListRow;
+export default StationListRowItem;

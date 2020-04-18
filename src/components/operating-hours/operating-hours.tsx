@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import OperatingHoursModel from '../../models/OperatingHoursModel';
-import OperatingHoursDayRow from './OperatingHoursDayRow';
+import OperatingHoursDay from './OperatingHoursDay';
 import moment, { Moment } from 'moment';
 import { BankHolidays } from '../../models/BankHolidays';
 
@@ -27,9 +27,9 @@ const OperatingHours: React.FC<OperatingHoursProps> = (props: OperatingHoursProp
    return (
       <section>
          <h3>Operating Hours</h3>
-         <OperatingHoursDayRow day={t('days.weekdays')} operatingHoursDay={props.operatingHours.weekdays} line={props.line} expanded={dayOfWeek() >= 1 && dayOfWeek() <= 5} />
-         <OperatingHoursDayRow day={t('days.saturday')} operatingHoursDay={props.operatingHours.saturday} line={props.line} expanded={dayOfWeek() === 6} />
-         <OperatingHoursDayRow day={t('days.sunday')} operatingHoursDay={props.operatingHours.sunday} line={props.line} expanded={dayOfWeek() === 7} />
+         <OperatingHoursDay day={t('days.weekdays')} operatingHoursDay={props.operatingHours.weekdays} line={props.line} expanded={dayOfWeek() >= 1 && dayOfWeek() <= 5} />
+         <OperatingHoursDay day={t('days.saturday')} operatingHoursDay={props.operatingHours.saturday} line={props.line} expanded={dayOfWeek() === 6} />
+         <OperatingHoursDay day={t('days.sunday')} operatingHoursDay={props.operatingHours.sunday} line={props.line} expanded={dayOfWeek() === 7} />
       </section>
    );
 }

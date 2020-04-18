@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import './Forecast.scss';
+import './forecast-header.scss';
 import { ReactComponent as LeftArrow } from './arrow-left-circle.svg';
 import Line from '../../models/Line';
-import FavouriteStar from '../shared/FavouriteStar';
+import FavouriteStar from '../favourite-star/favourite-star';
 import Station from '../../models/Station';
 
 interface ForecastHeaderProps {
@@ -23,7 +23,12 @@ const ForecastHeader: React.FC<ForecastHeaderProps> = (props: ForecastHeaderProp
    }
 
    return (
-      <header style={(props.loading && { borderColor: '#424242' }) || (props.station.line.toString() === Line[Line.Red] ? { borderColor: '#f44336' } : { borderColor: '#00af00' })}>
+      <header
+         className="forecast-header"
+         style={(props.loading && { borderColor: '#424242' }) ||
+            (props.station.line.toString() === Line[Line.Red] ?
+               { borderColor: '#f44336' } :
+               { borderColor: '#00af00' })}>
          <Link
             className="back-arrow"
             aria-label="Go Back to the list of Stations"

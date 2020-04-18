@@ -6,13 +6,13 @@ import {
    Route,
    Redirect
 } from 'react-router-dom';
-import Forecast from '../Forcast/Forecast';
-import StationList from '../StationList/StationList';
+import Forecast from '../forecast/forecast';
+import StationList from '../station-list/station-list';
 import Station from '../../models/Station';
-import NavBar from '../NavBar/NavBar';
-import Help from '../Help/Help';
+import NavBar from '../nav-bar/nav-bar';
+import Help from '../help/help';
 import { useTranslation } from 'react-i18next';
-import PrivacyPrompt from '../PrivacyPrompt';
+import PrivacyPrompt from '../privacy-prompt/privacy-prompt';
 
 const App: React.FC = () => {
    const [favouriteStations, setFavouriteStations] = useState<Station[]>([] as Station[]);

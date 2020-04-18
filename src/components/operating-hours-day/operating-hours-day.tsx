@@ -2,19 +2,19 @@ import React, { useState } from 'react';
 import { ReactComponent as ChevronUp } from './chevron-up.svg';
 import { ReactComponent as ChevronDown } from './chevron-down.svg';
 import OperatingHoursDay from '../../models/OperatingHoursDay';
-import './OperatingHoursDayRow.scss';
+import './OperatingHoursDay.scss';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
-import SplitListItem from '../Forcast/SplitListItem';
+import SplitListItem from '../split-list-item/split-list-item';
 
-interface OperatingHoursDayRowProps {
+interface OperatingHoursDayProps {
    day: string;
    operatingHoursDay: OperatingHoursDay;
    line: string;
    expanded: boolean;
 }
 
-const OperatingHoursDayRow: React.FC<OperatingHoursDayRowProps> = (props: OperatingHoursDayRowProps) => {
+const OperatingHoursDay: React.FC<OperatingHoursDayProps> = (props: OperatingHoursDayProps) => {
    const [open, toggle] = useState<boolean>(props.expanded);
    const { t } = useTranslation();
 
@@ -32,19 +32,19 @@ const OperatingHoursDayRow: React.FC<OperatingHoursDayRowProps> = (props: Operat
             <ul>
                {props.operatingHoursDay.inbound &&
                   <SplitListItem
-                  key="inbound"
-                  left={t(`lines.${props.line}.inbound`)}
-                  right={`${formatTime(props.operatingHoursDay.inbound.firstTram) + " - " + formatTime(props.operatingHoursDay.inbound.lastTram)}`} />}
+                     key="inbound"
+                     left={t(`lines.${props.line}.inbound`)}
+                     right={`${formatTime(props.operatingHoursDay.inbound.firstTram) + " - " + formatTime(props.operatingHoursDay.inbound.lastTram)}`} />}
 
                {props.operatingHoursDay.outbound &&
                   <SplitListItem
-                  key="outbound"
-                  left={t(`lines.${props.line}.outbound`)}
-                  right={`${formatTime(props.operatingHoursDay.outbound.firstTram) + " - " + formatTime(props.operatingHoursDay.outbound.lastTram)}`} />}
+                     key="outbound"
+                     left={t(`lines.${props.line}.outbound`)}
+                     right={`${formatTime(props.operatingHoursDay.outbound.firstTram) + " - " + formatTime(props.operatingHoursDay.outbound.lastTram)}`} />}
             </ul>
          }
       </div>
    );
 }
 
-export default OperatingHoursDayRow;
+export default OperatingHoursDay;

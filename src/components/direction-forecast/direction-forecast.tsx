@@ -1,8 +1,8 @@
 import React from 'react';
 import moment, { Moment } from 'moment';
-import './DirectionForecasts.scss';
+import './direction-forecast.scss';
 import TramForecast from '../../models/TramForecast';
-import SplitListItem from './SplitListItem';
+import SplitListItem from '../split-list-item/split-list-item';
 import OperatingHoursDirection from '../../models/OperatingHoursDirection';
 import OperatingHoursDay from '../../models/OperatingHoursDay';
 import OperatingHoursModel from '../../models/OperatingHoursModel';

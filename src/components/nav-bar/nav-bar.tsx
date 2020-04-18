@@ -1,7 +1,7 @@
 import React from 'react';
 import './NavBar.scss';
 import Station from '../../models/Station';
-import NavBarLink from './NavBarLink';
+import NavBarLink from '../nav-bar-link/nav-bar-link';
 import Line from '../../models/Line';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
