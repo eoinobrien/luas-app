@@ -10,7 +10,7 @@ import OperatingHoursDay from '../../models/OperatingHoursDay';
 import OperatingHoursModel from '../../models/OperatingHoursModel';
 import TramForecast from '../../models/TramForecast';
 
-interface DirectionForecastsProps {
+interface DirectionForecastProps {
     isInbound: boolean;
     direction: string;
     forecasts: TramForecast[];
@@ -93,7 +93,7 @@ const formatTime = (time: string) => {
     return moment(time, "HH:mm").format("h:mm a");
 }
 
-const DirectionForecasts: React.FC<DirectionForecastsProps> = (props: DirectionForecastsProps) => {
+const DirectionForecast: React.FC<DirectionForecastProps> = (props: DirectionForecastProps) => {
     let enabled: boolean = ((props.isInbound && props.operatingHours.weekdays.inbound !== null)
         || (!props.isInbound && props.operatingHours.weekdays.outbound !== null));
     let operatingHours: [OperatingHoursDirection, OperatingHoursDirection] = getOperatingHoursDirectionForToday(props.operatingHours, props.isInbound);
@@ -114,7 +114,7 @@ const DirectionForecasts: React.FC<DirectionForecastsProps> = (props: DirectionF
         <section className="direction-forecast">
             <div className="direction">
                 <h2>{props.direction}</h2>
-                {shouldShowLastTram && <h3 className="direction-last-tram">{t('last-tram-is-at', {lastTram: formatTime(operatingHours[0].lastTram)})}</h3>}
+                {shouldShowLastTram && <h3 className="direction-last-tram">{t('last-tram-is-at', { lastTram: formatTime(operatingHours[0].lastTram) })}</h3>}
             </div>
             <ul>
                 {enabled && props.forecasts.length === 0 && (
@@ -132,4 +132,4 @@ const DirectionForecasts: React.FC<DirectionForecastsProps> = (props: DirectionF
     );
 }
 
-export default DirectionForecasts;
+export default DirectionForecast;
