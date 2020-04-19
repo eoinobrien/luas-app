@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FavouriteStar > Matches snapshot 1`] = `
+<button
+  aria-label="Favourite station name"
+  className="favourite-star"
+  onClick={[Function]}
+>
+  <svg>
+    star.svg
+  </svg>
+</button>
+`;
+
+exports[`FavouriteStar > Matches snapshot 2`] = `
+<button
+  aria-label="Favourite station name"
+  className="favourite-star"
+  onClick={[Function]}
+>
+  <svg
+    style={
+      Object {
+        "color": "#fdd835",
+      }
+    }
+  >
+    star-fill.svg
+  </svg>
+</button>
+`;
