@@ -10,7 +10,7 @@ interface PageHeaderProps {
     headerTitleIrish?: string;
     color: string;
     loading: boolean;
-    isFavourite: boolean;
+    isFavourite?: boolean;
     favouriteClick?: any;
 }
 
@@ -32,10 +32,11 @@ const PageHeader: React.FC<PageHeaderProps> = (props: PageHeaderProps) => {
                 <span> {!props.loading && props.headerTitleIrish !== undefined && ((i18n.language === "ga" && props.headerTitle) || props.headerTitleIrish)}</span></h1>
 
             {props.favouriteClick !== undefined &&
+                props.isFavourite !== undefined &&
                 !props.loading &&
                 <FavouriteStar
                     name={(i18n.language === "ga" && props.headerTitleIrish) || props.headerTitle}
-                    isFavourite={props.isFavourite}
+                    isFavourite={props.isFavourite ?? false}
                     favouriteClick={props.favouriteClick} />}
         </header>
     );

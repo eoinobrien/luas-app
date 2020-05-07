@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { RouteComponentProps, withRouter, NavLink, Link } from 'react-router-dom';
+import { RouteComponentProps, withRouter, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './station-list.scss';
 import { ReactComponent as MoreIcon } from './more-vertical.svg';
 import StationListRowItem from '../station-list-row-item/station-list-row-item';
 import Station from '../../models/Station';
-import Line from '../../models/Line';
 
 interface StationListRouteProps {
     line: string;
@@ -52,36 +51,14 @@ const StationList: React.FC<StationListProps> = (props: StationListProps) => {
             });
     }, [cookiesAccepted, props.match.params.line]);
 
-    const GetLineName = (line: string, active: boolean): string => {
-        if (active) {
-            return line;
-        }
-        else {
-            return line === Line[Line.Red] ? Line[Line.Green] : Line[Line.Red];
-        }
-    }
-
-    const GetLocalizedStringFromLine = (line: string, active: boolean): string => {
-        return t(`lines.${GetLineName(line, active).toLowerCase()}.colour`);
-    }
-
     return (
         <div className="station-list">
-            <header>
-                <nav className="colour-nav">
-                    <NavLink
-                        exact to={`/${i18n.language}/line/${GetLineName(props.match.params.line, true)}`}
-                        activeClassName="active-line"
-                        style={props.match.params.line === Line[Line.Red] ? { color: '#f44336' } : { color: '#00af00' }}>
-                        {GetLocalizedStringFromLine(props.match.params.line, true)}
-                    </NavLink>
-                    <NavLink
-                        exact to={`/${i18n.language}/line/${GetLineName(props.match.params.line, false)}`}
-                        activeClassName="active-line">
-                        {GetLocalizedStringFromLine(props.match.params.line, false)}
-                    </NavLink>
-                </nav>
-                <Link to={`/${i18n.language}/help`} aria-label="Learn More"><MoreIcon /></Link>
+            <header
+                className="page-header"
+                style={{ borderColor: '#424242' }}>
+                <h1>{t('luasDueNow')}</h1>
+
+                    <Link to={`/${i18n.language}/help`} aria-label="Help and Settings"><MoreIcon /></Link>
             </header>
             {loading && <h2>{t('loading')}</h2>}
             <nav className="list">
