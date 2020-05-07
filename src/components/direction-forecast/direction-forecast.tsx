@@ -100,7 +100,7 @@ const DirectionForecast: React.FC<DirectionForecastProps> = (props: DirectionFor
     let lastTramTime: Moment = enabled ? getLastTramMoment(operatingHours[0].lastTram) : moment(0);
     let areServicesFinishedForDay: boolean = enabled && servicesFinishedForDay(lastTramTime);
     let shouldShowLastTram: boolean = enabled && !areServicesFinishedForDay && shouldShowLastTramTime(lastTramTime);
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     const minutesDue = (minutes: number, due: boolean) => {
         return due ? t('forecast.time.due') : t('forecast.time.minutes', { minutes: minutes });
@@ -124,7 +124,10 @@ const DirectionForecast: React.FC<DirectionForecastProps> = (props: DirectionFor
                         <SplitListItem key="NoTramsForecast" left={t('no-trams-forecast')} />))}
                 {enabled &&
                     props.forecasts.map((tram, index) =>
-                        <SplitListItem key={index} left={tram.destinationStation.name} right={getMinutes(tram.minutes, tram.isDue)} />)}
+                        <SplitListItem
+                            key={index}
+                            left={(i18n.language === "ga" && tram.destinationStation.irishName) || tram.destinationStation.name}
+                            right={getMinutes(tram.minutes, tram.isDue)} />)}
                 {!enabled &&
                     <SplitListItem key="NoTramsDirection" left={t('no-trams-in-this-direction')} />}
             </ul>

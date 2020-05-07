@@ -49,7 +49,11 @@ const App: React.FC = () => {
     }, []);
 
     const getLanguageFromLocalStorage = () => {
-        return localStorage.getItem('i18nextLng') || "";
+        return localStorage.getItem('i18nextLng') || "en";
+    }
+
+    const getLineFromLocalStorage = () => {
+        return localStorage.getItem('mostRecentLine') || "Red";
     }
 
     return (
@@ -108,12 +112,9 @@ const App: React.FC = () => {
                             path="/"
                             render={() => {
                                 let lang: string = getLanguageFromLocalStorage();
+                                let line: string = getLineFromLocalStorage();
 
-                                if (lang !== "") {
-                                    return <Redirect to={`/${lang}/line/Red`} />
-                                }
-
-                                return <Redirect to="/en/line/Red" />
+                                return <Redirect to={`/${lang ?? 'en'}/line/${line ?? 'Red'}`} />
                             }}
                         />
                     </Switch>

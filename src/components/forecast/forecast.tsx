@@ -4,9 +4,10 @@ import { useTranslation } from 'react-i18next';
 import './forecast.scss';
 import DirectionForecast from '../direction-forecast/direction-forecast';
 import OperatingHours from '../operating-hours/operating-hours';
-import ForecastHeader from '../forecast-header/forecast-header';
+import PageHeader from '../page-header/page-header';
 import StationForecast from '../../models/StationForecast';
 import Station from '../../models/Station';
+import Line from '../../models/Line';
 
 interface ForecastRouteProps {
     abbreviation: string;
@@ -52,7 +53,7 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
 
     useEffect(() => {
         let abbreviation: string = props.match.params.abbreviation;
-        getForecastFromApi(abbreviation)
+        getForecastFromApi(abbreviation);
     }, [props.match.params.abbreviation]);
 
     useInterval(() => getForecastFromApi(props.match.params.abbreviation), updateFrequencySeconds * 1000);
@@ -69,6 +70,7 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
                 setLastUpdate(new Date());
                 setUpdating(false);
                 setLoading(false);
+                localStorage.setItem('mostRecentLine', response.station.line.toString());
             })
             .catch(() => {
                 console.error("Something went wrong fetching real time information.");
@@ -85,14 +87,19 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
         setSecondsSinceUpdate(secondsToUpdate)
     }
 
+    function favouriteStationClick() {
+        props.favouriteClick(forecast.station)
+    }
+
     return (
         <div className="forecast">
-            <ForecastHeader
+            <PageHeader
+                headerTitle={(loading && props.match.params.abbreviation) || forecast.station.name}
+                headerTitleIrish={(!loading && forecast.station.irishName) || undefined}
+                color={(loading && '#424242') || (forecast.station.line.toString() === Line[Line.Red] ? '#f44336' : '#00af00')}
                 loading={loading}
-                station={forecast.station}
-                abbreviation={props.match.params.abbreviation}
-                favouriteStations={props.favouriteStations}
-                favouriteClick={props.favouriteClick} />
+                isFavourite={props.favouriteStations.filter(s => s.abbreviation === props.match.params.abbreviation).length !== 0}
+                favouriteClick={favouriteStationClick} />
 
             <main>
                 {loading && !error &&

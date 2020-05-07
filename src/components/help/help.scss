@@ -1,1 +1,30 @@
+.language-selector {
+    label {
+        // display: none;
+        padding: 0.5em 1rem;
+        border: 2px solid var(--secondary-text-colour);
+        margin-right: 0.5rem;
 
+        input[type="radio"] {
+            position: absolute;
+            clip: rect(0, 0, 0, 0);
+            pointer-events: none;
+        }
+
+        &.active, &:hover {
+            background: var(--hover-colour);
+        }
+    }
+}
+
+.btn-group-toggle {
+    > .btn,
+    > .btn-group > .btn {
+        input[type="radio"],
+        input[type="checkbox"] {
+            position: absolute;
+            clip: rect(0, 0, 0, 0);
+            pointer-events: none;
+        }
+    }
+}

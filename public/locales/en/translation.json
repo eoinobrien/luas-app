@@ -37,5 +37,6 @@
     "last-tram-is-at": "Last tram is at {{lastTram}}",
     "no-trams-in-this-direction": "Trams do not run in this direction.",
     "services-resume-at": "Services resume in this direction at {{startTime}}",
-    "no-trams-forecast": "No trams forecast"
+    "no-trams-forecast": "No trams forecast",
+    "settings": "Settings"
 }
