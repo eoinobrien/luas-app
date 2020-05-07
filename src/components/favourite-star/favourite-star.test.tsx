@@ -3,6 +3,12 @@ import renderer from 'react-test-renderer';
 import { shallow, mount } from 'enzyme';
 import FavouriteStar from './favourite-star';
 
+test('renders without crashing', () => {
+    const mockFavouriteClick = jest.fn(x => console.log("clicked"));
+
+    shallow(<FavouriteStar isFavourite={false} favouriteClick={mockFavouriteClick} name="name" />);
+    shallow(<FavouriteStar isFavourite={true} favouriteClick={mockFavouriteClick} name="name" />);
+});
 
 test('FavouriteStar > Matches snapshot', () => {
     const mockFavouriteClick = jest.fn(x => console.log("clicked"));
