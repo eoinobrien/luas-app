@@ -1,34 +1,41 @@
 .navbar {
-   align-items: center;
-   background: var(--background);
-   border-top: 2px solid var(--secondary-text-colour);
-   bottom: 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 
-   display: flex;
-   height: 4rem;
-   max-width: 784px;
+    display: flex;
+    justify-content: center;
 
-   overflow: hidden;
-   padding: 0.25rem 0.5rem;
-   position: fixed;
+    background: var(--background);
 
-   width: 100%;
+    nav {
+        border-top: 2px solid var(--secondary-text-colour);
 
-   div {
-      height: 100%;
+        display: flex;
+        height: 4rem;
+        max-width: 800px;
 
-      h1 {
-         font-size: 0.7rem;
-         margin-top: 0;
-         text-transform: uppercase;
-      }
+        overflow: hidden;
+        padding: 0.25rem 0.5rem;
 
-      &.line-section {
-         margin-right: 0.5rem;
-      }
+        width: 100%;
 
-      .line-section-links p {
-          margin: 0;
-      }
-   }
+        div {
+            height: 100%;
+
+            h1 {
+                font-size: 0.7rem;
+                margin-top: 0;
+                text-transform: uppercase;
+            }
+
+            &.line-section {
+                margin-right: 0.5rem;
+            }
+
+            .line-section-links p {
+                margin: 0;
+            }
+        }
+    }
 }
