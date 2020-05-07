@@ -25,6 +25,11 @@
             "now": "Ag Uasdátú...",
             "in": "Ag nuashonrú i gceann {{count}} soicind",
             "in_1": "Ag nuashonrú i soicind amháin"
+        },
+        "status" : "Staid",
+        "operatingNormally" : {
+            "green" : "Seirbhísí Líne Ghlas a oibríonn de ghnáth",
+            "red" : "Seirbhísí Líne Dhearga  a oibríonn de ghnáth"
         }
     },
     "operating-hours": "Uaireanta Oibriúcháin",

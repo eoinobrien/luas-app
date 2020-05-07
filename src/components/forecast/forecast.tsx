@@ -91,6 +91,15 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
         props.favouriteClick(forecast.station)
     }
 
+    function getStatusMessage(line: string, message: string): string {
+        if (message.toLowerCase() === line + " line services operating normally")
+        {
+            return t(`forecast.operatingNormally.${line}`);
+        }
+
+        return message;
+    }
+
     return (
         <div className="forecast">
             <PageHeader
@@ -126,7 +135,8 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
                         </div>
 
                         <section className="message">
-                            <h3 className="message">{forecast.message}</h3>
+                            <h3>{t('forecast.status')}</h3>
+                            <p>{getStatusMessage(forecast.station.line.toString().toLowerCase(), forecast.message)}</p>
                         </section>
 
                         <OperatingHours operatingHours={forecast.station.operatingHours} line={forecast.station.line.toString().toLowerCase()} />
