@@ -1,10 +1,11 @@
 button.favourite-star {
-   background: none;
-   border: none;
-   margin-left: auto;
+    background: none;
+    border: none;
+    margin-left: auto;
+    padding: 0;
 
-   svg {
-      color: var(--secondary-text-colour);
-      width: 2rem;
-   }
+    svg {
+        color: var(--secondary-text-colour);
+        width: 2rem;
+    }
 }
