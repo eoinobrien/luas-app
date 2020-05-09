@@ -37,8 +37,8 @@
     "operating-hours-times": "from {{firstTram}} to {{lastTram}}",
     "days": {
         "weekdays": "Weekdays",
-        "saturday": "Saturday",
-        "sunday": "Sunday"
+        "saturday": "Saturdays",
+        "sunday": "Sundays and Bank Holidays"
     },
     "last-tram-is-at": "Last tram is at {{lastTram}}",
     "no-trams-in-this-direction": "Trams do not run in this direction.",

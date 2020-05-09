@@ -37,8 +37,8 @@
     "operating-hours-times": "ó {{firstTram}} go {{lastTram}}",
     "days": {
         "weekdays": "Laethanta na seachtaine",
-        "saturday": "Satharn",
-        "sunday": "Domhnach"
+        "saturday": "Dé Satharn",
+        "sunday": "Dé Domhnach agus Laethanta Saoire Bainc"
     },
     "last-tram-is-at": "Tá an tram deireanach ag {{lastTram}}",
     "no-trams-in-this-direction": "Ní ritheann tramanna sa treo seo.",
