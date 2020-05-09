@@ -104,7 +104,6 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
     function getWalkingTransferStations(walkingTransfers: string[]): Station[] {
         var transferStations = walkingTransfers
             .map(walkingTransfer => props.allStations.filter(s => s.abbreviation === walkingTransfer));
-        console.log(transferStations);
 
         return ([] as Station[]).concat(...transferStations);
     }

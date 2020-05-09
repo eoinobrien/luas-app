@@ -12,7 +12,7 @@ interface FavouriteStarProps {
 const FavouriteStar: React.FC<FavouriteStarProps> = (props: FavouriteStarProps) => {
    return (
       <button
-         className="favourite-star"
+         className={`favourite-star ${props.isFavourite ? 'favourited': ''}`}
          aria-label={"Favourite " + props.name}
          onClick={() => props.favouriteClick()}>
          {props.isFavourite ? <StarFill style={{ color: '#fdd835' }} /> : <Star />}

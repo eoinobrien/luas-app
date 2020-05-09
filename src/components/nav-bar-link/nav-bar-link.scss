@@ -13,6 +13,10 @@
             font-weight: 700;
         }
 
+        &:hover, &:focus {
+            background: var(--hover-colour);
+        }
+
         :last-child {
             margin-right: 0;
         }

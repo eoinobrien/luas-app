@@ -8,4 +8,10 @@ button.favourite-star {
         color: var(--secondary-text-colour);
         width: 2rem;
     }
+
+    &:hover svg,
+    &:focus svg,
+    &:focus-within svg {
+        color: var(--favourite-yellow);
+    }
 }
