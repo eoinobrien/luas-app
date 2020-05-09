@@ -15,17 +15,17 @@
         height: 4rem;
         max-width: 800px;
 
-        overflow: hidden;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
         padding: 0.25rem 0.5rem;
 
         width: 100%;
 
         div {
-            height: 100%;
-
             h1 {
                 font-size: 0.7rem;
-                margin-top: 0;
+                margin: 0;
                 text-transform: uppercase;
             }
 
@@ -33,8 +33,13 @@
                 margin-right: 0.5rem;
             }
 
-            .line-section-links p {
-                margin: 0;
+            .line-section-links {
+                display: flex;
+                white-space: nowrap;
+
+                p {
+                    margin: 0;
+                }
             }
         }
     }

@@ -1,20 +1,22 @@
 .navbar-link {
-   border-bottom: 3px solid var(--main-text-colour);
-   color: var(--main-text-colour);
-   margin-right: 0.5rem;
-   padding: 0.5rem;
-   text-decoration: none;
+    display: grid;
+    justify-content: flex-end;
 
-   vertical-align: middle;
+    a {
+        border-bottom: 3px solid var(--main-text-colour);
+        color: var(--main-text-colour);
+        margin-right: 0.5rem;
+        padding: 0.5rem;
+        text-decoration: none;
 
-   &.line {
-      font-weight: 700;
-   }
+        vertical-align: middle;
 
-   // &.stations {
-   // }
+        &.line {
+            font-weight: 700;
+        }
 
-   :last-child {
-      margin-right: 0;
-   }
+        :last-child {
+            margin-right: 0;
+        }
+    }
 }
