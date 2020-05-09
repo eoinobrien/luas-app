@@ -30,7 +30,7 @@ const PrivacyPrompt: React.FC<PrivacyPromptProps> = (props: PrivacyPromptProps) 
             <div className="privacy-prompt">
                <h1>{props.header}</h1>
                <p>{props.bodyText}</p>
-               <p><Link to={`/${i18n.language}/help`} aria-label="Learn More">You can find more information and update your preferences on our help page</Link></p>
+               <p><Link to={`/help`} aria-label="Learn More">You can find more information and update your preferences on our help page</Link></p>
                <button onClick={() => setCookie()}>Accept</button>
                <button onClick={() => removeCookie()}>Not now</button>
             </div>

@@ -28,6 +28,7 @@
             "in_1": "Updating in {{count}} second"
         },
         "status" : "Status",
+        "walkingTransfer" : "Walking Transfer",
         "operatingNormally" : {
             "green" : "Green Line services operating normally",
             "red" : "Red Line services operating normally"

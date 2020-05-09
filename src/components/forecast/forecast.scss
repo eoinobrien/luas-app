@@ -1,17 +1,22 @@
 .forecast {
-   main {
-      padding: 0.5rem;
+    main {
+        padding: 0.5rem;
 
-      .message {
-         margin: 3rem 0;
-      }
 
-      .updating {
-         font-size: 0.8rem;
-         font-style: italic;
-         font-weight: 400;
-         text-align: right;
-         margin: 0;
-      }
-   }
+        section {
+            margin: 3rem 0;
+        }
+
+        .walking-transfer {
+            display: inline-flex;
+        }
+
+         .updating {
+            font-size: 0.8rem;
+            font-style: italic;
+            font-weight: 400;
+            text-align: right;
+            margin: 0;
+        }
+    }
 }

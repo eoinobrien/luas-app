@@ -13,42 +13,19 @@ interface StationListRouteProps {
 interface StationListProps extends RouteComponentProps<StationListRouteProps> {
     favouriteClick: any;
     favouriteStations: Station[];
+    allStations: Station[];
+    loading: boolean;
+    error: boolean;
 }
 
 const StationList: React.FC<StationListProps> = (props: StationListProps) => {
     const cookiesAccepted = document.cookie.split(';').some((item) => item.trim().startsWith('cookies-accepted-all=true'));
-    const [stations, setStations] = useState<Station[]>([] as Station[]);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<boolean>(false);
     const { t, i18n } = useTranslation();
 
     useEffect(() => {
         if (cookiesAccepted) {
             localStorage.setItem('mostRecentLine', props.match.params.line);
-            const localStorageStations: string = localStorage.getItem('allStations') || "";
-
-            if (localStorageStations !== "") {
-                const allStations: Station[] = JSON.parse(localStorageStations);
-
-                setLoading(false);
-                setStations(allStations);
-            }
         }
-
-        fetch(`https://luasapifunction.azurewebsites.net/api/stations`)
-            .then(response => response.json())
-            .then(response => {
-                setLoading(false);
-                setStations(response);
-
-                if (cookiesAccepted) {
-                    localStorage.setItem('allStations', JSON.stringify(response));
-                }
-            })
-            .catch(() => {
-                setLoading(false);
-                setError(true);
-            });
     }, [cookiesAccepted, props.match.params.line]);
 
     return (
@@ -58,15 +35,15 @@ const StationList: React.FC<StationListProps> = (props: StationListProps) => {
                 style={{ borderColor: '#424242' }}>
                 <h1>{t('luasDueNow')}</h1>
 
-                    <Link to={`/${i18n.language}/help`} aria-label="Help and Settings"><MoreIcon /></Link>
+                <Link to={`/help`} aria-label="Help and Settings"><MoreIcon /></Link>
             </header>
-            {loading && <h2>{t('loading')}</h2>}
+            {props.loading && <h2>{t('loading')}</h2>}
             <nav className="list">
                 <ul>
-                    {error && <h2>{t('error:loading')}</h2>}
+                    {props.error && <h2>{t('error:loading')}</h2>}
                     {
-                        !loading &&
-                        stations
+                        !props.loading &&
+                        props.allStations
                             .filter(s => s.line.toString().toLowerCase() === props.match.params.line.toString().toLowerCase())
                             .map(station =>
                                 <StationListRowItem

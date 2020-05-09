@@ -20,8 +20,8 @@ const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
                     <h1>{t('lines.line')}</h1>
 
                     <div className="line-section-links">
-                        <NavBarLink className="line" value={t('lines.red.colour')} to={`/${i18n.language}/line/Red`} colour="#f44336" />
-                        <NavBarLink className="line" value={t('lines.green.colour')} to={`/${i18n.language}/line/Green`} colour="#00af00" />
+                        <NavBarLink className="line" value={t('lines.red.colour')} to={`/line/Red`} colour="#f44336" />
+                        <NavBarLink className="line" value={t('lines.green.colour')} to={`/line/Green`} colour="#00af00" />
                     </div>
                 </div>
 
@@ -35,7 +35,7 @@ const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
                                 <NavBarLink
                                     className="stations"
                                     value={i18n.language === "ga" ? station.irishName : station.name}
-                                    to={`/${i18n.language}/station/${station.abbreviation}`}
+                                    to={`/station/${station.abbreviation}`}
                                     colour={station.line.toString() === Line[Line.Red] ? '#f44336' : '#00af00'}
                                     key={station.abbreviation} />
                             )}

@@ -77,7 +77,6 @@ const timeToLastTram = (lastTram: Moment) => {
     let now: Moment = moment();
     let lastTramDifference = now.diff(lastTram, 'hours', true);
 
-    console.log("Time until last tram: " + lastTramDifference + " hours");
     return lastTramDifference;
 }
 

@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './forecast.scss';
 import DirectionForecast from '../direction-forecast/direction-forecast';
 import OperatingHours from '../operating-hours/operating-hours';
 import PageHeader from '../page-header/page-header';
+import NavBarLink from '../nav-bar-link/nav-bar-link';
 import StationForecast from '../../models/StationForecast';
 import Station from '../../models/Station';
 import Line from '../../models/Line';
@@ -16,6 +17,7 @@ interface ForecastRouteProps {
 interface ForecastProps extends RouteComponentProps<ForecastRouteProps> {
     favouriteClick: any;
     favouriteStations: Station[];
+    allStations: Station[];
 }
 
 
@@ -49,7 +51,7 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
     const [secondsSinceUpdate, setSecondsSinceUpdate] = useState<number>(0);
     const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
     var updateFrequencySeconds: number = 15;
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     useEffect(() => {
         let abbreviation: string = props.match.params.abbreviation;
@@ -92,12 +94,19 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
     }
 
     function getStatusMessage(line: string, message: string): string {
-        if (message.toLowerCase() === line + " line services operating normally")
-        {
+        if (message.toLowerCase() === line + " line services operating normally") {
             return t(`forecast.operatingNormally.${line}`);
         }
 
         return message;
+    }
+
+    function getWalkingTransferStations(walkingTransfers: string[]): Station[] {
+        var transferStations = walkingTransfers
+            .map(walkingTransfer => props.allStations.filter(s => s.abbreviation === walkingTransfer));
+        console.log(transferStations);
+
+        return ([] as Station[]).concat(...transferStations);
     }
 
     return (
@@ -134,10 +143,28 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
                                 operatingHours={forecast.station.operatingHours} />
                         </div>
 
-                        <section className="message">
+                        <section>
                             <h3>{t('forecast.status')}</h3>
                             <p>{getStatusMessage(forecast.station.line.toString().toLowerCase(), forecast.message)}</p>
                         </section>
+
+                        {
+                            forecast.station.walkingTransfer.length > 0 &&
+                            <section>
+                                <h3>{t('forecast.walkingTransfer')}</h3>
+                                <div className="walking-transfer">
+                                    {
+                                        getWalkingTransferStations(forecast.station.walkingTransfer)
+                                            .map(station =>
+                                                <NavBarLink
+                                                    value={i18n.language === "ga" ? station.irishName : station.name}
+                                                    to={`/station/${station.abbreviation}`}
+                                                    colour={station.line.toString() === Line[Line.Red] ? '#f44336' : '#00af00'}
+                                                    key={station.abbreviation} />)
+                                    }
+                                </div>
+                            </section>
+                        }
 
                         <OperatingHours operatingHours={forecast.station.operatingHours} line={forecast.station.line.toString().toLowerCase()} />
                     </div>}

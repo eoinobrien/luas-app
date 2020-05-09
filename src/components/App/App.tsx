@@ -15,7 +15,11 @@ import { useTranslation } from 'react-i18next';
 import PrivacyPrompt from '../privacy-prompt/privacy-prompt';
 
 const App: React.FC = () => {
+    const cookiesAccepted = document.cookie.split(';').some((item) => item.trim().startsWith('cookies-accepted-all=true'));
     const [favouriteStations, setFavouriteStations] = useState<Station[]>([] as Station[]);
+    const [stations, setStations] = useState<Station[]>([] as Station[]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<boolean>(false);
     const { i18n } = useTranslation();
     let showFunctionalPrompt: boolean = false;
 
@@ -48,6 +52,34 @@ const App: React.FC = () => {
         }
     }, []);
 
+    useEffect(() => {
+        if (cookiesAccepted) {
+            const localStorageStations: string = localStorage.getItem('allStations') || "";
+
+            if (localStorageStations !== "") {
+                const allStations: Station[] = JSON.parse(localStorageStations);
+
+                setLoading(false);
+                setStations(allStations);
+            }
+        }
+
+        fetch(`https://luasapifunction.azurewebsites.net/api/stations`)
+            .then(response => response.json())
+            .then(response => {
+                setLoading(false);
+                setStations(response);
+
+                if (cookiesAccepted) {
+                    localStorage.setItem('allStations', JSON.stringify(response));
+                }
+            })
+            .catch(() => {
+                setLoading(false);
+                setError(true);
+            });
+    }, [cookiesAccepted]);
+
     const getLanguageFromLocalStorage = () => {
         return localStorage.getItem('i18nextLng') || "en";
     }
@@ -68,11 +100,11 @@ const App: React.FC = () => {
                     <Switch>
                         <Route
                             path="/:lng(en|ga)/station/:abbreviation"
-                            render={() => <Forecast favouriteClick={addToFavouriteStations} favouriteStations={favouriteStations} />} />
+                            render={() => <Forecast favouriteClick={addToFavouriteStations} favouriteStations={favouriteStations} allStations={stations} />} />
 
                         <Route
                             path="/:lng(en|ga)/line/:line"
-                            render={() => <StationList favouriteClick={addToFavouriteStations} favouriteStations={favouriteStations} />} />
+                            render={() => <StationList favouriteClick={addToFavouriteStations} favouriteStations={favouriteStations} allStations={stations} loading={loading} error={error} />} />
 
                         <Route path="/:lng(en|ga)/help">
                             <Help />

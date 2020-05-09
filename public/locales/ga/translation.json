@@ -28,6 +28,7 @@
             "in_1": "Ag nuashonrú i soicind amháin"
         },
         "status" : "Staid",
+        "walkingTransfer" : "Aistriú Siúil",
         "operatingNormally" : {
             "green" : "Seirbhísí Líne Ghlas a oibríonn de ghnáth",
             "red" : "Seirbhísí Líne Dhearga  a oibríonn de ghnáth"
