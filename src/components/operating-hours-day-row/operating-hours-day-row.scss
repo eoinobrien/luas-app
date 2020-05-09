@@ -18,6 +18,10 @@
         svg {
             margin-left: auto;
         }
+
+        &.open {
+            border-bottom: 2px solid var(--secondary-text-colour);
+        }
     }
 
     ul {

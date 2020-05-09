@@ -24,7 +24,7 @@ const OperatingHoursDayRow: React.FC<OperatingHoursDayRowProps> = (props: Operat
 
     return (
         <div className="operating-hours-day-row">
-            <div className="op-hours-header" onClick={() => toggle(!open)}>
+            <div className={`op-hours-header ${open ? 'open' : ''}`} onClick={() => toggle(!open)}>
                 <h4>{props.day}</h4>
                 {open ? <ChevronUp /> : <ChevronDown />}
             </div>
