@@ -1,22 +1,30 @@
 .page-header {
-   border-bottom: 0.75rem solid var(--main-text-colour);
-   display: flex;
-   margin: 0;
-   padding: 0.5rem;
+    border-bottom: 0.75rem solid var(--main-text-colour);
+    display: flex;
+    margin: 0;
+    padding: 0.5rem;
 
-   h1 {
-      margin: 0;
-      font-size: 1.8rem;
+    div {
+        margin: auto;
 
-      span {
-         font-style: italic;
-         font-weight: 400;
-      }
-   }
+        &.title {
+            flex-grow: 5;
+        }
+    }
+
+    h1 {
+        margin: 0;
+        font-size: 1.8rem;
+
+        span {
+            font-style: italic;
+            font-weight: 400;
+        }
+    }
 }
 
 .back-arrow svg {
-   color: var(--main-text-colour);
-   margin-right: 0.5rem;
-   width: 2rem;
+    color: var(--main-text-colour);
+    margin-right: 0.5rem;
+    width: 2rem;
 }
