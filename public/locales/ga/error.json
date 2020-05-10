@@ -1,3 +1,5 @@
 {
-    "loading" : "Earráid ag sonraí á luchtú."
+    "loading" : "Earráid ag sonraí á luchtú.",
+    "loadingAndUpdating": "Earráid ag sonraí á luchtú. Ag nuashonrú i gceann {{count}} soicind",
+    "loadingAndUpdating_1": "Earráid ag sonraí á luchtú. Ag nuashonrú i soicind amháin"
 }

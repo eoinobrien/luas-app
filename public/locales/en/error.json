@@ -1,3 +1,5 @@
 {
-    "loading" : "Error loading data."
+    "loading" : "Error loading data.",
+    "loadingAndUpdating": "Error loading data. Updating in {{count}} seconds",
+    "loadingAndUpdating_1": "Error loading data. Updating in {{count}} second"
 }

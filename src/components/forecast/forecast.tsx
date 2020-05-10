@@ -49,8 +49,9 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
     const [forecast, setForecast] = useState<StationForecast>({} as StationForecast);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<boolean>(false);
+    const [haveForecast, setHaveForecast] = useState<boolean>(false);
     const [updating, setUpdating] = useState<boolean>(false);
-    const [secondsSinceUpdate, setSecondsSinceUpdate] = useState<number>(0);
+    const [secondsUntilUpdate, setSecondsUntilUpdate] = useState<number>(0);
     const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
     var updateFrequencySeconds: number = 15;
     const { t, i18n } = useTranslation();
@@ -75,13 +76,14 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
                 setUpdating(false);
                 setLoading(false);
                 setError(false);
+                setHaveForecast(true);
                 localStorage.setItem('mostRecentLine', response.station.line.toString());
             })
             .catch(() => {
                 console.error("Something went wrong fetching real time information.");
 
                 setError(true);
-                // setLastUpdate(new Date());
+                setLastUpdate(new Date());
                 setLoading(false);
                 setUpdating(false);
             });
@@ -89,7 +91,7 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
 
     function getSecondsToUpdate(): void {
         let secondsToUpdate: number = updateFrequencySeconds - Math.ceil((Date.now() - lastUpdate.getTime()) / 1000);
-        setSecondsSinceUpdate(secondsToUpdate)
+        setSecondsUntilUpdate(secondsToUpdate)
     }
 
     function favouriteStationClick() {
@@ -125,12 +127,18 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
                 {loading && !error &&
                     <h1>{t('loading')}</h1>}
 
-                {error &&
+                {error && !haveForecast &&
                     <h1>{t('error:loading')}</h1>}
 
-                {!loading && !error &&
+                {haveForecast &&
                     <div>
-                        <h4 className="updating">{updating ? t('forecast.updating.now') : t('forecast.updating.in', { count: secondsSinceUpdate })}</h4>
+                        <h4 className="updating">
+                            {updating ?
+                                t('forecast.updating.now') :
+                                (error ?
+                                    t('error:loadingAndUpdating', { count: secondsUntilUpdate }) :
+                                    t('forecast.updating.in', { count: secondsUntilUpdate }))}
+                        </h4>
                         <div>
                             <DirectionForecast
                                 isInbound={true}
