@@ -32,6 +32,11 @@
         "operatingNormally" : {
             "green" : "Green Line services operating normally",
             "red" : "Red Line services operating normally"
+        },
+        "facilities" : {
+            "title": "Station Facilities",
+            "bike": "Bicycle parking available",
+            "car": "Car parking available"
         }
     },
     "operating-hours": "Operating Hours",

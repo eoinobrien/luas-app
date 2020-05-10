@@ -32,6 +32,11 @@
         "operatingNormally" : {
             "green" : "Seirbhísí Líne Ghlas a oibríonn de ghnáth",
             "red" : "Seirbhísí Líne Dhearga  a oibríonn de ghnáth"
+        },
+        "facilities" : {
+            "title": "Áiseanna Stáisiúin",
+            "bike": "Páirceáil rothair ar fáil",
+            "car": "Páirceáil gluaisteán ar fáil"
         }
     },
     "operating-hours": "Uaireanta Oibriúcháin",
