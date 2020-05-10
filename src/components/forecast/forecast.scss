@@ -2,7 +2,6 @@
     main {
         padding: 0.5rem;
 
-
         .section {
             margin: 3rem 0;
         }
@@ -11,12 +10,26 @@
             display: inline-flex;
         }
 
-         .updating {
+        .updating {
             font-size: 0.8rem;
             font-style: italic;
             font-weight: 400;
             text-align: right;
             margin: 0;
+        }
+
+        .facility {
+            display: flex;
+
+            svg {
+                height: 2rem;
+                width: 2rem;
+                margin-right: 1rem;
+            }
+
+            span {
+                margin: auto 0;
+            }
         }
     }
 }

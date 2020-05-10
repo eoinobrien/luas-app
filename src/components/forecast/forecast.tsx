@@ -9,6 +9,8 @@ import NavBarLink from '../nav-bar-link/nav-bar-link';
 import StationForecast from '../../models/StationForecast';
 import Station from '../../models/Station';
 import Line from '../../models/Line';
+import { ReactComponent as Bike } from './bike.svg';
+import { ReactComponent as Car } from './car.svg';
 
 interface ForecastRouteProps {
     abbreviation: string;
@@ -166,6 +168,22 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
                         }
 
                         <OperatingHours operatingHours={forecast.station.operatingHours} line={forecast.station.line.toString().toLowerCase()} />
+
+                        {(forecast.station.hasCycleParking || forecast.station.hasParking) &&
+                            <section className="section">
+                                <h3>Station Facilities</h3>
+                                {forecast.station.hasCycleParking &&
+                                    <div className="facility">
+                                        <Bike />
+                                        <span>Bicycle Parking Available</span>
+                                    </div>}
+                                {forecast.station.hasParking &&
+                                    <div className="facility">
+                                        <Car />
+                                        <span>Car Parking Available</span>
+                                    </div>}
+                            </section>
+                        }
                     </div>}
             </main>
         </div>
