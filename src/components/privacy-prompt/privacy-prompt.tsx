@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import './privacy-prompt.scss';
 
 interface PrivacyPromptProps {
@@ -12,7 +11,6 @@ interface PrivacyPromptProps {
 const PrivacyPrompt: React.FC<PrivacyPromptProps> = (props: PrivacyPromptProps) => {
    const [showPrompt, setPromptVisibility] = useState<boolean>(
       !document.cookie.split(';').some((item) => item.trim().startsWith(props.cookieName + '=true')));
-   const { i18n } = useTranslation();
 
    const setCookie = () => {
       document.cookie = props.cookieName + '=true;max-age=31536000;';

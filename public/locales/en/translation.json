@@ -1,5 +1,5 @@
 {
-    "luasDueNow" : "Luas Due Now",
+    "luasDueNow": "Luas Due Now",
     "lines": {
         "line": "line",
         "red": {
@@ -20,20 +20,21 @@
     "forecast": {
         "time": {
             "due": "Due",
-            "minutes": "{{minutes}} mins"
+            "in": "{{count}} min",
+            "in_plural": "{{count}} mins"
         },
         "updating": {
             "now": "Updating...",
-            "in": "Updating in {{count}} seconds",
-            "in_1": "Updating in {{count}} second"
+            "in": "Updating in {{count}} second",
+            "in_plural": "Updating in {{count}} seconds"
         },
-        "status" : "Status",
-        "walkingTransfer" : "Walking Transfer",
-        "operatingNormally" : {
-            "green" : "Green Line services operating normally",
-            "red" : "Red Line services operating normally"
+        "status": "Status",
+        "walkingTransfer": "Walking Transfer",
+        "operatingNormally": {
+            "green": "Green Line services operating normally",
+            "red": "Red Line services operating normally"
         },
-        "facilities" : {
+        "facilities": {
             "title": "Station Facilities",
             "bike": "Bicycle parking available",
             "car": "Car parking available"

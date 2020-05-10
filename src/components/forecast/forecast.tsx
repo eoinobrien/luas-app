@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './forecast.scss';
 import DirectionForecast from '../direction-forecast/direction-forecast';

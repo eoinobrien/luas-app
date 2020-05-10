@@ -1,5 +1,5 @@
 {
-    "luasDueNow" : "Luas Dlite Anois",
+    "luasDueNow": "Luas Dlite Anois",
     "lines": {
         "line": "líne",
         "red": {
@@ -20,20 +20,21 @@
     "forecast": {
         "time": {
             "due": "Go luath",
-            "minutes": "{{minutes}} nóiméad"
+            "in": "{{count}} nóiméad",
+            "in_plural": "{{count}} nóiméad"
         },
         "updating": {
             "now": "Ag Uasdátú...",
-            "in": "Ag nuashonrú i gceann {{count}} soicind",
-            "in_1": "Ag nuashonrú i soicind amháin"
+            "in": "Ag nuashonrú i soicind amháin",
+            "in_plural": "Ag nuashonrú i gceann {{count}} soicind"
         },
-        "status" : "Staid",
-        "walkingTransfer" : "Aistriú Siúil",
-        "operatingNormally" : {
-            "green" : "Seirbhísí Líne Ghlas a oibríonn de ghnáth",
-            "red" : "Seirbhísí Líne Dhearga  a oibríonn de ghnáth"
+        "status": "Staid",
+        "walkingTransfer": "Aistriú Siúil",
+        "operatingNormally": {
+            "green": "Seirbhísí Líne Ghlas a oibríonn de ghnáth",
+            "red": "Seirbhísí Líne Dhearga  a oibríonn de ghnáth"
         },
-        "facilities" : {
+        "facilities": {
             "title": "Áiseanna Stáisiúin",
             "bike": "Páirceáil rothair ar fáil",
             "car": "Páirceáil gluaisteán ar fáil"

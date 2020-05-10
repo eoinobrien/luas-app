@@ -102,7 +102,7 @@ const DirectionForecast: React.FC<DirectionForecastProps> = (props: DirectionFor
     const { t, i18n } = useTranslation();
 
     const minutesDue = (minutes: number, due: boolean) => {
-        return due ? t('forecast.time.due') : t('forecast.time.minutes', { minutes: minutes });
+        return due ? t('forecast.time.due') : t('forecast.time.in', { count: minutes });
     }
 
     const getMinutes = (minutes: number, due: boolean) => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { RouteComponentProps, withRouter, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './station-list.scss';
@@ -20,7 +20,7 @@ interface StationListProps extends RouteComponentProps<StationListRouteProps> {
 
 const StationList: React.FC<StationListProps> = (props: StationListProps) => {
     const cookiesAccepted = document.cookie.split(';').some((item) => item.trim().startsWith('cookies-accepted-all=true'));
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (cookiesAccepted) {
