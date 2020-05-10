@@ -74,6 +74,7 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
                 setLastUpdate(new Date());
                 setUpdating(false);
                 setLoading(false);
+                setError(false);
                 localStorage.setItem('mostRecentLine', response.station.line.toString());
             })
             .catch(() => {

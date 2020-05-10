@@ -68,6 +68,7 @@ const App: React.FC = () => {
             .then(response => response.json())
             .then(response => {
                 setLoading(false);
+                setError(false);
                 setStations(response);
 
                 if (cookiesAccepted) {
