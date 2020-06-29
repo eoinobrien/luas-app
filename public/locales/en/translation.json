@@ -51,5 +51,10 @@
     "no-trams-in-this-direction": "Trams do not run in this direction.",
     "services-resume-at": "Services resume in this direction at {{startTime}}",
     "no-trams-forecast": "No trams forecast",
-    "settings": "Settings"
+    "settings": "Settings",
+    "covid": {
+        "masks-mandatory": "Face Coverings are mandatory on Public Transport.",
+        "help-stop-the-spread": "Help stop the spread of Covid 19, please wear a mask."
+    },
+    "learn-more": "Learn more."
 }

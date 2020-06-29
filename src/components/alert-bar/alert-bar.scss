@@ -1,0 +1,23 @@
+.alert-bar {
+    background: #feeb00;
+    color: #212121;
+    padding: 1rem;
+    font-size: 0.5rem;
+    display: flex;
+    align-items: center;
+
+    svg {
+        margin-right: 0.5rem;
+    }
+
+    h1 {
+        display: inline;
+        margin: 0;
+        vertical-align: middle;
+        font-weight: 500;
+
+        b {
+            font-weight: 700;
+        }
+    }
+}

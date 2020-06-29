@@ -51,5 +51,10 @@
     "no-trams-in-this-direction": "Ní ritheann tramanna sa treo seo.",
     "services-resume-at": "Seirbhísí atosú sa treo seo ag {{startTime}}",
     "no-trams-forecast": "Ní thuar tramanna",
-    "settings": "Socruithe"
+    "settings": "Socruithe",
+    "covid": {
+        "masks-mandatory": "Tá Clúdaigh Aghaidh éigeantach ar Iompar Poiblí.",
+        "help-stop-the-spread": "Cuidigh le leathadh Covid 19 a stopadh, caith masc le do thoil."
+    },
+    "learn-more": "Tuilleadh eolais."
 }
