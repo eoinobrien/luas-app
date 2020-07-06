@@ -20,14 +20,11 @@ interface StationListProps extends RouteComponentProps<StationListRouteProps> {
 }
 
 const StationList: React.FC<StationListProps> = (props: StationListProps) => {
-    const cookiesAccepted = document.cookie.split(';').some((item) => item.trim().startsWith('cookies-accepted-all=true'));
     const { t } = useTranslation();
 
     useEffect(() => {
-        if (cookiesAccepted) {
-            localStorage.setItem('mostRecentLine', props.match.params.line);
-        }
-    }, [cookiesAccepted, props.match.params.line]);
+        localStorage.setItem('mostRecentLine', props.match.params.line);
+    }, [props.match.params.line]);
 
     return (
         <div className="station-list">

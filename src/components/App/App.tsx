@@ -12,22 +12,17 @@ import Station from '../../models/Station';
 import NavBar from '../nav-bar/nav-bar';
 import Help from '../help/help';
 import { useTranslation } from 'react-i18next';
-import PrivacyPrompt from '../privacy-prompt/privacy-prompt';
 
 const App: React.FC = () => {
-    const cookiesAccepted = document.cookie.split(';').some((item) => item.trim().startsWith('cookies-accepted-all=true'));
     const [favouriteStations, setFavouriteStations] = useState<Station[]>([] as Station[]);
     const [stations, setStations] = useState<Station[]>([] as Station[]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<boolean>(false);
     const { i18n } = useTranslation();
-    let showFunctionalPrompt: boolean = false;
 
     document.getElementsByTagName("html")[0].setAttribute("lang", i18n.language);
 
     const addToFavouriteStations = (station: Station) => {
-        showFunctionalPrompt = true;
-
         let updatedFavouriteStations: Station[];
 
         if (favouriteStations.filter(s => s.abbreviation === station.abbreviation).length === 0) {
@@ -53,15 +48,13 @@ const App: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        if (cookiesAccepted) {
-            const localStorageStations: string = localStorage.getItem('allStations') || "";
+        const localStorageStations: string = localStorage.getItem('allStations') || "";
 
-            if (localStorageStations !== "") {
-                const allStations: Station[] = JSON.parse(localStorageStations);
+        if (localStorageStations !== "") {
+            const allStations: Station[] = JSON.parse(localStorageStations);
 
-                setLoading(false);
-                setStations(allStations);
-            }
+            setLoading(false);
+            setStations(allStations);
         }
 
         fetch(`https://luasapifunction.azurewebsites.net/api/stations`)
@@ -71,15 +64,13 @@ const App: React.FC = () => {
                 setError(false);
                 setStations(response);
 
-                if (cookiesAccepted) {
-                    localStorage.setItem('allStations', JSON.stringify(response));
-                }
+                localStorage.setItem('allStations', JSON.stringify(response));
             })
             .catch(() => {
                 setLoading(false);
                 setError(true);
             });
-    }, [cookiesAccepted]);
+    }, []);
 
     const getLanguageFromLocalStorage = () => {
         return localStorage.getItem('i18nextLng') || "en";
@@ -92,11 +83,6 @@ const App: React.FC = () => {
     return (
         <Router>
             <div className="app">
-                {showFunctionalPrompt &&
-                    <PrivacyPrompt
-                        cookieName="cookies-favourites"
-                        header="Cookies"
-                        bodyText="We use cookies and local storage to remember your favourite stations and languages and to make the site faster for you." />}
                 <div className="main-content">
                     <Switch>
                         <Route

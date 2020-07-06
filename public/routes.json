@@ -1,0 +1,11 @@
+{
+    "routes": [
+      {
+        "route": "/*",
+        "serve": "/"
+      }
+    ],
+    "mimeTyes": {
+        "custom": "text/html"
+    }
+  }
