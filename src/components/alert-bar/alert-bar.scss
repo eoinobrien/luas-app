@@ -22,4 +22,9 @@
             font-weight: 700;
         }
     }
+
+    a, a:visited {
+        // fixed color as the background does not change between light and dark schemes
+        color: #1663B1;
+    }
 }

@@ -8,6 +8,7 @@
    --background: #fff;
    --hover-colour: #f5f5f5;
    --favourite-yellow: #fdd835;
+   --link-color: #14599F;
 
    @media (prefers-color-scheme: dark) {
       --main-text-colour: #fff;
@@ -17,6 +18,7 @@
       --background: #212121;
       --hover-colour: #383838;
       --favourite-yellow: #fdd835;
+      --link-color: #77B3EE;
    }
 }
 
@@ -34,4 +36,8 @@ body {
    -webkit-font-smoothing: antialiased;
    -moz-osx-font-smoothing: grayscale;
    margin: 0;
+}
+
+a, a:visited {
+   color: var(--link-color);
 }

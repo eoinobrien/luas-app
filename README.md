@@ -1,5 +1,7 @@
 # LUAS App
 
+![Azure Static Web Apps CI/CD](https://github.com/eoinobrien/luas-app/workflows/Azure%20Static%20Web%20Apps%20CI/CD/badge.svg)
+
 A super simple React Luas App.
 
 This app started as a lockdown project, I wanted to make a Luas app that was simple, quick and reliable, and I wanted to learn more about React.
