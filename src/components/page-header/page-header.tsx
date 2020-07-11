@@ -9,7 +9,6 @@ interface PageHeaderProps {
     headerTitle: string;
     headerTitleIrish?: string;
     color: string;
-    loading: boolean;
     isFavourite?: boolean;
     favouriteClick?: any;
 }
@@ -32,12 +31,11 @@ const PageHeader: React.FC<PageHeaderProps> = (props: PageHeaderProps) => {
             <div className="title">
                 <h1>
                     {(i18n.language === "ga" && props.headerTitleIrish) || props.headerTitle}
-                    <span> {!props.loading && props.headerTitleIrish !== undefined && ((i18n.language === "ga" && props.headerTitle) || props.headerTitleIrish)}</span></h1>
+                    <span> {props.headerTitleIrish !== undefined && ((i18n.language === "ga" && props.headerTitle) || props.headerTitleIrish)}</span></h1>
             </div>
 
             {props.favouriteClick !== undefined &&
                 props.isFavourite !== undefined &&
-                !props.loading &&
                 <div>
                     <FavouriteStar
                         name={(i18n.language === "ga" && props.headerTitleIrish) || props.headerTitle}

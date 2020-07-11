@@ -12,7 +12,6 @@ const Help: React.FC<{}> = () => {
                 headerTitle={t('settings')}
                 headerTitleIrish={undefined}
                 color='#424242'
-                loading={false}
                 isFavourite={false} />
 
             <section className="settings">

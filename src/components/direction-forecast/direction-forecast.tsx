@@ -14,6 +14,7 @@ interface DirectionForecastProps {
     isInbound: boolean;
     direction: string;
     forecasts: TramForecast[];
+    haveForecast: boolean;
     operatingHours: OperatingHoursModel;
 }
 
@@ -116,17 +117,21 @@ const DirectionForecast: React.FC<DirectionForecastProps> = (props: DirectionFor
                 {shouldShowLastTram && <h3 className="direction-last-tram">{t('last-tram-is-at', { lastTram: formatTime(operatingHours[0].lastTram) })}</h3>}
             </div>
             <ul>
-                {enabled && props.forecasts.length === 0 && (
+                {enabled  && !props.haveForecast && t('loading')}
+
+                {enabled  && props.haveForecast && props.forecasts.length === 0 && (
                     (areServicesFinishedForDay &&
                         <SplitListItem key="ServicesFinished" left={t('services-resume-at', { startTime: formatTime(operatingHours[1].firstTram) })} />) ||
                     (!areServicesFinishedForDay &&
                         <SplitListItem key="NoTramsForecast" left={t('no-trams-forecast')} />))}
-                {enabled &&
+
+                {enabled && props.haveForecast &&
                     props.forecasts.map((tram, index) =>
                         <SplitListItem
                             key={index}
                             left={(i18n.language === "ga" && tram.destinationStation.irishName) || tram.destinationStation.name}
                             right={getMinutes(tram.minutes, tram.isDue)} />)}
+
                 {!enabled &&
                     <SplitListItem key="NoTramsDirection" left={t('no-trams-in-this-direction')} />}
             </ul>

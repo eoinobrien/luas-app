@@ -48,14 +48,13 @@ const App: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        const localStorageStations: string = localStorage.getItem('allStations') || "";
+        let localStorageStations = getStationsFromLocalStorage();
 
-        if (localStorageStations !== "") {
-            const allStations: Station[] = JSON.parse(localStorageStations);
-
+        if (localStorageStations !== []) {
             setLoading(false);
-            setStations(allStations);
+            setStations(localStorageStations);
         }
+
 
         fetch(`https://luasapifunction.azurewebsites.net/api/stations`)
             .then(response => response.json())
@@ -72,6 +71,17 @@ const App: React.FC = () => {
             });
     }, []);
 
+    const getStationsFromLocalStorage = () => {
+        const localStorageStations: string = localStorage.getItem('allStations') || "";
+        var allStations: Station[] = [];
+
+        if (localStorageStations !== "") {
+            allStations = JSON.parse(localStorageStations);
+        }
+
+        return allStations;
+    }
+
     const getLanguageFromLocalStorage = () => {
         return localStorage.getItem('i18nextLng') || "en";
     }
@@ -87,7 +97,7 @@ const App: React.FC = () => {
                     <Switch>
                         <Route
                             path="/:lng(en|ga)/station/:abbreviation"
-                            render={() => <Forecast favouriteClick={addToFavouriteStations} favouriteStations={favouriteStations} allStations={stations} />} />
+                            render={() => <Forecast favouriteClick={addToFavouriteStations} favouriteStations={favouriteStations} allStations={getStationsFromLocalStorage()} />} />
 
                         <Route
                             path="/:lng(en|ga)/line/:line"

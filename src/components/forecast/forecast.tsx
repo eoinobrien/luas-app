@@ -48,17 +48,19 @@ function useInterval(callback: any, delay: number) {
 
 const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
     const [forecast, setForecast] = useState<StationForecast>({} as StationForecast);
-    const [loading, setLoading] = useState<boolean>(true);
+    const [stationDetails, setStationDetails] = useState<Station>(props.allStations.filter(s => s.abbreviation === props.match.params.abbreviation)[0]);
     const [error, setError] = useState<boolean>(false);
     const [haveForecast, setHaveForecast] = useState<boolean>(false);
     const [updating, setUpdating] = useState<boolean>(false);
     const [secondsUntilUpdate, setSecondsUntilUpdate] = useState<number>(0);
     const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
-    var updateFrequencySeconds: number = 15;
     const { t, i18n } = useTranslation();
+
+    var updateFrequencySeconds: number = 15;
 
     useEffect(() => {
         let abbreviation: string = props.match.params.abbreviation;
+
         getForecastFromApi(abbreviation);
     }, [props.match.params.abbreviation]);
 
@@ -73,9 +75,9 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
             .then(response => response.json())
             .then(response => {
                 setForecast(response);
+                setStationDetails(response.station);
                 setLastUpdate(new Date());
                 setUpdating(false);
-                setLoading(false);
                 setError(false);
                 setHaveForecast(true);
                 localStorage.setItem('mostRecentLine', response.station.line.toString());
@@ -85,7 +87,6 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
 
                 setError(true);
                 setLastUpdate(new Date());
-                setLoading(false);
                 setUpdating(false);
             });
     }
@@ -117,85 +118,94 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
     return (
         <div className="forecast">
             <PageHeader
-                headerTitle={(loading && props.match.params.abbreviation) || forecast.station.name}
-                headerTitleIrish={(!loading && forecast.station.irishName) || undefined}
-                color={(loading && '#424242') || (forecast.station.line.toString() === Line[Line.Red] ? '#f44336' : '#00af00')}
-                loading={loading}
+                headerTitle={stationDetails ? stationDetails.name : props.match.params.abbreviation}
+                headerTitleIrish={stationDetails ? stationDetails.irishName : undefined}
+                color={stationDetails ? (stationDetails.line.toString() === Line[Line.Red] ? '#f44336' : '#00af00') : '#424242'}
                 isFavourite={props.favouriteStations.filter(s => s.abbreviation === props.match.params.abbreviation).length !== 0}
                 favouriteClick={favouriteStationClick} />
             <AlertBar />
 
             <main>
-                {loading && !error &&
-                    <h1>{t('loading')}</h1>}
+                {/* {loading && !error &&
+                    <h1>{t('loading')}</h1>} */}
 
                 {error && !haveForecast &&
                     <h1>{t('error:loading')}</h1>}
 
-                {haveForecast &&
+                <div>
+                    <h4 className="updating">
+                        {updating ?
+                            t('forecast.updating.now') :
+                            (error ?
+                                t('error:loadingAndUpdating', { count: secondsUntilUpdate }) :
+                                t('forecast.updating.in', { count: secondsUntilUpdate }))}
+                    </h4>
+
                     <div>
-                        <h4 className="updating">
-                            {updating ?
-                                t('forecast.updating.now') :
-                                (error ?
-                                    t('error:loadingAndUpdating', { count: secondsUntilUpdate }) :
-                                    t('forecast.updating.in', { count: secondsUntilUpdate }))}
-                        </h4>
                         <div>
                             <DirectionForecast
                                 isInbound={true}
-                                direction={t(`lines.${forecast.station.line.toString().toLowerCase()}.inbound`)}
+                                direction={t(`lines.${stationDetails.line.toString().toLowerCase()}.inbound`)}
                                 forecasts={forecast.inboundTrams}
-                                operatingHours={forecast.station.operatingHours} />
+                                haveForecast={haveForecast}
+                                operatingHours={stationDetails.operatingHours} />
 
                             <DirectionForecast
                                 isInbound={false}
-                                direction={t(`lines.${forecast.station.line.toString().toLowerCase()}.outbound`)}
+                                direction={t(`lines.${stationDetails.line.toString().toLowerCase()}.outbound`)}
                                 forecasts={forecast.outboundTrams}
-                                operatingHours={forecast.station.operatingHours} />
+                                haveForecast={haveForecast}
+                                operatingHours={stationDetails.operatingHours} />
+
                         </div>
-
-                        <section className="section">
-                            <h3>{t('forecast.status')}</h3>
-                            <p>{getStatusMessage(forecast.station.line.toString().toLowerCase(), forecast.message)}</p>
-                        </section>
-
                         {
-                            forecast.station.walkingTransfer.length > 0 &&
+                            haveForecast &&
                             <section className="section">
-                                <h3>{t('forecast.walkingTransfer')}</h3>
-                                <div className="walking-transfer">
-                                    {
-                                        getWalkingTransferStations(forecast.station.walkingTransfer)
-                                            .map(station =>
-                                                <NavBarLink
-                                                    value={i18n.language === "ga" ? station.irishName : station.name}
-                                                    to={`/station/${station.abbreviation}`}
-                                                    colour={station.line.toString() === Line[Line.Red] ? '#f44336' : '#00af00'}
-                                                    key={station.abbreviation} />)
-                                    }
-                                </div>
+                                <h3>{t('forecast.status')}</h3>
+                                <p>{getStatusMessage(stationDetails.line.toString().toLowerCase(), forecast.message)}</p>
                             </section>
                         }
+                    </div>
 
-                        <OperatingHours operatingHours={forecast.station.operatingHours} line={forecast.station.line.toString().toLowerCase()} />
+                    {
+                        stationDetails && stationDetails.walkingTransfer.length > 0 &&
+                        <section className="section">
+                            <h3>{t('forecast.walkingTransfer')}</h3>
+                            <div className="walking-transfer">
+                                {
+                                    getWalkingTransferStations(stationDetails.walkingTransfer)
+                                        .map(station =>
+                                            <NavBarLink
+                                                value={i18n.language === "ga" ? station.irishName : station.name}
+                                                to={`/station/${station.abbreviation}`}
+                                                colour={station.line.toString() === Line[Line.Red] ? '#f44336' : '#00af00'}
+                                                key={station.abbreviation} />)
+                                }
+                            </div>
+                        </section>
+                    }
 
-                        {(forecast.station.hasCycleParking || forecast.station.hasParking) &&
-                            <section className="section">
-                                <h3>Station Facilities</h3>
-                                {forecast.station.hasCycleParking &&
-                                    <div className="facility">
-                                        <Bike />
-                                        <span>Bicycle Parking Available</span>
-                                    </div>}
-                                {forecast.station.hasParking &&
-                                    <div className="facility">
-                                        <Car />
-                                        <span>Car Parking Available</span>
-                                    </div>}
-                            </section>
-                        }
-                    </div>}
+                    {
+                        stationDetails &&
+                        <OperatingHours operatingHours={stationDetails.operatingHours} line={stationDetails.line.toString().toLowerCase()} />}
+
+                    {
+                        stationDetails && (stationDetails.hasCycleParking || stationDetails.hasParking) &&
+                        <section className="section">
+                            <h3>Station Facilities</h3>
+                            {stationDetails.hasCycleParking &&
+                                <div className="facility">
+                                    <Bike />
+                                    <span>Bicycle Parking Available</span>
+                                </div>}
+                            {stationDetails.hasParking &&
+                                <div className="facility">
+                                    <Car />
+                                    <span>Car Parking Available</span>
+                                </div>}
+                        </section>
+                    }
+                </div>
             </main>
         </div>
     );
