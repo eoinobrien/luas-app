@@ -158,13 +158,13 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
                                 operatingHours={stationDetails.operatingHours} />
 
                         </div>
-                        {
-                            haveForecast &&
                             <section className="section">
                                 <h3>{t('forecast.status')}</h3>
-                                <p>{getStatusMessage(stationDetails.line.toString().toLowerCase(), forecast.message)}</p>
+                                <p>{
+                                    haveForecast ?
+                                        getStatusMessage(stationDetails.line.toString().toLowerCase(), forecast.message) :
+                                        t('loading')}</p>
                             </section>
-                        }
                     </div>
 
                     {
