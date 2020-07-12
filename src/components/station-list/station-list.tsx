@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { RouteComponentProps, withRouter, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './station-list.scss';
-import { ReactComponent as MoreIcon } from './more-vertical.svg';
+import { ReactComponent as SettingsIcon } from './settings.svg';
 import StationListRowItem from '../station-list-row-item/station-list-row-item';
 import Station from '../../models/Station';
 import AlertBar from '../alert-bar/alert-bar';
@@ -33,7 +33,7 @@ const StationList: React.FC<StationListProps> = (props: StationListProps) => {
                 style={{ borderColor: '#424242' }}>
                 <h1>{t('luasDueNow')}</h1>
 
-                <Link to={`/help`} aria-label="Help and Settings"><MoreIcon /></Link>
+                <Link to={`/help`} aria-label="Help and Settings"><SettingsIcon /></Link>
             </header>
             <AlertBar />
             {props.loading && <h2>{t('loading')}</h2>}

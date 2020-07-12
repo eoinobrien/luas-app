@@ -141,31 +141,29 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
                                 t('forecast.updating.in', { count: secondsUntilUpdate }))}
                     </h4>
 
-                    <div>
-                        <div>
-                            <DirectionForecast
-                                isInbound={true}
-                                direction={t(`lines.${stationDetails.line.toString().toLowerCase()}.inbound`)}
-                                forecasts={forecast.inboundTrams}
-                                haveForecast={haveForecast}
-                                operatingHours={stationDetails.operatingHours} />
+                    <section>
+                        <DirectionForecast
+                            isInbound={true}
+                            direction={t(`lines.${stationDetails.line.toString().toLowerCase()}.inbound`)}
+                            forecasts={forecast.inboundTrams}
+                            haveForecast={haveForecast}
+                            operatingHours={stationDetails.operatingHours} />
 
-                            <DirectionForecast
-                                isInbound={false}
-                                direction={t(`lines.${stationDetails.line.toString().toLowerCase()}.outbound`)}
-                                forecasts={forecast.outboundTrams}
-                                haveForecast={haveForecast}
-                                operatingHours={stationDetails.operatingHours} />
+                        <DirectionForecast
+                            isInbound={false}
+                            direction={t(`lines.${stationDetails.line.toString().toLowerCase()}.outbound`)}
+                            forecasts={forecast.outboundTrams}
+                            haveForecast={haveForecast}
+                            operatingHours={stationDetails.operatingHours} />
+                    </section>
 
-                        </div>
-                            <section className="section">
-                                <h3>{t('forecast.status')}</h3>
-                                <p>{
-                                    haveForecast ?
-                                        getStatusMessage(stationDetails.line.toString().toLowerCase(), forecast.message) :
-                                        t('loading')}</p>
-                            </section>
-                    </div>
+                    <section className="section">
+                        <h3>{t('forecast.status')}</h3>
+                        <p>{
+                            haveForecast ?
+                                getStatusMessage(stationDetails.line.toString().toLowerCase(), forecast.message) :
+                                t('loading')}</p>
+                    </section>
 
                     {
                         stationDetails && stationDetails.walkingTransfer.length > 0 &&

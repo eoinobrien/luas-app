@@ -8,11 +8,15 @@ interface AlertBarProps {
 
 const AlertBar: React.FC<AlertBarProps> = (props: AlertBarProps) => {
    const { t } = useTranslation();
-   
+
    return (
       <div className="alert-bar">
-         <AlertCircle></AlertCircle>
-         <h1><b>{t('covid.masks-mandatory')}</b> {t('covid.help-stop-the-spread')} <a href="https://www.transportforireland.ie/covid-19-updates-face-coverings/">{t('learn-more')}</a></h1>
+         <div>
+            <AlertCircle></AlertCircle>
+         </div>
+         <div>
+            <h1><b>{t('covid.masks-mandatory')}</b> {t('covid.help-stop-the-spread')} <a href="https://www.transportforireland.ie/covid-19-updates-face-coverings/">{t('learn-more')}</a></h1>
+         </div>
       </div>
    );
 }
