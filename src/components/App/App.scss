@@ -1,7 +1,10 @@
 .app {
+    // iPhone Safari won't respect margin-bottom unless there is something to push against
+    padding-bottom: 1px;
+
     .main-content {
         max-width: 800px;
-        margin: 0 auto 6rem auto;
+        margin: 0 auto 4.5rem auto;
     }
 }
 
