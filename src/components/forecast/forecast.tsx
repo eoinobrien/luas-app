@@ -100,8 +100,12 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
         props.favouriteClick(forecast.station)
     }
 
+    function operatingNormally(line: string, message: string): boolean {
+        return message.toLowerCase() === line + " line services operating normally";
+    }
+
     function getStatusMessage(line: string, message: string): string {
-        if (message.toLowerCase() === line + " line services operating normally") {
+        if (operatingNormally(line, message)) {
             return t(`forecast.operatingNormally.${line}`);
         }
 

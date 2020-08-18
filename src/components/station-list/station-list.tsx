@@ -31,7 +31,7 @@ const StationList: React.FC<StationListProps> = (props: StationListProps) => {
             <header
                 className="page-header"
                 style={{ borderColor: '#424242' }}>
-                <h1>{t('luasDueNow')}</h1>
+                <h1>{t('luasAppName')}</h1>
 
                 <Link to={`/help`} aria-label="Help and Settings"><SettingsIcon /></Link>
             </header>

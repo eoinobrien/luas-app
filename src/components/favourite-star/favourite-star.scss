@@ -10,8 +10,19 @@ button.favourite-star {
     }
 
     &:hover svg,
-    &:focus svg,
-    &:focus-within svg {
+    &:focus svg {
         color: var(--favourite-yellow);
+    }
+
+    @media screen and (-ms-high-contrast: black-on-white) {
+        svg {
+            color: black;
+        }
+    }
+
+    @media screen and (-ms-high-contrast: white-on-black) {
+        svg {
+            color: white;
+        }
     }
 }
