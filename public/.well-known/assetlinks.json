@@ -1,0 +1,5 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target" : { "namespace": "android_app", "package_name": "com.anotherluas.app",
+                   "sha256_cert_fingerprints": ["05:94:ED:A1:B8:DC:BA:21:5E:66:1D:8F:1E:A6:7F:8D:B7:5F:D2:BD:59:91:09:2D:AF:8B:FF:0D:A0:2A:CC:39"] }
+    }]
