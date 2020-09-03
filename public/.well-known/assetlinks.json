@@ -1,5 +1,5 @@
 [{
       "relation": ["delegate_permission/common.handle_all_urls"],
       "target" : { "namespace": "android_app", "package_name": "com.anotherluas.app",
-                   "sha256_cert_fingerprints": ["9F:93:56:30:E0:EA:64:EB:B7:B7:26:FB:74:30:9B:DA:42:A3:E7:1F:55:9F:3C:57:D2:8E:F1:EB:29:4E:2B:20"] }
+                   "sha256_cert_fingerprints": ["9F:93:56:30:E0:EA:64:EB:B7:B7:26:FB:74:30:9B:DA:42:A3:E7:1F:55:9F:3C:57:D2:8E:F1:EB:29:4E:2B:20", "FF:28:A6:2D:1A:BC:EE:DF:61:FA:7A:53:F3:CA:A6:36:1B:25:C3:93:6F:A6:6A:57:B9:02:21:98:FF:B3:51:AC"] }
     }]
