@@ -19,27 +19,33 @@ interface DirectionForecastProps {
 }
 
 function getOperatingHoursDirectionForToday(operatingHours: OperatingHoursModel, isInbound: boolean): [OperatingHoursDirection, OperatingHoursDirection] {
-    let now: Moment = moment().hour() <= 2 ? moment(-1, 'day') : moment();
+    let operatingDay: Moment = moment();
+    let nextOperatingDay: Moment = moment();
 
-    var todayOperatingHoursDay: OperatingHoursDay;
-    let weekday = now.isoWeekday();
-
-    if (BankHolidays.includes(now.format("YYYY-MM-DD"))) {
-        weekday = 7;
+    if (operatingDay.hour() <= 2) {
+        operatingDay = moment(-1, 'day');
     }
 
-    todayOperatingHoursDay = getOperatingHours(weekday, operatingHours);
+    let weekDayOfWeek = operatingDay.isoWeekday();
+    let nextOperatingDayOfWeek = nextOperatingDay.isoWeekday();
 
+    if (BankHolidays.includes(operatingDay.format("YYYY-MM-DD"))) {
+        weekDayOfWeek = 7;
+    }
 
-    let nextDay: Moment = now.add(1, 'day');
-    let nextOperatingHoursDay: OperatingHoursDay = getOperatingHours(nextDay.isoWeekday(), operatingHours);
+    if (BankHolidays.includes(nextOperatingDay.format("YYYY-MM-DD"))) {
+        nextOperatingDayOfWeek = 7;
+    }
+
+    let todayOperatingHoursDay: OperatingHoursDay = getOperatingHours(weekDayOfWeek, operatingHours);
+    let nextOperatingHoursDay: OperatingHoursDay = getOperatingHours(nextOperatingDayOfWeek, operatingHours);
 
     return isInbound ?
         [todayOperatingHoursDay.inbound, nextOperatingHoursDay.inbound] :
         [todayOperatingHoursDay.outbound, nextOperatingHoursDay.outbound];
 }
 
-function getOperatingHours(dayOfWeek: number | Moment, operatingHours: OperatingHoursModel): OperatingHoursDay {
+function getOperatingHours(dayOfWeek: number, operatingHours: OperatingHoursModel): OperatingHoursDay {
     switch (dayOfWeek) {
         case 1:
         case 2:
@@ -47,13 +53,10 @@ function getOperatingHours(dayOfWeek: number | Moment, operatingHours: Operating
         case 4:
         case 5:
             return operatingHours.weekdays;
-
         case 6:
             return operatingHours.saturday;
-
         case 7:
             return operatingHours.sunday;
-
         default:
             return operatingHours.sunday;
     }
@@ -62,6 +65,7 @@ function getOperatingHours(dayOfWeek: number | Moment, operatingHours: Operating
 const getLastTramMoment = (lastTram: string) => {
     let lastTramMoment: Moment = moment.tz(lastTram, "HH:mm", "Europe/Dublin");
 
+    console.log(lastTramMoment)
     if (moment().diff(lastTramMoment, 'hours', true) > 12) {
         if (lastTramMoment.hours() >= 0 && lastTramMoment.hours() <= 2) {
             return lastTramMoment.add(1, 'day');
