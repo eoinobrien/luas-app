@@ -1,4 +1,6 @@
 .language-selector {
+    display: flex;
+
     label {
         // display: none;
         padding: 0.5rem 1rem;
@@ -11,8 +13,19 @@
             pointer-events: none;
         }
 
-        &.active, &:hover {
+        &.active,
+        &:hover {
             background: var(--app-purple);
         }
+    }
+}
+
+.gaeilge-apology {
+    margin-top: 1rem;
+    &.show {
+        display: block;
+    }
+    &.hide {
+        display: none;
     }
 }

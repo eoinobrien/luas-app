@@ -20,23 +20,27 @@ const Help: React.FC<{}> = () => {
                 <div className="language-selector">
                     <label className={i18n.language === "en" ? 'active' : ''}>
                         <input
-                            type="radio" 
-                            id="en" 
-                            name="language" 
-                            value="en" 
+                            type="radio"
+                            id="en"
+                            name="language"
+                            value="en"
                             onClick={() => i18n.changeLanguage("en")} defaultChecked={i18n.language === "en"} />
                         English
                     </label>
 
                     <label className={i18n.language === "ga" ? 'active' : ''}>
                         <input
-                            type="radio" 
-                            id="ga" 
-                            name="language" 
-                            value="ga" 
+                            type="radio"
+                            id="ga"
+                            name="language"
+                            value="ga"
                             onClick={() => i18n.changeLanguage("ga")} defaultChecked={i18n.language === "ga"} />
                         Gaeilge
                     </label>
+                </div>
+
+                <div className={i18n.language === "ga" ? 'gaeilge-apology show' : 'gaeilge-apology hide'}>
+                    Tá brón orm, ach níl an t-eolas thíos ar fáil trí Ghaeilge faoi láthair.
                 </div>
             </section>
 
