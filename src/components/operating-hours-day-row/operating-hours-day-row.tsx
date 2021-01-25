@@ -18,7 +18,7 @@ const OperatingHoursDayRow: React.FC<OperatingHoursDayRowProps> = (props: Operat
     const [open, toggle] = useState<boolean>(props.expanded);
     const { t } = useTranslation();
 
-    const formatTime = (time: string) => {
+    const formatTime = (time: string): string => {
         return moment(time, "HH:mm").format("h:mm a");
     }
 

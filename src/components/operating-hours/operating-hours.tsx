@@ -13,7 +13,7 @@ interface OperatingHoursProps {
 const OperatingHours: React.FC<OperatingHoursProps> = (props: OperatingHoursProps) => {
     const { t } = useTranslation();
 
-    const dayOfWeek = () => {
+    const dayOfWeek = () : number => {
         let operatingDay: Moment = moment();
 
         if (operatingDay.hour() <= 2) {

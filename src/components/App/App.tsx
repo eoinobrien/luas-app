@@ -22,7 +22,7 @@ const App: React.FC = () => {
 
     document.getElementsByTagName("html")[0].setAttribute("lang", i18n.language);
 
-    const addToFavouriteStations = (station: Station) => {
+    const addToFavouriteStations = (station: Station): void => {
         let updatedFavouriteStations: Station[];
 
         if (favouriteStations.filter(s => s.abbreviation === station.abbreviation).length === 0) {
@@ -38,17 +38,17 @@ const App: React.FC = () => {
     }
 
     useEffect(() => {
-        let localStorageString: string = localStorage.getItem('favouriteStations') || "";
+        const localStorageString: string = localStorage.getItem('favouriteStations') || "";
 
         if (localStorageString !== "") {
-            let stations: Station[] = JSON.parse(localStorageString);
+            const stations: Station[] = JSON.parse(localStorageString);
 
             setFavouriteStations(stations);
         }
     }, []);
 
     useEffect(() => {
-        let localStorageStations = getStationsFromLocalStorage();
+        const localStorageStations = getStationsFromLocalStorage();
 
         if (localStorageStations !== []) {
             setLoading(false);
@@ -71,9 +71,9 @@ const App: React.FC = () => {
             });
     }, []);
 
-    const getStationsFromLocalStorage = () => {
+    const getStationsFromLocalStorage = (): Station[] => {
         const localStorageStations: string = localStorage.getItem('allStations') || "";
-        var allStations: Station[] = [];
+        let allStations: Station[] = [];
 
         if (localStorageStations !== "") {
             allStations = JSON.parse(localStorageStations);
@@ -82,11 +82,11 @@ const App: React.FC = () => {
         return allStations;
     }
 
-    const getLanguageFromLocalStorage = () => {
+    const getLanguageFromLocalStorage = (): string => {
         return localStorage.getItem('i18nextLng') || "en";
     }
 
-    const getLineFromLocalStorage = () => {
+    const getLineFromLocalStorage = (): string => {
         return localStorage.getItem('mostRecentLine') || "Red";
     }
 
@@ -110,21 +110,21 @@ const App: React.FC = () => {
                         <Route
                             path="/station/:abbreviation"
                             render={props => {
-                                let lang: string = getLanguageFromLocalStorage();
-                                return <Redirect to={`/${lang}/station/${props.match.params.abbreviation}`} />
+                                const lang: string = getLanguageFromLocalStorage();
+                                return <Redirect to={`/${lang}/station/${props.match.params.abbreviation}`} /> // eslint-disable-line react/prop-types
                             }} />
 
                         <Route
                             path="/line/:line"
                             render={props => {
-                                let lang: string = getLanguageFromLocalStorage();
-                                return <Redirect to={`/${lang}/line/${props.match.params.line}`} />
+                                const lang: string = getLanguageFromLocalStorage();
+                                return <Redirect to={`/${lang}/line/${props.match.params.line}`} /> // eslint-disable-line react/prop-types
                             }} />
 
                         <Route
                             path="/help"
                             render={() => {
-                                let lang: string = getLanguageFromLocalStorage();
+                                const lang: string = getLanguageFromLocalStorage();
                                 return <Redirect to={`/${lang}/help`} />
                             }} />
 
@@ -132,7 +132,7 @@ const App: React.FC = () => {
                             exact
                             path="/:lng(en|ga)"
                             render={props => (
-                                <Redirect to={`/${props.match.params.lng}/line/Red`} />
+                                <Redirect to={`/${props.match.params.lng}/line/Red`} /> // eslint-disable-line react/prop-types
                             )}
                         />
 
@@ -140,8 +140,8 @@ const App: React.FC = () => {
                             exact
                             path="/"
                             render={() => {
-                                let lang: string = getLanguageFromLocalStorage();
-                                let line: string = getLineFromLocalStorage();
+                                const lang: string = getLanguageFromLocalStorage();
+                                const line: string = getLineFromLocalStorage();
 
                                 return <Redirect to={`/${lang ?? 'en'}/line/${line ?? 'Red'}`} />
                             }}

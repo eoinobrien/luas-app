@@ -20,7 +20,7 @@ interface DirectionForecastProps {
 
 function getOperatingHoursDirectionForToday(operatingHours: OperatingHoursModel, isInbound: boolean): [OperatingHoursDirection, OperatingHoursDirection] {
     let operatingDay: Moment = moment();
-    let nextOperatingDay: Moment = moment();
+    const nextOperatingDay: Moment = moment();
 
     if (operatingDay.hour() <= 2) {
         operatingDay = moment(-1, 'day');
@@ -37,8 +37,8 @@ function getOperatingHoursDirectionForToday(operatingHours: OperatingHoursModel,
         nextOperatingDayOfWeek = 7;
     }
 
-    let todayOperatingHoursDay: OperatingHoursDay = getOperatingHours(weekDayOfWeek, operatingHours);
-    let nextOperatingHoursDay: OperatingHoursDay = getOperatingHours(nextOperatingDayOfWeek, operatingHours);
+    const todayOperatingHoursDay: OperatingHoursDay = getOperatingHours(weekDayOfWeek, operatingHours);
+    const nextOperatingHoursDay: OperatingHoursDay = getOperatingHours(nextOperatingDayOfWeek, operatingHours);
 
     return isInbound ?
         [todayOperatingHoursDay.inbound, nextOperatingHoursDay.inbound] :
@@ -62,8 +62,8 @@ function getOperatingHours(dayOfWeek: number, operatingHours: OperatingHoursMode
     }
 }
 
-const getLastTramMoment = (lastTram: string) => {
-    let lastTramMoment: Moment = moment.tz(lastTram, "HH:mm", "Europe/Dublin");
+const getLastTramMoment = (lastTram: string): moment.Moment => {
+    const lastTramMoment: Moment = moment.tz(lastTram, "HH:mm", "Europe/Dublin");
 
     console.log(lastTramMoment)
     if (moment().diff(lastTramMoment, 'hours', true) > 12) {
@@ -78,39 +78,39 @@ const getLastTramMoment = (lastTram: string) => {
     return lastTramMoment;
 }
 
-const timeToLastTram = (lastTram: Moment) => {
-    let now: Moment = moment();
-    let lastTramDifference = now.diff(lastTram, 'hours', true);
+const timeToLastTram = (lastTram: Moment): number => {
+    const now: Moment = moment();
+    const lastTramDifference = now.diff(lastTram, 'hours', true);
 
     return lastTramDifference;
 }
 
-const servicesFinishedForDay = (lastTram: Moment) => {
+const servicesFinishedForDay = (lastTram: Moment): boolean => {
     return timeToLastTram(lastTram) > 0;
 }
 
-const shouldShowLastTramTime = (lastTram: Moment) => {
+const shouldShowLastTramTime = (lastTram: Moment): boolean => {
     return timeToLastTram(lastTram) > -1.5;
 }
 
-const formatTime = (time: string) => {
+const formatTime = (time: string): string => {
     return moment(time, "HH:mm").format("h:mm a");
 }
 
 const DirectionForecast: React.FC<DirectionForecastProps> = (props: DirectionForecastProps) => {
-    let enabled: boolean = ((props.isInbound && props.operatingHours.weekdays.inbound !== null)
+    const enabled: boolean = ((props.isInbound && props.operatingHours.weekdays.inbound !== null)
         || (!props.isInbound && props.operatingHours.weekdays.outbound !== null));
-    let operatingHours: [OperatingHoursDirection, OperatingHoursDirection] = getOperatingHoursDirectionForToday(props.operatingHours, props.isInbound);
-    let lastTramTime: Moment = enabled ? getLastTramMoment(operatingHours[0].lastTram) : moment(0);
-    let areServicesFinishedForDay: boolean = enabled && servicesFinishedForDay(lastTramTime);
-    let shouldShowLastTram: boolean = enabled && !areServicesFinishedForDay && shouldShowLastTramTime(lastTramTime);
+    const operatingHours: [OperatingHoursDirection, OperatingHoursDirection] = getOperatingHoursDirectionForToday(props.operatingHours, props.isInbound);
+    const lastTramTime: Moment = enabled ? getLastTramMoment(operatingHours[0].lastTram) : moment(0);
+    const areServicesFinishedForDay: boolean = enabled && servicesFinishedForDay(lastTramTime);
+    const shouldShowLastTram: boolean = enabled && !areServicesFinishedForDay && shouldShowLastTramTime(lastTramTime);
     const { t, i18n } = useTranslation();
 
-    const minutesDue = (minutes: number, due: boolean) => {
+    const minutesDue = (minutes: number, due: boolean): string => {
         return due ? t('forecast.time.due') : t('forecast.time.in', { count: minutes });
     }
 
-    const getMinutes = (minutes: number, due: boolean) => {
+    const getMinutes = (minutes: number, due: boolean): string|undefined => {
         return (minutes !== undefined && due !== undefined && minutesDue(minutes, due)) || undefined;
     }
 

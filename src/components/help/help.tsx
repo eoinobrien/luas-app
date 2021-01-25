@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import './help.scss';
 import PageHeader from '../page-header/page-header';
 
-const Help: React.FC<{}> = () => {
+const Help: React.FC = () => {
     const { t, i18n } = useTranslation();
 
     return (
@@ -52,7 +52,7 @@ const Help: React.FC<{}> = () => {
                 <p>If you have better Irish than me, and would like to help improve the translations in this app, I would love the help. Please reach out to me on <a href="https://twitter.com/iameoinobrien">Twitter</a> or <a href="https://github.com/eoinobrien/luas-app/issues">file an issue on Github</a></p>
 
                 <h2>About this app</h2>
-                <p>This app was a lockdown project for me, <a href="https://eoinobrien.ie">Eoin O'Brien</a>, and is meant to serve as a simple, quick and reliable Luas application.</p>
+                <p>This app was a lockdown project for me, <a href="https://eoinobrien.ie">Eoin O&apos;Brien</a>, and is meant to serve as a simple, quick and reliable Luas application.</p>
                 <p>It is licensed under an MIT License you can find the code for this site on <a href="https://github.com/eoinobrien/luas-app/">Github</a>. If you find an issue please <a href="https://github.com/eoinobrien/luas-app/issues">file an issue</a>.</p>
 
                 <h2>Privacy</h2>

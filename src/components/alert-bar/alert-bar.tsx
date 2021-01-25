@@ -3,10 +3,7 @@ import { useTranslation } from 'react-i18next';
 import './alert-bar.scss';
 import { ReactComponent as AlertCircle } from './alert-circle.svg';
 
-interface AlertBarProps {
-}
-
-const AlertBar: React.FC<AlertBarProps> = (props: AlertBarProps) => {
+const AlertBar: React.FC = () => {
    const { t } = useTranslation();
 
    return (

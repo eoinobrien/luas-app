@@ -24,7 +24,7 @@ interface ForecastProps extends RouteComponentProps<ForecastRouteProps> {
 }
 
 
-function useInterval(callback: any, delay: number) {
+function useInterval(callback: any, delay: number): void {
     const savedCallback = useRef<any | null>();
 
     // Remember the latest function.
@@ -34,13 +34,13 @@ function useInterval(callback: any, delay: number) {
 
     // Set up the interval.
     useEffect(() => {
-        function tick() {
+        function tick(): void {
             if (savedCallback) {
                 savedCallback.current();
             }
         }
         if (delay !== null) {
-            let id = setInterval(tick, delay);
+            const id = setInterval(tick, delay);
             return () => clearInterval(id);
         }
     }, [delay]);
@@ -56,10 +56,10 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
     const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
     const { t, i18n } = useTranslation();
 
-    var updateFrequencySeconds: number = 15;
+    const updateFrequencySeconds = 15;
 
     useEffect(() => {
-        let abbreviation: string = props.match.params.abbreviation;
+        const abbreviation: string = props.match.params.abbreviation;
 
         getForecastFromApi(abbreviation);
     }, [props.match.params.abbreviation]);
@@ -92,11 +92,11 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
     }
 
     function getSecondsToUpdate(): void {
-        let secondsToUpdate: number = updateFrequencySeconds - Math.ceil((Date.now() - lastUpdate.getTime()) / 1000);
+        const secondsToUpdate: number = updateFrequencySeconds - Math.ceil((Date.now() - lastUpdate.getTime()) / 1000);
         setSecondsUntilUpdate(secondsToUpdate)
     }
 
-    function favouriteStationClick() {
+    function favouriteStationClick(): void {
         props.favouriteClick(forecast.station)
     }
 
@@ -113,7 +113,7 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
     }
 
     function getWalkingTransferStations(walkingTransfers: string[]): Station[] {
-        var transferStations = walkingTransfers
+        const transferStations = walkingTransfers
             .map(walkingTransfer => props.allStations.filter(s => s.abbreviation === walkingTransfer));
 
         return ([] as Station[]).concat(...transferStations);
