@@ -8,7 +8,7 @@ import Line from '../../models/Line';
 
 interface StationListRowItemProps {
    station: Station;
-   favouriteClick: any;
+   favouriteClick: (station: Station) => void;
    isFavourite: boolean;
 }
 

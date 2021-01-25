@@ -4,7 +4,7 @@ import { ReactComponent as Star } from './star.svg';
 import { ReactComponent as StarFill } from './star-fill.svg';
 
 interface FavouriteStarProps {
-   favouriteClick: any;
+   favouriteClick: () => void;
    isFavourite: boolean;
    name: string;
 }

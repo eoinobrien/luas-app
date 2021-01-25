@@ -18,14 +18,14 @@ interface ForecastRouteProps {
 }
 
 interface ForecastProps extends RouteComponentProps<ForecastRouteProps> {
-    favouriteClick: any;
+    favouriteClick: (station: Station) => void;
     favouriteStations: Station[];
     allStations: Station[];
 }
 
 
-function useInterval(callback: any, delay: number): void {
-    const savedCallback = useRef<any | null>();
+function useInterval(callback: () => void, delay: number): void {
+    const savedCallback = useRef<any | null>(); // eslint-disable-line @typescript-eslint/no-explicit-any
 
     // Remember the latest function.
     useEffect(() => {

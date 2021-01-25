@@ -10,7 +10,7 @@ interface PageHeaderProps {
     headerTitleIrish?: string;
     color: string;
     isFavourite?: boolean;
-    favouriteClick?: any;
+    favouriteClick?: () => void;
 }
 
 const PageHeader: React.FC<PageHeaderProps> = (props: PageHeaderProps) => {

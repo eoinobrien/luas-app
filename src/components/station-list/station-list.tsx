@@ -12,7 +12,7 @@ interface StationListRouteProps {
 }
 
 interface StationListProps extends RouteComponentProps<StationListRouteProps> {
-    favouriteClick: any;
+    favouriteClick: (station: Station) => void;
     favouriteStations: Station[];
     allStations: Station[];
     loading: boolean;
