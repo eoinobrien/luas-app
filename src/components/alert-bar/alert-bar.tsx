@@ -12,7 +12,7 @@ const AlertBar: React.FC = () => {
             <AlertCircle></AlertCircle>
          </div>
          <div>
-            <h1><b>{t('covid.masks-mandatory')}</b> {t('covid.help-stop-the-spread')} <a href="https://www.transportforireland.ie/covid-19-updates-face-coverings/">{t('learn-more')}</a></h1>
+            <h1><b>{t('developer-messaging.app-broken')}</b> {t('developer-messaging.working-hard-to-fix')}</h1>
          </div>
       </div>
    );

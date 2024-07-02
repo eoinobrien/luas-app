@@ -5,6 +5,7 @@ import './station-list.scss';
 import { ReactComponent as SettingsIcon } from './settings.svg';
 import StationListRowItem from '../station-list-row-item/station-list-row-item';
 import Station from '../../models/Station';
+import AlertBar from '../alert-bar/alert-bar';
 
 interface StationListRouteProps {
     line: string;
@@ -34,6 +35,7 @@ const StationList: React.FC<StationListProps> = (props: StationListProps) => {
 
                 <Link to={`/help`} aria-label="Help and Settings"><SettingsIcon /></Link>
             </header>
+            <AlertBar />
             {props.loading && <h2>{t('loading')}</h2>}
             <nav className="list">
                 <ul>

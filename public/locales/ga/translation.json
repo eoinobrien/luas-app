@@ -56,5 +56,9 @@
         "masks-mandatory": "Tá Clúdaigh Aghaidh éigeantach ar Iompar Poiblí.",
         "help-stop-the-spread": "Cuidigh le leathadh Covid 19 a stopadh, caith masc le do thoil."
     },
+    "developer-messaging": {
+        "app-broken": "Níl an aip ag obair faoi láthair, gabhaimid leithscéal as an míchaoithiúlacht.",
+        "working-hard-to-fix": "Táimid ag obair go dian chun é a dheisiú."
+    },
     "learn-more": "Tuilleadh eolais."
 }

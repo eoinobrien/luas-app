@@ -56,5 +56,9 @@
         "masks-mandatory": "Face Coverings are mandatory on Public Transport.",
         "help-stop-the-spread": "Help stop the spread of Covid 19, please wear a mask."
     },
+    "developer-messaging": {
+        "app-broken": "The app is currently not working, we apologise for the inconvenience.",
+        "working-hard-to-fix": "We are working hard to fix it."
+    },
     "learn-more": "Learn more."
 }
