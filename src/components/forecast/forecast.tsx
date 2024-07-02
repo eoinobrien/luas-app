@@ -11,7 +11,6 @@ import Station from '../../models/Station';
 import Line from '../../models/Line';
 import { ReactComponent as Bike } from './bike.svg';
 import { ReactComponent as Car } from './car.svg';
-import AlertBar from '../alert-bar/alert-bar';
 
 interface ForecastRouteProps {
     abbreviation: string;
@@ -127,7 +126,6 @@ const Forecast: React.FC<ForecastProps> = (props: ForecastProps) => {
                 color={stationDetails ? (stationDetails.line.toString() === Line[Line.Red] ? '#f44336' : '#00af00') : '#424242'}
                 isFavourite={props.favouriteStations.filter(s => s.abbreviation === props.match.params.abbreviation).length !== 0}
                 favouriteClick={favouriteStationClick} />
-            <AlertBar />
 
             <main>
                 {/* {loading && !error &&
